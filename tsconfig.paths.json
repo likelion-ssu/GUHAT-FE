@@ -9,7 +9,8 @@
             "@constants/*": ["src/constants/*"],
             "@pages/*": ["src/pages/*"],
             "@public/*": ["public/*"],
-            "@_types/*": ["types/*"]
+            "@lib/*": ["src/lib/*"],
+            "@_types/*": ["src/types/*"]
         }
     }
 }
