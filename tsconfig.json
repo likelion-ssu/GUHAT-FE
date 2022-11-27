@@ -1,4 +1,6 @@
 {
+    "extends": "./tsconfig.paths.json",
+    "exclude": ["node_modules"],
     "compilerOptions": {
         "target": "es5",
         "lib": [
@@ -24,10 +26,8 @@
         "noEmit": true,
         "jsx": "react-jsx",
         "jsxImportSource": "@emotion/react",
-        "baseUrl": "src",
-        "allowJs": true
+        "allowJs": true,
+        "typeRoots": ["./node_modules/@types", "src/types"]
     },
-    "include": ["src", "next-env.d.ts", "**/*.ts", "**/*.tsx"],
-    "exclude": ["node_modules"],
-    "extends": "./tsconfig.paths.json"
+    "include": ["src", "craco.config.js", "next-env.d.ts"]
 }
