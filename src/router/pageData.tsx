@@ -1,7 +1,5 @@
-import Landing from "pages/Landing";
-import { ComponentType } from "react";
-import routerType from "../types/router.types";
-
+import Landing from "@pages/Landing";
+import routerType from "@_types/router.types";
 const pagesData: routerType[] = [
     {
         name: "Landing",

@@ -1,6 +1,9 @@
+import { ThemeProvider } from "@emotion/react";
+import GlobalStyle from "@styles/GlobalStyle";
+import themes from "@styles/themes";
 import { BrowserRouter } from "react-router-dom";
 import { RecoilRoot } from "recoil";
-import Router from "router";
+import Router from "./router";
 function App() {
     return (
         <RecoilRoot>
