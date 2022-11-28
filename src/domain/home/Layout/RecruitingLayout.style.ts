@@ -13,4 +13,16 @@ export const RecruitingListLayoutWrapper = styled.div`
             font-weight: 700;
         }
     }
+    .recruiting-more {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        transform: translate(-1rem, -1rem);
+        text-align: right;
+        font-size: 1.6rem;
+        font-weight: 700;
+        :active {
+            color: white;
+        }
+    }
 `;

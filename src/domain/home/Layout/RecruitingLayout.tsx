@@ -15,6 +15,9 @@ const RecruitingLayout = () => {
                 </div>
 
                 <RecruitingList recruitingList={list} />
+                <div style={{ width: "100%", position: "relative" }}>
+                    <button className="recruiting-more">더보기</button>
+                </div>
             </RecruitingListLayoutWrapper>
         </>
     );
