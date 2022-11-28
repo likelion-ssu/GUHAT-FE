@@ -36,5 +36,5 @@ export const RecruitContentDDay = styled.p`
     font-size: 1.6rem;
     font-weight: 700;
     right: 2.5rem;
-    bottom: calc(2rem + 0.4rem);
+    bottom: calc(3rem);
 `;

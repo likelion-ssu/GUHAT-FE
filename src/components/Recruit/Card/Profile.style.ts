@@ -6,7 +6,7 @@ export const ProfileWrap = styled.div`
     margin-left: 0.5rem;
     #recruit-profile-level {
         font-weight: 300;
-        font-size: 12px;
+        font-size: 10px;
     }
     #recruit-profile-nickname {
         font-weight: 700;
