@@ -1,12 +1,17 @@
-import Landing from "pages/Landing";
-import { ComponentType } from "react";
-import routerType from "../types/router.types";
-
+import Home from "@pages/Home";
+import Landing from "@pages/Landing";
+import routerType from "@_types/router.types";
 const pagesData: routerType[] = [
     {
         name: "Landing",
-        path: "",
+        path: "/login",
         component: <Landing />,
+    },
+
+    {
+        name: "Home",
+        path: "",
+        component: <Home />,
     },
 ];
 
