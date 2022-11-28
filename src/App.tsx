@@ -1,3 +1,4 @@
+import Header from "@components/Header";
 import { ThemeProvider } from "@emotion/react";
 import GlobalStyle from "@styles/GlobalStyle";
 import themes from "@styles/themes";
@@ -9,6 +10,7 @@ function App() {
         <RecoilRoot>
             <ThemeProvider theme={themes}>
                 <GlobalStyle />
+                <Header title={"GUHAT"} />
                 <BrowserRouter>
                     <Router />
                 </BrowserRouter>

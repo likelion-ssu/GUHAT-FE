@@ -1,6 +1,4 @@
 import styled from "@emotion/styled";
-import SearchIcon from "../../assets/Search.svg"
-
 const HeaderWrap = styled.header`
     display: flex;
     flex-direction: row;
@@ -12,7 +10,21 @@ const HeaderWrap = styled.header`
     background-color: lightblue;
     padding: 0 2.4rem;
     width: calc(100% + 2.4rem);
-    height: 5.6rem;
+    height: 7rem;
+
+    #header-schedule-btn {
+        position: absolute;
+        right: 6%;
+        transform: translate(6%);
+        height: 60%;
+    }
+
+    #header-profile-btn {
+        position: absolute;
+        right: 10%;
+        transform: translate(10%);
+        height: 60%;
+    }
 `;
 
 const Title = styled.div`
@@ -22,28 +34,7 @@ const Title = styled.div`
     transform: translate(-7%);
     margin: 0 auto;
     font-size: 2rem;
-    font-weight: 600;
+    font-weight: 700;
 `;
 
-const SearchWrap = styled.div`
-    background-color: white;
-    border-radius: 20px;
-    border: 1px solid black;
-    position: absolute;
-    display: flex;
-    left: calc(7% + 10rem);
-    transform: translate(calc(-7% -10rem));
-
-    img {
-        height: 100%;
-        src: SearchIcon;
-    }
-`;
-
-const SearchInput = styled.input`
-    background-color: transparent;
-    padding: 1rem;
-    width: 50%;
-`;
-
-export { HeaderWrap, Title, SearchWrap, SearchInput };
+export { HeaderWrap, Title };
