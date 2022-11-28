@@ -1,4 +1,5 @@
 import { recuritLecture } from "@_types/recruitLecture.types";
+import { useCallback } from "react";
 import Profile from "./Profile";
 import ProgressBar from "./ProgressBar";
 import {
@@ -19,7 +20,19 @@ const Recruit = ({
         lectureTitle: "사용자 인터페이스 및 실습",
         schedule: ["월 10:30", "수 13:30"],
         professor: "최지웅",
+        endDate: "2022-12-31",
     };
+
+    const calculateDate = useCallback<(endDate: string) => string>(
+        (endDate) => {
+            const endTime: any = new Date(endDate);
+            const nowTime: any = new Date();
+            const diff = endTime - nowTime;
+            const diffDay = Math.floor(diff / (1000 * 60 * 60 * 24)).toString();
+            return diffDay;
+        },
+        []
+    );
 
     return (
         <RecruitWrap>
@@ -36,6 +49,7 @@ const Recruit = ({
                 detail={
                     "안녕하세요. 저는 나랏말싸미 듕귁에 달아 물자와로 서로 사맛디 아니할쎄 내 이를 어녀삐녀겨 새로 스물 여덟 글..."
                 }
+                endDate={calculateDate(recruitData.endDate)}
             >
                 <Profile level={"Lv1.새내기"} nickname={"닉네임107"} />
             </RecruitContent>

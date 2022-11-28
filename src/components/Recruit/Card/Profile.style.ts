@@ -16,7 +16,7 @@ export const ProfileWrap = styled.div`
 
 export const ProfileImg = styled.div<{ img: string | undefined }>`
     /* background-image: ${(img) => `url(${img})`}; */
-    background-color: black;
+    background-color: darkgray;
     width: 3rem;
     height: 3rem;
     border-radius: 3rem;

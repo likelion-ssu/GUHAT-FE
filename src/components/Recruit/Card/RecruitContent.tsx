@@ -8,16 +8,17 @@ import {
 interface Props {
     title: string;
     detail: string;
+    endDate?: string;
     children: React.ReactNode;
 }
 
-const RecruitContent = ({ title, detail, children }: Props) => {
+const RecruitContent = ({ title, detail, endDate, children }: Props) => {
     return (
         <RecruitContentWrap>
             <RecruitContentTitle>{title}</RecruitContentTitle>
             <RecruitContentDetail>{detail}</RecruitContentDetail>
             {children}
-            <RecruitContentDDay>D-3</RecruitContentDDay>
+            <RecruitContentDDay>D-{endDate}</RecruitContentDDay>
         </RecruitContentWrap>
     );
 };

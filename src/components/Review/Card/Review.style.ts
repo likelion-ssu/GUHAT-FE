@@ -4,9 +4,9 @@ export const ReviewWrap = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 22vw;
+    min-width: 18vw;
     border-radius: 1rem;
-    background-color: #f4f4f4;
+    background-color: #e1e1e1;
     padding: 2rem;
 
     :active {
@@ -18,7 +18,7 @@ export const ReviewTitle = styled.p`
     font-weight: 700;
     font-size: 1.8rem;
     align-items: center;
-    margin: 1rem;
+    margin-left: 1rem;
 `;
 
 export const ReviewContent = styled.p`

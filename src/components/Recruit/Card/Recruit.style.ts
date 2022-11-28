@@ -5,10 +5,11 @@ export const RecruitWrap = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 22vw;
+    min-width: 21vw;
     border-radius: 1rem;
     background-color: #f4f4f4;
     padding-top: 4rem;
+    margin-top: 4rem;
 
     :active {
         filter: brightness(0.8);

@@ -33,13 +33,16 @@ export const MyProfileSubText = styled.p`
 
 export const MyProfileBtnWrap = styled.div`
     width: 100%;
+    height: 4rem;
     display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const MyProfileInfoBtn = styled.div`
     width: 50%;
-    padding: 0.8rem;
     text-align: center;
+    line-height: 4rem;
     font-size: 16px;
     font-weight: 700;
     background-color: lightgray;
