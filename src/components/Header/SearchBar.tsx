@@ -1,14 +1,19 @@
-import { debounce } from "@/util/debounce";
-import SearchIcon from "@assets/Search.svg";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { useResults } from "../../apis/search/index";
+
 import RecomandKeywords from "./RecomandKeywords";
 import { SearchInput, SearchWrap } from "./SearchBar.style";
 import SearchResult from "./SearchResult";
 
+import { debounce } from "@/util/debounce";
+import SearchIcon from "@assets/Search.svg";
+
 const SearchBar = () => {
     const navigator = useNavigate();
+    const inputRef: React.RefObject<HTMLDivElement> = useRef(null);
+
     const [search, setSearch] = useState<string>("");
     const [searchResult, setSeachResult] = useState<string[] | null>([]);
     const [submitted, setSubmitted] = useState<boolean>(true);
@@ -21,6 +26,20 @@ const SearchBar = () => {
     ]);
 
     const { status, data } = useResults(search);
+
+    useEffect(() => {
+        document.addEventListener("mousedown", clickInputOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", clickInputOutside);
+        };
+    });
+
+    const clickInputOutside = (event: any) => {
+        if (inputRef.current && !inputRef.current.contains(event.target)) {
+            setSubmitted(true);
+        }
+    };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -75,7 +94,7 @@ const SearchBar = () => {
     };
 
     return (
-        <SearchWrap>
+        <SearchWrap ref={inputRef}>
             {!submitted && search.length === 0 ? (
                 <RecomandKeywords
                     keywords={keywordList}
