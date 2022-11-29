@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useResults } from "../../apis/search/index";
+import { useKeywordResults } from "../../apis/search/keyword/index";
 
 import RecomandKeywords from "./RecomandKeywords";
 import { SearchInput, SearchWrap } from "./SearchBar.style";
 import SearchResult from "./SearchResult";
 
-import { debounce } from "@/util/debounce";
+import debounce from "@/util/debounce";
 import SearchIcon from "@assets/Search.svg";
 
 const SearchBar = () => {
@@ -15,6 +15,7 @@ const SearchBar = () => {
     const inputRef: React.RefObject<HTMLDivElement> = useRef(null);
 
     const [search, setSearch] = useState<string>("");
+    const [apiQuery, setApiQuery] = useState<string>("");
     const [searchResult, setSeachResult] = useState<string[] | null>([]);
     const [submitted, setSubmitted] = useState<boolean>(true);
     const [keywordList, setKeywordList] = useState<string[]>([
@@ -25,7 +26,7 @@ const SearchBar = () => {
         "9w09r0e",
     ]);
 
-    const { status, data } = useResults(search);
+    const { status, data } = useKeywordResults(apiQuery);
 
     useEffect(() => {
         document.addEventListener("mousedown", clickInputOutside);
@@ -51,20 +52,26 @@ const SearchBar = () => {
         setSeachResult([]);
         setSubmitted(false);
         setSearch("");
-        // this.search(this.state.searchKeyword);
     };
 
-    const inputHandler = useCallback(
+    const onDebouncedChangeListener = debounce(
         (e: React.ChangeEvent<HTMLInputElement>) => {
-            e.preventDefault();
-            if (e.target.value.length <= 0 && submitted) {
-                return handleReset();
-            }
-            debounce(setSearch(e.target.value), 2000);
-            //TODO search API & Delay
+            console.log("action", e.target.value);
+            if (e.target.value !== "") setApiQuery(e.target.value);
         },
-        [search]
+        500
     );
+
+    const callApi = useCallback(onDebouncedChangeListener, []);
+
+    const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault();
+        if (e.target.value.length <= 0 && submitted) {
+            return handleReset();
+        }
+        setSearch(e.target.value);
+        callApi(e);
+    };
 
     const moveToResultPage = (searchKeyword: string) => {
         setSearch(searchKeyword);
@@ -111,6 +118,8 @@ const SearchBar = () => {
                 <SearchInput
                     value={search ? search : ""}
                     onChange={inputHandler}
+                    // value={value ? value : ""}
+                    // onChange={handleChange}
                     onFocus={(e) => {
                         setSubmitted(false);
                     }}

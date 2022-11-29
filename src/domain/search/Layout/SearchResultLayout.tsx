@@ -1,6 +1,7 @@
 import LectureItem from "@/components/Lecture/LectureItem";
 import SearchResultTab from "@/components/Tab/SearchResultTab/SearchResultTab";
 import SearchIcon from "@assets/Search.svg";
+import { useNavigate } from "react-router-dom";
 import {
     ResultContainer,
     ResultItemListWrapper,
@@ -13,10 +14,16 @@ interface Props {
 }
 
 const SearchResultLayout = ({ keyword }: Props) => {
+    const navigator = useNavigate();
     const lectures = [
         { title: "현성서", professor: "유유유" },
         { title: "현성서", professor: "유유유" },
     ];
+
+    const moveToLectureDetail = () => {
+        navigator(`/search/${keyword}`);
+    };
+
     return (
         <>
             <ResultContainer>
@@ -35,7 +42,13 @@ const SearchResultLayout = ({ keyword }: Props) => {
                             />
                         );
                     })}
-                    <ResultMoreButton>더보기</ResultMoreButton>
+                    <ResultMoreButton
+                        onClick={() => {
+                            moveToLectureDetail();
+                        }}
+                    >
+                        더보기
+                    </ResultMoreButton>
                 </ResultItemListWrapper>
                 <SearchResultTab title={"프로필"} count={2} />
             </ResultContainer>

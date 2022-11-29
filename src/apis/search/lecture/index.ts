@@ -1,13 +1,13 @@
 import axios from "axios";
 import { useQuery } from "react-query";
 
-const getResultByKeyword = async (keyword: string) => {
+const getResultByLecture = async (lectureName: string) => {
     const data = await axios
         .get("https://jsonplaceholder.typicode.com/posts")
         .then((res) => {
             const result: any = [];
             res.data.map((context: any, idx: number) => {
-                if (context.body.includes(keyword))
+                if (context.body.includes(lectureName))
                     result.push(context.body.slice(0, 10));
             });
 
@@ -20,9 +20,13 @@ const getResultByKeyword = async (keyword: string) => {
     return data;
 };
 
-export const useResults = (keyword: string) => {
-    return useQuery(["keyword", keyword], () => getResultByKeyword(keyword), {
-        enabled: !!keyword,
-        select: (data) => data.slice(0, 10),
-    });
+export const useLectureResults = (lectureName: string) => {
+    return useQuery(
+        ["lectureKeyword", lectureName],
+        () => getResultByLecture(lectureName),
+        {
+            enabled: !!lectureName,
+            select: (data) => data.slice(0, 10),
+        }
+    );
 };

@@ -1,8 +1,14 @@
 import Home from "@pages/Home";
 import Landing from "@pages/Landing";
+import Search from "@pages/Search";
+import SearchDetail from "@pages/SearchDetail";
 import routerType from "@_types/router.types";
-import Search from "../pages/Search";
 const pagesData: routerType[] = [
+    {
+        name: "Home",
+        path: "",
+        component: <Home />,
+    },
     {
         name: "Landing",
         path: "/login",
@@ -13,11 +19,10 @@ const pagesData: routerType[] = [
         path: "/search",
         component: <Search />,
     },
-
     {
-        name: "Home",
-        path: "",
-        component: <Home />,
+        name: "Seach",
+        path: "/search/:keyword",
+        component: <SearchDetail />,
     },
 ];
 
