@@ -26,8 +26,9 @@ const SearchWrap = styled.div`
 `;
 
 const SearchInput = styled.input`
+    z-index: 20;
     background-color: transparent;
-    padding: 1rem;
+    padding: 1rem 2rem;
     width: 80%;
 `;
 

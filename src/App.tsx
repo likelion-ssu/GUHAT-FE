@@ -10,8 +10,8 @@ function App() {
         <RecoilRoot>
             <ThemeProvider theme={themes}>
                 <GlobalStyle />
-                <Header title={"GUHAT"} />
                 <BrowserRouter>
+                    <Header title={"GUHAT"} />
                     <Router />
                 </BrowserRouter>
             </ThemeProvider>
