@@ -6,5 +6,5 @@ export const MainLayoutContainer = styled.div`
     margin: 0 auto;
     overflow-y: hidden;
     overflow-x: hidden;
-    background-color: #f2f2f2;
+    border: 1px solid #f2f2f2;
 `;
