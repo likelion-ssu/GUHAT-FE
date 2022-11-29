@@ -10,6 +10,7 @@ const SearchResult = ({ list, clickListener }: Props) => {
                 list.map((result, idx) => {
                     return (
                         <SearchResultItem
+                            key={result}
                             onClick={() => {
                                 clickListener(result);
                             }}

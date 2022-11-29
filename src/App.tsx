@@ -2,19 +2,27 @@ import Header from "@components/Header";
 import { ThemeProvider } from "@emotion/react";
 import GlobalStyle from "@styles/GlobalStyle";
 import themes from "@styles/themes";
+
 import { BrowserRouter } from "react-router-dom";
-import { RecoilRoot } from "recoil";
 import Router from "./router";
+
+import { QueryClient, QueryClientProvider } from "react-query";
+import { RecoilRoot } from "recoil";
+
+const queryClient = new QueryClient();
+
 function App() {
     return (
         <RecoilRoot>
-            <ThemeProvider theme={themes}>
-                <GlobalStyle />
-                <BrowserRouter>
-                    <Header title={"GUHAT"} />
-                    <Router />
-                </BrowserRouter>
-            </ThemeProvider>
+            <QueryClientProvider client={queryClient}>
+                <ThemeProvider theme={themes}>
+                    <GlobalStyle />
+                    <BrowserRouter>
+                        <Header title={"GUHAT"} />
+                        <Router />
+                    </BrowserRouter>
+                </ThemeProvider>
+            </QueryClientProvider>
         </RecoilRoot>
     );
 }

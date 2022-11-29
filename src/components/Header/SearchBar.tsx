@@ -1,6 +1,8 @@
+import { debounce } from "@/util/debounce";
 import SearchIcon from "@assets/Search.svg";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useResults } from "../../apis/search/index";
 import RecomandKeywords from "./RecomandKeywords";
 import { SearchInput, SearchWrap } from "./SearchBar.style";
 import SearchResult from "./SearchResult";
@@ -10,7 +12,7 @@ const SearchBar = () => {
     const [search, setSearch] = useState<string>("");
     const [searchResult, setSeachResult] = useState<string[] | null>([]);
     const [submitted, setSubmitted] = useState<boolean>(true);
-    const [keywordList, setKeywordList] = useState<string[] | null>([
+    const [keywordList, setKeywordList] = useState<string[]>([
         "refaef",
         "efafefaf",
         "2qrwq",
@@ -18,35 +20,11 @@ const SearchBar = () => {
         "9w09r0e",
     ]);
 
-    const searchKeyword = (search: string) => {
-        //TODO 검색 API
-        console.log("search", search);
-        setSeachResult(
-            [
-                {
-                    region: "Girardot",
-                },
-                {
-                    region: "Tuguegarao",
-                },
-                {
-                    region: "Betim",
-                },
-                {
-                    region: "Novgorod",
-                },
-                {
-                    region: "Norderstedt",
-                },
-            ]
-                .map((r, i) => r.region)
-                .concat([search])
-        );
-    };
+    const { status, data } = useResults(search);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        setSubmitted(true);
+        moveToResultPage(search);
         console.log("submit", search);
     };
 
@@ -57,15 +35,17 @@ const SearchBar = () => {
         // this.search(this.state.searchKeyword);
     };
 
-    const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault();
-        if (search.length <= 0 && submitted) {
-            return handleReset();
-        }
-        setSearch(e.target.value);
-        //TODO search API & Delay
-        searchKeyword(e.target.value);
-    };
+    const inputHandler = useCallback(
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            e.preventDefault();
+            if (e.target.value.length <= 0 && submitted) {
+                return handleReset();
+            }
+            debounce(setSearch(e.target.value), 2000);
+            //TODO search API & Delay
+        },
+        [search]
+    );
 
     const moveToResultPage = (searchKeyword: string) => {
         setSearch(searchKeyword);
@@ -73,26 +53,38 @@ const SearchBar = () => {
         navigator(`/search?keyword=${searchKeyword}`);
     };
 
+    const getDataByStatus = () => {
+        switch (status) {
+            case "loading":
+                return <div>Loading</div>;
+            case "error":
+                return <span>Error: {status}</span>;
+            default: {
+                return (
+                    <>
+                        {search.length !== 0 && !submitted ? (
+                            <SearchResult
+                                list={data}
+                                clickListener={moveToResultPage}
+                            />
+                        ) : null}
+                    </>
+                );
+            }
+        }
+    };
+
     return (
         <SearchWrap>
             {!submitted && search.length === 0 ? (
                 <RecomandKeywords
-                    keywords={[
-                        "refaef",
-                        "efafefaf",
-                        "2qrwq",
-                        "909re0",
-                        "9w09r0e",
-                    ]}
+                    keywords={keywordList}
+                    clickListener={(keyword) => {
+                        moveToResultPage(keyword);
+                    }}
                 />
             ) : null}
-            {search.length !== 0 && !submitted ? (
-                // <SearchResult list={searchResult ? searchResult : []} />
-                <SearchResult
-                    list={searchResult}
-                    clickListener={moveToResultPage}
-                />
-            ) : null}
+            {data ? getDataByStatus() : null}
             <form
                 onSubmit={(event) => handleSubmit(event)}
                 onReset={() => handleReset()}

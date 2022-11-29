@@ -6,9 +6,10 @@ import {
 
 interface Props {
     keywords?: string[];
+    clickListener?: (keyword: string) => void;
 }
 
-const RecomandKeywords = ({ keywords }: Props) => {
+const RecomandKeywords = ({ keywords, clickListener }: Props) => {
     return (
         <RecomandkeywordsWrapper>
             <h1>추천 검색어</h1>
@@ -19,6 +20,7 @@ const RecomandKeywords = ({ keywords }: Props) => {
                               <KeywordChip
                                   key={idx}
                                   keyword={keyword}
+                                  clickListener={clickListener}
                               ></KeywordChip>
                           );
                       })
