@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import ScheduleIcon from "@assets/Schedule.svg";
+import { useNavigate } from "react-router-dom";
 import { HeaderWrap, Title } from "./Header.style";
 import PostButton from "./PostButton";
 import SearchBar from "./SearchBar";
@@ -12,7 +13,7 @@ type HeaderProps = {
 
 function Header({ title }: HeaderProps) {
     const [isSSR, setIsSSR] = useState(true);
-
+    const navigator = useNavigate();
     useEffect(() => {
         setIsSSR(false);
     }, []);
@@ -23,7 +24,13 @@ function Header({ title }: HeaderProps) {
                 <>
                     {title && (
                         <>
-                            <Title>{title}</Title>
+                            <Title
+                                onClick={() => {
+                                    navigator("/");
+                                }}
+                            >
+                                {title}
+                            </Title>
                             <SearchBar />
                             <PostButton />
                             <img
