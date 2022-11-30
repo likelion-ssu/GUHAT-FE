@@ -10,9 +10,9 @@ const Home = () => {
             <MainLayout>
                 <Banner />
                 <MyInfoLayout />
-                <div style={{ width: "100%", height: "10vh" }}></div>
+                <div style={{ width: "100%", height: "7vh" }}></div>
                 <RecruitingLayout />
-                <div style={{ width: "100%", height: "10vh" }}></div>
+                <div style={{ width: "100%", height: "5vh" }}></div>
                 <ReviewLayout />
                 <div style={{ width: "100%", height: "10vh" }}></div>
             </MainLayout>

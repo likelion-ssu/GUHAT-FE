@@ -12,7 +12,11 @@ const ReviewLayout = () => {
             <RecruitingListLayoutWrapper>
                 <div
                     className="recruiting-title"
-                    style={{ display: "flex", gap: "0.5rem" }}
+                    style={{
+                        display: "flex",
+                        gap: "0.5rem",
+                        marginBottom: "1rem",
+                    }}
                 >
                     <p>방금 올라온 </p>
                     <h1>팀플 리뷰 </h1>

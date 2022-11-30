@@ -8,7 +8,7 @@ export const RecruitingListLayoutWrapper = styled.div`
 
     .recruiting-title {
         padding-left: 1.5rem;
-        font-size: 1.6rem;
+        font-size: 1.8rem;
         h1 {
             font-weight: 700;
         }
