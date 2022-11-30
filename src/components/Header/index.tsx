@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 
-import ScheduleIcon from "@assets/Schedule.svg";
-import { HeaderWrap, Title } from "./Header.style";
+import ProfileIcon from "@/assets/header_profile.svg";
+import ScheduleIcon from "@/assets/header_schedule.svg";
+import { HeaderIcon, HeaderWrap, IconWrapper, Title } from "./Header.style";
 import PostButton from "./PostButton";
 import SearchBar from "./SearchBar";
 
@@ -25,17 +26,12 @@ function Header({ title }: HeaderProps) {
                         <>
                             <Title>{title}</Title>
                             <SearchBar />
-                            <PostButton />
-                            <img
-                                id="header-schedule-btn"
-                                src={ScheduleIcon}
-                                alt="스케줄 아이콘"
-                            />
-                            <img
-                                id="header-profile-btn"
-                                src={ScheduleIcon}
-                                alt="프로필 아이콘"
-                            />
+                            <IconWrapper>
+                                <HeaderIcon img={ProfileIcon} />
+                                <HeaderIcon img={ScheduleIcon} />
+
+                                <PostButton />
+                            </IconWrapper>
                         </>
                     )}
                 </>

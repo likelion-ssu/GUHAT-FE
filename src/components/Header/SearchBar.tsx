@@ -94,12 +94,15 @@ const SearchBar = () => {
     };
 
     return (
-        <SearchWrap ref={inputRef}>
+        <SearchWrap isFocused={!submitted} ref={inputRef}>
             {!submitted && search.length === 0 ? (
                 <RecomandKeywords
                     keywords={keywordList}
                     clickListener={(keyword) => {
                         moveToResultPage(keyword);
+                    }}
+                    closeListener={() => {
+                        setSubmitted(true);
                     }}
                 />
             ) : null}
@@ -109,6 +112,7 @@ const SearchBar = () => {
                 onReset={() => handleReset()}
             >
                 <SearchInput
+                    placeholder="Search"
                     value={search ? search : ""}
                     onChange={inputHandler}
                     onFocus={(e) => {
