@@ -17,7 +17,12 @@ const MyPostingList = ({ postList }: Props) => {
             <MyPostingListWrapper>
                 {postList
                     ? postList.map((post, idx) => {
-                          return <Review title={idx.toString()} />;
+                          return (
+                              <Review
+                                  title={idx.toString()}
+                                  type={idx % 2 == 0 ? "major" : "elective "}
+                              />
+                          );
                       })
                     : null}
             </MyPostingListWrapper>

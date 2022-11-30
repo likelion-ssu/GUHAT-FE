@@ -5,7 +5,7 @@ export const MainLayoutContainer = styled.div`
     width: 80%;
     padding: 0;
     margin: 0 auto;
-    overflow-y: auto !important;
-
+    overflow-x: scroll;
+    overflow-y: hidden;
     background-color: ${themes.colors.bgColor};
 `;

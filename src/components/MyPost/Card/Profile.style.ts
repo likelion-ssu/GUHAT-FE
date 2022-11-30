@@ -22,7 +22,7 @@ export const ProfileWrap = styled.div`
 
 export const ProfileImgWrap = styled.div`
     position: relative;
-    width: 4rem;
+    min-width: 4rem;
     height: 4rem;
 `;
 
@@ -42,5 +42,7 @@ export const ProfileImg = styled.div<{ img: string | undefined }>`
     background-color: ${themes.colors.gray_600};
     width: 3.5rem;
     height: 3.5rem;
+    left: 0;
+    top: 0;
     border-radius: 3.5rem;
 `;

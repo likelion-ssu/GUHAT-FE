@@ -12,11 +12,11 @@ import Profile from "./Profile";
 
 interface Props {
     title: string;
-    file?: string[];
+    type?: string;
     likeCount?: number | null;
     commentCount?: number | null;
 }
-const Myposting = ({ title, file, likeCount, commentCount }: Props) => {
+const Myposting = ({ title, type, likeCount, commentCount }: Props) => {
     return (
         <MyPostWrap>
             <MyPosTitle>{title}</MyPosTitle>
@@ -39,7 +39,7 @@ const Myposting = ({ title, file, likeCount, commentCount }: Props) => {
                 </MyPostLecturenWrap>
             </MyPostIconContainer>
             <Profile level="LV2" nickname="닉네임" />
-            <MyPostingBgImg type="elective" />
+            <MyPostingBgImg type={type} />
         </MyPostWrap>
     );
 };
