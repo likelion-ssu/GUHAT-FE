@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
+import themes from "@styles/themes";
 
 export const MainLayoutContainer = styled.div`
     width: 80%;
     padding: 0;
     margin: 0 auto;
-    overflow-y: hidden;
-    overflow-x: hidden;
-    background-color: #f2f2f2;
+
+    background-color: ${themes.colors.bgColor};
 `;

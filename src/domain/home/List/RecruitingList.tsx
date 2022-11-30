@@ -13,7 +13,7 @@ const RecruitingList = ({ recruitingList }: Props) => {
             <RecruitingListWrapper>
                 {recruitingList
                     ? recruitingList.map((recruit, idx) => {
-                          return <Recruit recruit={null} />;
+                          return <Recruit recruit={recruit} />;
                       })
                     : null}
             </RecruitingListWrapper>
