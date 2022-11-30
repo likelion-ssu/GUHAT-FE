@@ -1,23 +1,32 @@
+import themes from "@/styles/themes";
 import styled from "@emotion/styled";
 
 export const RecomandkeywordsWrapper = styled.div`
     z-index: -1;
     position: absolute;
-    top: calc(3.3rem);
-    min-width: calc(40vw - 3rem);
-    padding: 2rem;
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
+    top: calc(5.5rem);
+    min-width: calc(35vw);
     display: flex;
     flex-direction: column;
-    gap: 2rem;
     background-color: white;
-    border: 1px solid black;
 
     h1 {
+        padding-left: 2rem;
+        padding-top: 2rem;
         width: 100%;
-        font-weight: 700;
-        font-size: 1.8rem;
+        font-weight: 500;
+        font-size: 1rem;
+        color: ${themes.colors.gray_900};
+    }
+    hr {
+        margin-top: 1rem;
+        height: 2px;
+    }
+    .close-btn {
+        width: 100%;
+        text-align: right;
+        align-items: center;
+        padding: 1rem;
     }
 `;
 
@@ -27,4 +36,5 @@ export const RecomandkeywordList = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     gap: 1rem;
+    padding: 1.5rem 2rem;
 `;

@@ -1,14 +1,17 @@
 import styled from "@emotion/styled";
-const SearchWrap = styled.div`
+import themes from "@styles/themes";
+
+const SearchWrap = styled.div<{ isFocused?: boolean }>`
     z-index: 10;
-    background-color: white;
-    border-radius: 20px;
-    border: 1px solid black;
+    background-color: ${(props) =>
+        props.isFocused ? themes.colors.gray_300 : "white"};
+    border-radius: 12px;
+    border: 1px solid ${themes.colors.gray_500};
     position: absolute;
     display: flex;
-    left: calc(7% + 10rem);
-    transform: translate(calc(-7% -10rem));
-    min-width: 40vw;
+    left: calc(8rem + 6rem);
+    transform: translate(calc(8rem + 6rem));
+    min-width: 35vw;
 
     img {
         z-index: 10;
