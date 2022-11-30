@@ -1,12 +1,11 @@
 import MyProfile from "@components/MyProfile/MyProfile";
 import Recruit from "@components/Recruit/Card/Recruit";
-import Review from "@components/Review/Card/Review";
 const Landing = () => {
     return (
         <div style={{ width: "5rem" }}>
             <h1>Landing Page</h1>
             <Recruit recruit={null} />
-            <Review title={"오픈소스"} />
+
             <MyProfile
                 nickName="닉네임1107"
                 name="홍길동"

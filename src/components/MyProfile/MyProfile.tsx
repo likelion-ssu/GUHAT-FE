@@ -36,7 +36,7 @@ const MyProfile = ({ nickName, name, semester, univ, major, level }: Props) => {
                     <p className="profile-label">진행중인 팀플</p>
                 </MyprofileinfoWrap>
                 <MyprofileinfoWrap>
-                    <p className="profile-number">4,4</p>
+                    <p className="profile-number">4.4</p>
                     <p className="profile-label">팀원들의 평가</p>
                 </MyprofileinfoWrap>
             </MyProfileInfoContainer>

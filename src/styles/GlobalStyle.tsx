@@ -20,6 +20,7 @@ const global = css`
             "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
         font-size: 62.5%;
         font-weight: 400;
+        overflow: scroll;
     }
     html,
     body {
