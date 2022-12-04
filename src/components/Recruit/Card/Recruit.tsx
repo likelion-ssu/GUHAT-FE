@@ -3,6 +3,7 @@ import { useCallback } from "react";
 import Profile from "./Profile";
 import ProgressBar from "./ProgressBar";
 import {
+    RecruitBgPogress,
     RecruitLectureTitle,
     RecruitSubTitle,
     RecruitWrap,
@@ -14,7 +15,7 @@ import ViewCount from "./ViewCount";
 const Recruit = ({
     recruit,
 }: {
-    recruit: recuritLecture | undefined | null;
+    recruit: recuritLecture | undefined | null | any;
 }) => {
     const recruitData = {
         lectureTitle: "사용자 인터페이스 및 실습",
@@ -22,6 +23,7 @@ const Recruit = ({
         professor: "최지웅",
         endDate: "2022-12-31",
     };
+    console.log(recruit);
 
     const calculateDate = useCallback<(endDate: string) => string>(
         (endDate) => {
@@ -33,17 +35,18 @@ const Recruit = ({
         },
         []
     );
-
+    const total = 5;
+    const current = 3;
+    const type = "major";
     return (
-        <RecruitWrap>
-            <RecruitContentChip />
-            <RecruitLectureTitle>
-                {recruitData.lectureTitle}
-            </RecruitLectureTitle>
+        <RecruitWrap type={recruit.type}>
+            <RecruitBgPogress progress={recruit.current / recruit.total} />
+            <RecruitContentChip type={type} />
+            <RecruitLectureTitle>{recruit.name}</RecruitLectureTitle>
             <RecruitSubTitle>{recruitData.schedule.join()}</RecruitSubTitle>
             <RecruitSubTitle>{recruitData.professor}</RecruitSubTitle>
-            <ViewCount count={1} />
-            <ProgressBar total={5} current={3} />
+            <ViewCount count={100} type={recruit.type} />
+            <ProgressBar total={recruit.total} current={recruit.current} />
             <RecruitContent
                 title="최지웅 사인페 버스 운영합니다"
                 detail={

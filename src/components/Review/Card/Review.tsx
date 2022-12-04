@@ -1,56 +1,39 @@
-import commentIcon from "../../../assets/comment.svg";
-import ImgIcon from "../../../assets/ImageIcon.svg";
-import thumbIcon from "../../../assets/thumbUp.svg";
-import Profile from "./Profile";
+import Profile from "@/components/MyPost/Card/Profile";
 import {
+    ReviewContainer,
     ReviewContent,
-    ReviewIconContainer,
-    ReviewIconWrap,
+    ReviewLecturenWrap,
+    ReviewLikeCount,
+    ReviewLikeTagWrap,
+    ReviewProfileInfo,
+    ReviewTagThumb,
     ReviewTitle,
-    ReviewWrap,
+    ReviewTitleWrap,
 } from "./Review.style";
-
-interface Props {
-    title: string;
-    file?: string[];
-    likeCount?: number | null;
-    commentCount?: number | null;
-}
-
-const Review = ({ title, file, likeCount, commentCount }: Props) => {
+const Review = () => {
     return (
-        <ReviewWrap>
-            <ReviewTitle>{title}</ReviewTitle>
-            <ReviewIconWrap style={{ margin: "1rem" }}>
-                <img src={ImgIcon} alt="좋아요" />
-                <p>{file ? file.length : 0}</p>
-            </ReviewIconWrap>
+        <ReviewContainer>
+            <ReviewLikeTagWrap />
+            <ReviewTagThumb />
+            <ReviewLikeCount>+1</ReviewLikeCount>
+            <ReviewTitleWrap>
+                <ReviewTitle>사인페 팀플 후기 남깁니다</ReviewTitle>
+                <ReviewLecturenWrap>
+                    <p>사용자 인터페이스 및 실습 / </p>
+                    <p>최지웅</p>
+                </ReviewLecturenWrap>
+            </ReviewTitleWrap>
+
             <ReviewContent>
-                {
-                    "안녕하세요. 저는 나랏말싸미 듕귁에 달아 물자와로 서로 사맛디 아니할쎄 내 이를 어녀삐녀겨 새로 스물 여덟 글..."
-                }
+                {" "}
+                {"안녕하세요. 저는 나랏말싸미 듕귁에 달아 물자와로 서로 사맛디 아니할쎄 내 이를 어녀삐녀겨 새로 스물 여덟 글..." +
+                    "안녕하세요. 저는 나랏말싸미 듕귁에 달아 물자와로 서로 사맛디 아니할쎄 내 이를 어녀삐녀겨 새로 스물 여덟 글..."}
             </ReviewContent>
-            <div
-                style={{
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    padding: "1rem",
-                }}
-            >
-                <ReviewIconContainer>
-                    <ReviewIconWrap>
-                        <img src={thumbIcon} alt="좋아요" />
-                        <p>{likeCount ? likeCount : 0}</p>
-                    </ReviewIconWrap>
-                    <ReviewIconWrap>
-                        <img src={commentIcon} alt="좋아요" />
-                        <p>{commentCount ? commentCount : 0}</p>
-                    </ReviewIconWrap>
-                </ReviewIconContainer>
+            <ReviewProfileInfo>
+                <p className="lecture-info">22학년도 2학기 수강자</p>
                 <Profile level="LV2" nickname="닉네임" />
-            </div>
-        </ReviewWrap>
+            </ReviewProfileInfo>
+        </ReviewContainer>
     );
 };
 

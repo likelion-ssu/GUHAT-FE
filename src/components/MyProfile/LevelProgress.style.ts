@@ -2,15 +2,14 @@ import themes from "@/styles/themes";
 import styled from "@emotion/styled";
 
 export const ProgressContainer = styled.div`
-    z-index: 5;
     position: relative;
-    margin-left: 2rem;
-    margin-right: 2rem;
-    margin-top: 2rem;
-    height: calc(10px + 4rem);
+    width: 100%;
+    overflow: hidden;
+    padding: 0rem 2.5rem;
 `;
 export const ProgressWrap = styled.div`
-    height: 10px;
+    width: 100%;
+    height: 2px;
     background-color: ${themes.colors.gray_900};
     border-radius: 10px;
 `;
@@ -22,8 +21,16 @@ export const Progress = styled.div<{ progress: number }>`
     border-radius: 10px;
 `;
 
-export const ProgressText = styled.p`
-    position: absolute;
-    right: 0;
-    margin-top: 0.5rem;
+export const ProgressInfo = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 200;
+    color: ${themes.colors.gray_900};
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
+    .profile-point {
+        color: white;
+        margin-right: 0.5rem;
+    }
 `;
