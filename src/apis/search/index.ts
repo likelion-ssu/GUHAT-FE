@@ -7,8 +7,8 @@ const getResultByKeyword = async (keyword: string) => {
         .then((res) => {
             const result: any = [];
             res.data.map((context: any, idx: number) => {
-                if (context.body.includes(keyword))
-                    result.push(context.body.slice(0, 10));
+                if (context.body.slice(0, 20).includes(keyword))
+                    result.push(context.body.slice(0, 20));
             });
 
             return result;
