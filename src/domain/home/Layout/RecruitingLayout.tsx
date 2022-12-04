@@ -1,12 +1,12 @@
+import { IRecruitItem } from "@/types/recruitLecture.types";
 import RecruitingList from "../List/RecruitingList";
 import { RecruitingListLayoutWrapper } from "./RecruitingLayout.style";
-const RecruitingLayout = () => {
-    const list = [
-        { name: "사인페", type: "major", total: 5, current: 1 },
-        { name: "현성서", type: "elective", total: 5, current: 3 },
-        { name: "캡스톤", type: "elective", total: 6, current: 2 },
-        { name: "캡스톤", type: "major", total: 6, current: 2 },
-    ];
+
+interface Props {
+    list: IRecruitItem[];
+}
+
+const RecruitingLayout = ({ list }: Props) => {
     return (
         <>
             <RecruitingListLayoutWrapper>

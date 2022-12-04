@@ -1,10 +1,9 @@
-import Review from "@/components/Review/Card/Review";
 import MyProfile from "@components/MyProfile/MyProfile";
 const Landing = () => {
     return (
         <div style={{ width: "5rem" }}>
             <h1>Landing Page</h1>
-            <Review />
+
             <MyProfile
                 nickName="닉네임1107"
                 name="홍길동"

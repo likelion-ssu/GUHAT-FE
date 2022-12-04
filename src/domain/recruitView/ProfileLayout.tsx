@@ -1,3 +1,4 @@
+import EditButton from "@/components/Button/EditButton";
 import {
     ProfileImg,
     ProfileImgBgCircle,
@@ -11,9 +12,11 @@ interface Props {
     id: string;
     level: string;
     endDate: string;
+    isOwner: boolean;
 }
 
 const ProfileLayout = ({ ...props }: Props) => {
+    const onClickEdit = () => {};
     return (
         <ProfileLayoutContainer>
             <ProfileImgWrap>
@@ -26,6 +29,11 @@ const ProfileLayout = ({ ...props }: Props) => {
             <p className="level">{props.level}</p>
             <p className="day">|</p>
             <p className="day">{"202020"}</p>
+            <div style={{ marginLeft: "1rem" }}>
+                {props.isOwner ? (
+                    <EditButton clickListener={onClickEdit} />
+                ) : null}
+            </div>
         </ProfileLayoutContainer>
     );
 };

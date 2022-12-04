@@ -21,6 +21,7 @@ const RecruitViewLayout = ({ recruit }: Props) => {
                     id={res.writer.id}
                     level={res.writer.level}
                     endDate={res.endDate ? res.endDate : "기간제한 없음"}
+                    isOwner={res.isOwner ? true : false}
                 ></ProfileLayout>
             </div>
             <hr />

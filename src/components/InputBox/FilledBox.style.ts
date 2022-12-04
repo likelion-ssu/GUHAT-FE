@@ -5,7 +5,7 @@ export const FilledBoxWrap = styled.div<{ mode?: string }>`
     background-color: ${({ mode }) =>
         mode === "dark" ? themes.colors.black_500 : themes.colors.gray_100};
     border-radius: 0.8rem;
-    font-weight: 700;
+    font-weight: 500;
     font-size: 1.3rem;
     color: ${({ mode }) =>
         mode === "dark"

@@ -1,16 +1,17 @@
-export interface lectureType {
+export interface Ilecture {
     lectureId: number;
-    lectureTitle?: string;
+    name?: string;
     professors?: string[] | null;
     semester?: string | null;
     univ?: string | null;
     major?: string | null;
     group?: string | null;
-    schedule?: lectureSchedule | null;
+    schedule?: any[] | null;
+    year?: string;
 }
 
 interface lectureSchedule {
-    day?: string[] | null;
+    day?: string[] | string | null;
     time?: string | null;
     place?: string;
 }

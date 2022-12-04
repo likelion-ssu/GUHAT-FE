@@ -13,6 +13,7 @@ const RecruitView = () => {
     const { id } = useParams();
 
     const dummyRes: RecruitViewResponse = {
+        isOwner: true,
         isApply: true,
         title: "최지웅 사인페 운영",
         writer: {

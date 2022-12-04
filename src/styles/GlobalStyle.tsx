@@ -70,6 +70,9 @@ const global = css`
             cursor: default;
             opacity: 0.5;
         }
+        :active {
+            filter: brightness(0.8);
+        }
     }
     img {
         border: none;
