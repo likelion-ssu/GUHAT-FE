@@ -8,7 +8,7 @@ export const ReviewContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-width: 25vw;
+    width: 100%;
     border-radius: 1rem;
     background-color: white;
     padding: 2.54rem;

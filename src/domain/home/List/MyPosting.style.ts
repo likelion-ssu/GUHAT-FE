@@ -7,14 +7,14 @@ export const MyPostingContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    overflow: scroll !important;
 `;
 
 export const MyPostingListWrapper = styled.div`
     max-width: calc(100%);
     display: flex;
-    scrollbar-color: red;
+
     flex-direction: row;
     gap: 2rem;
     padding: 1rem;
+    overflow-x: scroll !important;
 `;

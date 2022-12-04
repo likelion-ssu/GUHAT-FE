@@ -22,7 +22,7 @@ export const RecruitingListLayoutWrapper = styled.div`
         font-size: 1.6rem;
         font-weight: 700;
         :active {
-            color: white;
+            text-decoration: underline;
         }
     }
 `;

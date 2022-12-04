@@ -20,7 +20,7 @@ const MyPostingList = ({ postList }: Props) => {
                           return (
                               <Review
                                   title={idx.toString()}
-                                  type={idx % 2 == 0 ? "major" : "elective "}
+                                  type={idx % 2 === 0 ? "major" : "elective "}
                               />
                           );
                       })

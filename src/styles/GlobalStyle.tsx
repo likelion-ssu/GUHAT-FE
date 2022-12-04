@@ -27,8 +27,8 @@ const global = css`
         height: 100%;
         padding: 0;
         margin: 0;
-        overflow: scroll !important;
-        overflow-y: scroll !important;
+        /* overflow: scroll !important;
+        overflow-y: scroll !important; */
     }
     a {
         margin: 0;

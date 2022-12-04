@@ -6,7 +6,7 @@ export const ReviewListContainer = styled.div`
     flex-direction: column;
 `;
 export const ReviewListWrapper = styled.div`
-    width: 100%;
+    width: calc(100%);
     display: flex;
     flex-direction: row;
     gap: 2rem;
