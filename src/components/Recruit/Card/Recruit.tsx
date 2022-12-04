@@ -1,5 +1,6 @@
 import { recuritLecture } from "@_types/recruitLecture.types";
 import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import Profile from "./Profile";
 import ProgressBar from "./ProgressBar";
 import {
@@ -18,12 +19,18 @@ const Recruit = ({
     recruit: recuritLecture | undefined | null | any;
 }) => {
     const recruitData = {
+        lectureId: "",
         lectureTitle: "사용자 인터페이스 및 실습",
         schedule: ["월 10:30", "수 13:30"],
         professor: "최지웅",
         endDate: "2022-12-31",
     };
-    console.log(recruit);
+
+    const navigator = useNavigate();
+    const id = 737; // 모집글 아이디
+    const onClickRecruitCard = () => {
+        navigator("/recruit/" + id);
+    };
 
     const calculateDate = useCallback<(endDate: string) => string>(
         (endDate) => {
@@ -35,11 +42,10 @@ const Recruit = ({
         },
         []
     );
-    const total = 5;
-    const current = 3;
+
     const type = "major";
     return (
-        <RecruitWrap type={recruit.type}>
+        <RecruitWrap lectureType={recruit.type} onClick={onClickRecruitCard}>
             <RecruitBgPogress progress={recruit.current / recruit.total} />
             <RecruitContentChip type={type} />
             <RecruitLectureTitle>{recruit.name}</RecruitLectureTitle>

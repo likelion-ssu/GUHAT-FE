@@ -1,7 +1,7 @@
-import { lecture } from "./lecture.types";
+import { lectureType } from "./lecture.types";
 import { user } from "./user.type";
 export interface recuritLecture {
-    lecture: lecture | null;
+    lecture: lectureType | null;
     writerId: string;
     writer: user | null;
     recruitTitle: string;
@@ -11,4 +11,17 @@ export interface recuritLecture {
     viewCount: number | null;
     totalMember: number | null;
     currentMember: number | null;
+}
+
+export interface RecruitViewResponse {
+    isApply: boolean;
+    title: string;
+    writer: any;
+    date: string;
+    lecture: object;
+    duration: string;
+    endDate: string;
+    group: any[];
+    detail: string;
+    piriority: string;
 }

@@ -29,7 +29,7 @@ const HeaderWrap = styled.header`
     } */
 `;
 
-const Title = styled.div`
+const Title = styled.button`
     position: absolute;
     left: 5rem;
     transform: translate(5rem);
@@ -51,11 +51,13 @@ export const IconWrapper = styled.div`
     }
 `;
 
-export const HeaderIcon = styled.div<{ img: string }>`
+export const HeaderIcon = styled.button<{ img: string }>`
     height: 3.5rem;
     width: 3.5rem;
     background-image: ${(props) => (props.img ? `url(${props.img})` : null)};
     background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
     :active {
         filter: brightness(0.6);
     }

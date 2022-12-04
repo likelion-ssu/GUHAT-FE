@@ -1,6 +1,7 @@
 import Home from "@pages/Home";
 import Landing from "@pages/Landing";
 import routerType from "@_types/router.types";
+import RecruitView from "../pages/RecruitView";
 import Search from "../pages/Search";
 const pagesData: routerType[] = [
     {
@@ -18,6 +19,18 @@ const pagesData: routerType[] = [
         name: "Home",
         path: "",
         component: <Home />,
+    },
+
+    {
+        name: "RecruitView",
+        path: "/recruit/:id",
+        component: <RecruitView />,
+    },
+
+    {
+        name: "RecruitPost",
+        path: "/recruit/post",
+        component: <RecruitView />,
     },
 ];
 
