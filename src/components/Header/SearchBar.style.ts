@@ -13,7 +13,7 @@ const SearchWrap = styled.div<{ isFocused?: boolean }>`
     transform: translate(calc(8rem + 6rem));
     min-width: 35vw;
 
-    img {
+    .header-search {
         z-index: 10;
         width: 10%;
         height: 2.2rem;
@@ -23,7 +23,7 @@ const SearchWrap = styled.div<{ isFocused?: boolean }>`
         transform: translate(1rem, -50%);
         margin: 0 auto;
     }
-    img:active {
+    .header-search:active {
         filter: brightness(0.8);
     }
 `;
@@ -33,6 +33,7 @@ const SearchInput = styled.input`
     background-color: transparent;
     padding: 1rem 2rem;
     width: 80%;
+    font-size: 1.5rem;
 `;
 
 export { SearchWrap, SearchInput };

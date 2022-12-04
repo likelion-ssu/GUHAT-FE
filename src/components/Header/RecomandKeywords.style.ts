@@ -21,12 +21,14 @@ export const RecomandkeywordsWrapper = styled.div`
     hr {
         margin-top: 1rem;
         height: 2px;
+        background-color: #d9d9d9;
     }
     .close-btn {
         width: 100%;
         text-align: right;
         align-items: center;
         padding: 1rem;
+        color: #999999;
     }
 `;
 
