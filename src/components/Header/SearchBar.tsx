@@ -84,7 +84,11 @@ const SearchBar = () => {
                         {search.length !== 0 && !submitted ? (
                             <SearchResult
                                 list={data}
+                                keyword={search}
                                 clickListener={moveToResultPage}
+                                closeListener={() => {
+                                    setSubmitted(true);
+                                }}
                             />
                         ) : null}
                     </>
@@ -123,6 +127,7 @@ const SearchBar = () => {
 
             <img
                 alt="검색"
+                className="header-search"
                 src={SearchIcon}
                 onClick={() => (search ? moveToResultPage(search) : null)}
             />

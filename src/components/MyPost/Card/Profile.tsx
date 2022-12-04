@@ -13,16 +13,15 @@ interface Props {
 
 const Profile = ({ profileImg, level, nickname }: Props) => {
     return (
-        <div style={{ display: "flex", flexDirection: "row" }}>
-            <ProfileImgWrap>
-                <ProfileImgBgCircle />
-                <ProfileImg img={undefined} />
-            </ProfileImgWrap>
-
+        <div style={{ display: "flex", flexDirection: "row", gap: "0.5rem" }}>
             <ProfileWrap>
                 <p id="recruit-profile-nickname">{nickname}</p>
                 <p id="recruit-profile-level">{level}</p>
             </ProfileWrap>
+            <ProfileImgWrap>
+                <ProfileImgBgCircle />
+                <ProfileImg img={undefined} />
+            </ProfileImgWrap>
         </div>
     );
 };

@@ -1,4 +1,4 @@
-import Review from "@components/Review/Card/Review";
+import Review from "@/components/MyPost/Card/Myposting";
 import { MyPostingContainer, MyPostingListWrapper } from "./MyPosting.style";
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
 const MyPostingList = ({ postList }: Props) => {
     return (
         <MyPostingContainer>
-            <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", paddingLeft: "1rem" }}>
                 <p className="myinfo" id="myinfo-nickname">
                     닉네임님
                 </p>
@@ -17,7 +17,12 @@ const MyPostingList = ({ postList }: Props) => {
             <MyPostingListWrapper>
                 {postList
                     ? postList.map((post, idx) => {
-                          return <Review title={idx.toString()} />;
+                          return (
+                              <Review
+                                  title={idx.toString()}
+                                  type={idx % 2 === 0 ? "major" : "elective "}
+                              />
+                          );
                       })
                     : null}
             </MyPostingListWrapper>
