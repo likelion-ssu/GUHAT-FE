@@ -1,23 +1,28 @@
 import themes from "@/styles/themes";
 import styled from "@emotion/styled";
 
-export const RecruitWrap = styled.div<{ type?: string }>`
+export const RecruitWrap = styled.button<{ lectureType?: string }>`
     position: relative;
-    display: flex;
+    display: flex block;
     flex-direction: column;
     justify-content: center;
     width: calc(100% / 3);
     border-radius: 1rem;
-    color: ${({ type }) =>
-        type === "major"
+    color: ${({ lectureType }) =>
+        lectureType === "major"
             ? ` ${themes.colors.gray_300}`
             : ` ${themes.colors.black_500}`};
     box-shadow: 10px 10px 0px #999999;
     padding-top: 4rem;
     margin-top: 4rem;
-    background: ${({ type }) => (type === "major" ? "#303644;" : " #C6E7FA")};
+    background: ${({ lectureType }) =>
+        lectureType === "major" ? "#303644;" : " #C6E7FA"};
     :active {
         filter: brightness(0.8);
+    }
+    :hover {
+        transition-duration: 0.4s;
+        transform: translate(0, -20px) scale(1.01);
     }
 `;
 

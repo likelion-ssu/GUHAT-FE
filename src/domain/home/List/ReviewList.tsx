@@ -1,8 +1,9 @@
 import Review from "@/components/Review/Card/Review";
+import { IReview } from "@/types/review.types";
 import { ReviewListContainer, ReviewListWrapper } from "./ReviewList.style";
 
 interface Props {
-    reviewList?: any[];
+    reviewList?: IReview[];
 }
 
 const ReviewList = ({ reviewList }: Props) => {
@@ -11,7 +12,9 @@ const ReviewList = ({ reviewList }: Props) => {
             <ReviewListWrapper>
                 {reviewList
                     ? reviewList.map((review, idx) => {
-                          return <Review />;
+                          return (
+                              <Review review={review} key={"review " + idx} />
+                          );
                       })
                     : null}
             </ReviewListWrapper>

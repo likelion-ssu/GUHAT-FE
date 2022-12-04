@@ -1,9 +1,9 @@
-import { lecture } from "./lecture.types";
-import { user } from "./user.type";
+import { Ilecture } from "./lecture.types";
+import { IUser } from "./user.type";
 export interface recuritLecture {
-    lecture: lecture | null;
+    lecture: Ilecture | null;
     writerId: string;
-    writer: user | null;
+    writer: IUser | null;
     recruitTitle: string;
     endDate: string | null;
     detail: string | null;
@@ -11,4 +11,43 @@ export interface recuritLecture {
     viewCount: number | null;
     totalMember: number | null;
     currentMember: number | null;
+}
+
+export interface RecruitViewResponse {
+    isOwner: boolean;
+    isApply: boolean;
+    title: string;
+    writer: any;
+    date: string;
+    lecture: object;
+    duration: string;
+    endDate: string;
+    group: any[];
+    detail: string;
+    piriority: string;
+}
+
+export interface IRecruit {
+    id: number;
+    title: string; // 공지 제목
+    time: [];
+    professor: [];
+    type: string | "major" | "elective";
+    writer: IUser;
+    endDate: string;
+    lecture: Ilecture;
+    detail: string;
+}
+
+export interface IRecruitItem {
+    id: number;
+    lecture: Ilecture;
+    title: string; // 공지 제목
+    type: string | "major" | "elective";
+    writer: IUser;
+    endDate: string;
+    detail: string;
+    viewCount: number;
+    total: number;
+    current: number;
 }
