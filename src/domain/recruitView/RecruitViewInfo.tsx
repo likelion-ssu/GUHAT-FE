@@ -53,7 +53,11 @@ const RecruitViewInfo = ({ res }: Props) => {
                                       <div className="recruit-info-item">
                                           <FilledBox
                                               text={g.title}
-                                              key={"recruit-info-item" + i}
+                                              key={
+                                                  "recruit-info-item" +
+                                                  i +
+                                                  g.title
+                                              }
                                           />
                                           <h1>{g.member.length}명</h1>
                                       </div>

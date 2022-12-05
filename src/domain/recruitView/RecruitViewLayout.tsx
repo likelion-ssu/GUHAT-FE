@@ -35,7 +35,11 @@ const RecruitViewLayout = ({ recruit }: Props) => {
                     {res?.group
                         ? res.group.map((g, i) => {
                               return (
-                                  <MemberList list={g.member} name={g.title} />
+                                  <MemberList
+                                      list={g.member}
+                                      name={g.title}
+                                      key={g.member}
+                                  />
                               );
                           })
                         : null}

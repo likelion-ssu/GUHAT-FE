@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const ModalBackgroundContainer = styled.div`
-    z-index: 100;
+    z-index: 80;
     position: fixed;
     top: 0;
     background-color: rgb(0, 0, 0, 0.6);
@@ -17,6 +17,6 @@ export const ModalContainer = styled.div`
     background-color: white;
     border-radius: 1.5rem;
     display: flex;
-    padding: 3rem;
+    padding: 2rem 3rem;
     opacity: 100% !important;
 `;

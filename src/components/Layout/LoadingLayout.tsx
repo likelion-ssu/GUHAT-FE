@@ -23,9 +23,7 @@ const LoadingLayout = ({
         }, 5000);
     }, []);
 
-    useEffect(() => {
-        console.log(errorMsg);
-    }, [errorMsg]);
+    useEffect(() => {}, [errorMsg]);
 
     return (
         <>

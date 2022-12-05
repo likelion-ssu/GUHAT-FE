@@ -1,5 +1,5 @@
 import { modalState } from "@/storage/recoil/modalState";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { ModalBackgroundContainer, ModalContainer } from "./ModalLayout.style";
 interface Prop {
@@ -8,6 +8,10 @@ interface Prop {
 }
 const ModalLayout = ({ children, closeListener }: Prop) => {
     const [isVisible, setVisible] = useRecoilState(modalState);
+
+    useEffect(() => {
+        console.log("moodal tigger", isVisible);
+    }, []);
 
     return (
         <>

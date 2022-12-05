@@ -1,5 +1,5 @@
 import MainLayout from "@components/Layout/MainLayout";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import LoadingLayout from "./LoadingLayout";
 import ModalLayout from "./ModalLayout";
 
@@ -10,6 +10,10 @@ const APILayout = ({
     children: ReactNode;
     modal?: any;
 }) => {
+    useEffect(() => {
+        console.log("api state triger");
+    }, []);
+
     return (
         <>
             <LoadingLayout />

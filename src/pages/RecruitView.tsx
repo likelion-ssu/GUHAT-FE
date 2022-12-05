@@ -10,6 +10,7 @@ import { RecruitViewResponse } from "@/types/recruitLecture.types";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
+import RecruitMemModal from "../components/Modal/RecruitMemModal";
 import { loadingState } from "../storage/recoil/loadingState";
 
 const RecruitView = () => {
@@ -18,6 +19,7 @@ const RecruitView = () => {
     const [modalVisible, setModalVisible] = useRecoilState(modalState);
     useEffect(() => {
         setLoading(false);
+        setModalVisible(false);
     }, []);
     const dummyRes: RecruitViewResponse = {
         isOwner: true,
@@ -42,16 +44,16 @@ const RecruitView = () => {
                 title: "프론트",
                 member: [
                     {
-                        id: "20222222",
-                        nickname: "닉네임1",
+                        id: "202222221",
+                        nickname: "닉네임1f",
                     },
                     {
-                        id: "2022232",
-                        nickname: "닉네임3",
+                        id: "20222322",
+                        nickname: "닉네임3f",
                     },
                     {
-                        id: "2022232",
-                        nickname: "닉네임6",
+                        id: "20222323",
+                        nickname: "닉네임6f",
                     },
                     null,
                     null,
@@ -63,7 +65,7 @@ const RecruitView = () => {
                 member: [
                     {
                         id: "20222222",
-                        nickname: "닉네임1",
+                        nickname: "닉네임1b",
                     },
                     null,
                 ],
@@ -97,6 +99,7 @@ const RecruitView = () => {
 
     const onClickApply = () => {
         if (dummyRes.isOwner) {
+            setModalVisible(true);
         } else {
             alert("지원완료");
             setApplyState(true);
@@ -111,17 +114,22 @@ const RecruitView = () => {
 
             <APILayout
                 modal={
-                    <button
-                        onClick={() => {
-                            console.log("click close");
-                            setModalVisible(false);
-                        }}
-                    >
-                        Modal
-                    </button>
+                    dummyRes.isOwner && modalVisible ? (
+                        <RecruitMemModal
+                            members={dummyRes.group.map((g, titleIndex) => {
+                                return {
+                                    title: g.title,
+                                    member: g.member.map((m: any) => {
+                                        return m
+                                            ? { ...m, isNew: false }
+                                            : null;
+                                    }),
+                                };
+                            })}
+                        />
+                    ) : null
                 }
             >
-                <h1>head</h1>
                 <RecruitViewLayout recruit={dummyRes} />
                 <div style={{ height: "6rem" }}></div>
             </APILayout>
