@@ -169,30 +169,33 @@ const RecruitMemModal = ({ members }: { members: any[] }) => {
             ></button>
             <RecruitMemModalList>
                 <h1 className="list-label">지원자 목록</h1>
-                {checkedMem && applicantList
-                    ? applicantList[
-                          checkedMem ? checkedMem.titleIndex : 0
-                      ].applicant.map((a: any, idx: number) => {
-                          return (
-                              <RecruitApplyItem
-                                  key={
-                                      "recruit-modal-apply-item" + a.title + idx
-                                  }
-                                  nickname={a.nickname}
-                                  id={a.id}
-                                  level={a.level}
-                                  clickListener={() => {
-                                      onClickApplyItem({
-                                          titleIndex: checkedMem.titleIndex,
-                                          index: idx,
-                                          id: a.id,
-                                          ...a,
-                                      });
-                                  }}
-                              />
-                          );
-                      })
-                    : null}
+                {checkedMem && applicantList ? (
+                    applicantList[
+                        checkedMem ? checkedMem.titleIndex : 0
+                    ].applicant.map((a: any, idx: number) => {
+                        return (
+                            <RecruitApplyItem
+                                key={"recruit-modal-apply-item" + a.title + idx}
+                                nickname={a.nickname}
+                                id={a.id}
+                                level={a.level}
+                                clickListener={() => {
+                                    onClickApplyItem({
+                                        titleIndex: checkedMem.titleIndex,
+                                        index: idx,
+                                        id: a.id,
+                                        ...a,
+                                    });
+                                }}
+                            />
+                        );
+                    })
+                ) : (
+                    <div className="recruit-modal-empty-state">
+                        <h2>오른쪽 팀 현황 박스에서 추가하고 </h2>
+                        <h2>싶은 빈자리를 선택해주세요.</h2>
+                    </div>
+                )}
             </RecruitMemModalList>
             <div className="modal-recuit-content">
                 <RecruitMemModalGroups>

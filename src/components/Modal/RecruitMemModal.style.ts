@@ -63,6 +63,16 @@ export const RecruitMemModalList = styled.ul`
     padding: 2rem;
     background-color: #f0f0f0;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+    .recruit-modal-empty-state {
+        height: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        line-height: 2rem;
+        font-size: 1.2rem;
+    }
 `;
 export const RecruitMemModalGroups = styled.div`
     width: 100%;
