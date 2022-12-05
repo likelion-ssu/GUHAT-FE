@@ -1,4 +1,5 @@
 import Profile from "@/components/MyPost/Card/Profile";
+import { IReview } from "../../../types/review.types";
 import {
     ReviewContainer,
     ReviewContent,
@@ -10,28 +11,40 @@ import {
     ReviewTitle,
     ReviewTitleWrap,
 } from "./Review.style";
-const Review = () => {
+const Review = ({ review }: { review: IReview }) => {
     return (
         <ReviewContainer>
             <ReviewLikeTagWrap />
             <ReviewTagThumb />
             <ReviewLikeCount>+1</ReviewLikeCount>
             <ReviewTitleWrap>
-                <ReviewTitle>사인페 팀플 후기 남깁니다</ReviewTitle>
+                <ReviewTitle>{review.title}</ReviewTitle>
                 <ReviewLecturenWrap>
-                    <p>사용자 인터페이스 및 실습 / </p>
-                    <p>최지웅</p>
+                    <p>{review.lecture.name} / </p>
+                    <p>
+                        {review.lecture.professors?.map((p, i) => {
+                            if (i === 0) return p;
+                            else return ` / ${p}`;
+                        })}
+                    </p>
                 </ReviewLecturenWrap>
             </ReviewTitleWrap>
-
-            <ReviewContent>
-                {" "}
-                {"안녕하세요. 저는 나랏말싸미 듕귁에 달아 물자와로 서로 사맛디 아니할쎄 내 이를 어녀삐녀겨 새로 스물 여덟 글..." +
-                    "안녕하세요. 저는 나랏말싸미 듕귁에 달아 물자와로 서로 사맛디 아니할쎄 내 이를 어녀삐녀겨 새로 스물 여덟 글..."}
-            </ReviewContent>
+            <ReviewContent>{review.detail}</ReviewContent>
             <ReviewProfileInfo>
-                <p className="lecture-info">22학년도 2학기 수강자</p>
-                <Profile level="LV2" nickname="닉네임" />
+                <p className="lecture-info">
+                    {`${review.lecture.year?.substring(2, 4)} 년도 ${
+                        review.lecture.semester
+                    } `}
+                    수강자
+                </p>
+                <Profile
+                    level={
+                        review.writer.level?.toString()
+                            ? review.writer.level?.toString()
+                            : "0"
+                    }
+                    nickname={review.writer.nickname}
+                />
             </ReviewProfileInfo>
         </ReviewContainer>
     );

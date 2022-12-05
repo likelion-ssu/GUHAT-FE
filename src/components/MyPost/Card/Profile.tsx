@@ -7,7 +7,7 @@ import {
 
 interface Props {
     profileImg?: string | null;
-    level: string | null;
+    level: string;
     nickname: string | null;
 }
 
