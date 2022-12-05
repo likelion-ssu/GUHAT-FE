@@ -5,13 +5,20 @@ import {
     StickBackBtn,
     StickRecruitkBtn,
 } from "@/domain/recruitView/RecruitViewLayout.style";
+import { modalState } from "@/storage/recoil/modalState";
 import { RecruitViewResponse } from "@/types/recruitLecture.types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { loadingState } from "../storage/recoil/loadingState";
 
 const RecruitView = () => {
     const { id } = useParams();
-
+    const [loading, setLoading] = useRecoilState(loadingState);
+    const [modalVisible, setModalVisible] = useRecoilState(modalState);
+    useEffect(() => {
+        setLoading(false);
+    }, []);
     const dummyRes: RecruitViewResponse = {
         isOwner: true,
         isApply: true,
@@ -80,15 +87,20 @@ const RecruitView = () => {
         piriority: "학점 4.5",
     };
 
-    const [applyState, setApplyState] = useState(dummyRes.isApply);
+    const [applyState, setApplyState] = useState(
+        dummyRes.isOwner ? false : dummyRes.isApply
+    );
 
     const onClickBack = () => {
         window.history.back();
     };
 
     const onClickApply = () => {
-        alert("지원완료");
-        setApplyState(true);
+        if (dummyRes.isOwner) {
+        } else {
+            alert("지원완료");
+            setApplyState(true);
+        }
     };
 
     return (
@@ -96,13 +108,30 @@ const RecruitView = () => {
             <StickBackBtn>
                 <BackArrowBtn clickListener={onClickBack} />
             </StickBackBtn>
-            <APILayout>
+
+            <APILayout
+                modal={
+                    <button
+                        onClick={() => {
+                            console.log("click close");
+                            setModalVisible(false);
+                        }}
+                    >
+                        Modal
+                    </button>
+                }
+            >
+                <h1>head</h1>
                 <RecruitViewLayout recruit={dummyRes} />
                 <div style={{ height: "6rem" }}></div>
             </APILayout>
 
             <StickRecruitkBtn onClick={onClickApply} disabled={applyState}>
-                {applyState ? "지원완료" : "지원하기"}
+                {!dummyRes.isOwner
+                    ? applyState
+                        ? "지원완료"
+                        : "지원하기"
+                    : "지원받기"}
             </StickRecruitkBtn>
         </>
     );
