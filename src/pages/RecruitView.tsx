@@ -1,5 +1,5 @@
 import BackArrowBtn from "@/components/Button/BackArrow";
-import MainLayout from "@/components/Layout/MainLayout";
+import APILayout from "@/components/Layout/APILayout";
 import RecruitViewLayout from "@/domain/recruitView/RecruitViewLayout";
 import {
     StickBackBtn,
@@ -96,10 +96,11 @@ const RecruitView = () => {
             <StickBackBtn>
                 <BackArrowBtn clickListener={onClickBack} />
             </StickBackBtn>
-            <MainLayout>
+            <APILayout>
                 <RecruitViewLayout recruit={dummyRes} />
                 <div style={{ height: "6rem" }}></div>
-            </MainLayout>
+            </APILayout>
+
             <StickRecruitkBtn onClick={onClickApply} disabled={applyState}>
                 {applyState ? "지원완료" : "지원하기"}
             </StickRecruitkBtn>
