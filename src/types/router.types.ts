@@ -1,8 +1,7 @@
-import { ComponentType } from "react";
-import { JsxElement } from "typescript";
+import { ReactNode } from "react";
 
 export default interface routerType {
     name: string;
     path: string;
-    component: JSX.Element;
+    component: ReactNode;
 }

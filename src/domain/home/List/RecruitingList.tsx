@@ -1,3 +1,4 @@
+import { IRecruitItem } from "@/types/recruitLecture.types";
 import Recruit from "@components/Recruit/Card/Recruit";
 import {
     RecruitingListContainer,
@@ -5,7 +6,7 @@ import {
 } from "./RecruitingList.style";
 
 interface Props {
-    recruitingList?: any[];
+    recruitingList?: IRecruitItem[];
 }
 const RecruitingList = ({ recruitingList }: Props) => {
     return (

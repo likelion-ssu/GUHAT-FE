@@ -1,23 +1,31 @@
 import themes from "@/styles/themes";
 import styled from "@emotion/styled";
 
-export const RecruitWrap = styled.div<{ type?: string }>`
+export const RecruitWrap = styled.button<{ lectureType?: string }>`
     position: relative;
-    display: flex;
+    display: flex block;
     flex-direction: column;
     justify-content: center;
     width: calc(100% / 3);
     border-radius: 1rem;
-    color: ${({ type }) =>
-        type === "major"
+    color: ${({ lectureType }) =>
+        lectureType === "major"
             ? ` ${themes.colors.gray_300}`
             : ` ${themes.colors.black_500}`};
-    box-shadow: 10px 10px 0px #999999;
+    //filter: drop-shadow(6px 6px 0px #999999);
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+        rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+        rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     padding-top: 4rem;
     margin-top: 4rem;
-    background: ${({ type }) => (type === "major" ? "#303644;" : " #C6E7FA")};
+    background: ${({ lectureType }) =>
+        lectureType === "major" ? "#303644;" : " #C6E7FA"};
     :active {
-        filter: brightness(0.8);
+        filter: brightness(0.5);
+    }
+    :hover {
+        transition-duration: 0.4s;
+        transform: translate(0, -20px) scale(1.01);
     }
 `;
 

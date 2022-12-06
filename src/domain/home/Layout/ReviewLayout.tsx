@@ -1,12 +1,8 @@
+import { IReview } from "../../../types/review.types";
 import ReviewList from "../List/ReviewList";
 import { RecruitingListLayoutWrapper } from "./RecruitingLayout.style";
 
-const ReviewLayout = () => {
-    const list = [
-        { name: "사인페", type: "major", total: 5, current: 1 },
-        { name: "현성서", type: "elective", total: 5, current: 3 },
-        { name: "캡스톤", type: "major", total: 6, current: 2 },
-    ];
+const ReviewLayout = ({ list }: { list: IReview[] }) => {
     return (
         <>
             <RecruitingListLayoutWrapper>

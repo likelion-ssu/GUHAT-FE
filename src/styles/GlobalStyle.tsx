@@ -1,4 +1,5 @@
 import { css, Global } from "@emotion/react";
+import themes from "./themes";
 
 export default function GlobalStyle() {
     return <Global styles={global} />;
@@ -27,6 +28,7 @@ const global = css`
         height: 100%;
         padding: 0;
         margin: 0;
+        background-color: ${themes.colors.bgColor};
         /* overflow: scroll !important;
         overflow-y: scroll !important; */
     }
@@ -63,6 +65,14 @@ const global = css`
         cursor: pointer;
         padding: 0;
         overflow: visible;
+
+        &:disabled {
+            cursor: default;
+            opacity: 0.5;
+        }
+        :active {
+            filter: brightness(0.8);
+        }
     }
     img {
         border: none;
