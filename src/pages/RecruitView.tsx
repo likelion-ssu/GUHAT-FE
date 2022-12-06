@@ -1,20 +1,30 @@
 import BackArrowBtn from "@/components/Button/BackArrow";
 import APILayout from "@/components/Layout/APILayout";
+import RecruitApplyModal from "@/components/Modal/RecruitApplyModal";
+import RecruitMemModal from "@/components/Modal/RecruitMemModal";
 import RecruitViewLayout from "@/domain/recruitView/RecruitViewLayout";
 import {
     StickBackBtn,
     StickRecruitkBtn,
 } from "@/domain/recruitView/RecruitViewLayout.style";
+import { modalState } from "@/storage/recoil/modalState";
 import { RecruitViewResponse } from "@/types/recruitLecture.types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { loadingState } from "../storage/recoil/loadingState";
 
 const RecruitView = () => {
     const { id } = useParams();
-
+    const [loading, setLoading] = useRecoilState(loadingState);
+    const [modalVisible, setModalVisible] = useRecoilState(modalState);
+    useEffect(() => {
+        setLoading(false);
+        setModalVisible(false);
+    }, []);
     const dummyRes: RecruitViewResponse = {
         isOwner: true,
-        isApply: true,
+        isApply: false,
         title: "최지웅 사인페 운영",
         writer: {
             id: "2022222",
@@ -32,31 +42,48 @@ const RecruitView = () => {
         duration: "3개월",
         group: [
             {
+                roleId: 1,
                 title: "프론트",
                 member: [
                     {
-                        id: "20222222",
-                        nickname: "닉네임1",
+                        id: "202222221",
+                        nickname: "닉네임1f",
                     },
                     {
-                        id: "2022232",
-                        nickname: "닉네임3",
+                        id: "20222322",
+                        nickname: "닉네임3f",
                     },
                     {
-                        id: "2022232",
-                        nickname: "닉네임6",
+                        id: "20222323",
+                        nickname: "닉네임6f",
                     },
                     null,
                     null,
                 ],
             },
-
             {
+                roleId: 31,
+                title: "기획",
+                member: [
+                    {
+                        id: "202222221",
+                        nickname: "닉네임1f",
+                    },
+                    {
+                        id: "20222322",
+                        nickname: "닉네임3f",
+                    },
+
+                    null,
+                ],
+            },
+            {
+                roleId: 2,
                 title: "백엔드",
                 member: [
                     {
                         id: "20222222",
-                        nickname: "닉네임1",
+                        nickname: "닉네임1b",
                     },
                     null,
                 ],
@@ -80,15 +107,16 @@ const RecruitView = () => {
         piriority: "학점 4.5",
     };
 
-    const [applyState, setApplyState] = useState(dummyRes.isApply);
+    const [applyState, setApplyState] = useState(
+        dummyRes.isOwner ? false : dummyRes.isApply
+    );
 
     const onClickBack = () => {
         window.history.back();
     };
 
     const onClickApply = () => {
-        alert("지원완료");
-        setApplyState(true);
+        setModalVisible(true);
     };
 
     return (
@@ -96,13 +124,42 @@ const RecruitView = () => {
             <StickBackBtn>
                 <BackArrowBtn clickListener={onClickBack} />
             </StickBackBtn>
-            <APILayout>
+
+            <APILayout
+                modal={
+                    dummyRes.isOwner ? (
+                        <RecruitMemModal
+                            members={dummyRes.group.map((g, titleIndex) => {
+                                return {
+                                    roleId: g.roleId,
+                                    title: g.title,
+                                    member: g.member.map((m: any) => {
+                                        return m
+                                            ? { ...m, isNew: false }
+                                            : null;
+                                    }),
+                                };
+                            })}
+                        />
+                    ) : (
+                        <RecruitApplyModal
+                            list={dummyRes.group.map((g, i) => {
+                                return { roleId: g.roleId, title: g.title };
+                            })}
+                        />
+                    )
+                }
+            >
                 <RecruitViewLayout recruit={dummyRes} />
                 <div style={{ height: "6rem" }}></div>
             </APILayout>
 
             <StickRecruitkBtn onClick={onClickApply} disabled={applyState}>
-                {applyState ? "지원완료" : "지원하기"}
+                {!dummyRes.isOwner
+                    ? applyState
+                        ? "지원완료"
+                        : "지원하기"
+                    : "지원받기"}
             </StickRecruitkBtn>
         </>
     );

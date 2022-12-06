@@ -3,14 +3,22 @@ import { MemberCardContainer } from "./MemberCard.style";
 
 interface Props {
     width?: string;
-    member: any;
+    member: string | null;
+    id?: number;
+    disabled?: boolean;
+    clickListener?: () => any;
 }
 
-const MemberCard = ({ member, width }: Props) => {
+const MemberCard = ({ member, width, disabled, clickListener }: Props) => {
     return (
-        <MemberCardContainer width={width} member={member}>
+        <MemberCardContainer
+            width={width}
+            member={member}
+            disabled={disabled}
+            onClick={clickListener}
+        >
             <img src={MemberDefault} className="member-img" />
-            <p>{member ? member : "모집중"}</p>
+            <div className="member-nickname">{member ? member : "모집중"}</div>
         </MemberCardContainer>
     );
 };
