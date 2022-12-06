@@ -49,11 +49,18 @@ const RecruitMemModal = ({ members }: { members: any[] }) => {
     const onClickSubmit = () => {
         setLoading(true);
         const submit = selecteMember.map(
-            (group: { title: string; member: any }, idx) => {
+            (
+                group: { roleId: number | string; title: string; member: any },
+                idx
+            ) => {
                 let member = group.member.map((m: any) => {
                     return m ? m.id : null;
                 });
-                return { title: group?.title.toString(), member: member };
+                return {
+                    roldeId: group?.roleId,
+                    title: group?.title.toString(),
+                    member: member,
+                };
             }
         );
 
@@ -62,6 +69,7 @@ const RecruitMemModal = ({ members }: { members: any[] }) => {
 
         setTimeout(() => {
             setLoading(false);
+            window.location.reload();
         }, 4000);
     };
 

@@ -3,6 +3,7 @@ export const getApplicants = (recruitId: number | string): any[] => {
 
     return [
         {
+            roleId: 1,
             title: "프론트",
             applicant: [
                 {
@@ -22,8 +23,14 @@ export const getApplicants = (recruitId: number | string): any[] => {
                 },
             ],
         },
+        {
+            roleId: 3,
+            title: "기획",
+            applicant: [],
+        },
 
         {
+            roleId: 6,
             title: "백엔드",
             applicant: [
                 {

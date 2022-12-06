@@ -15,13 +15,11 @@ const ModalLayout = ({ children, closeListener }: Prop) => {
 
     return (
         <>
-            (
             {isVisible ? (
                 <ModalBackgroundContainer>
                     <ModalContainer>{children}</ModalContainer>
                 </ModalBackgroundContainer>
             ) : null}
-            )
         </>
     );
 };

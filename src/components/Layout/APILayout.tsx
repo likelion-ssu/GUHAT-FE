@@ -18,10 +18,7 @@ const APILayout = ({
         <>
             <LoadingLayout />
             <ModalLayout>{modal}</ModalLayout>
-            <MainLayout>
-                {/* <ModalLayout> {modal}</ModalLayout> */}
-                {children}
-            </MainLayout>
+            <MainLayout>{children}</MainLayout>
         </>
     );
 };
