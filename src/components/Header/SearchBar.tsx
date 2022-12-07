@@ -91,7 +91,11 @@ const SearchBar = () => {
                         {search.length !== 0 && !submitted ? (
                             <SearchResult
                                 list={data}
+                                keyword={search}
                                 clickListener={moveToResultPage}
+                                closeListener={() => {
+                                    setSubmitted(true);
+                                }}
                             />
                         ) : null}
                     </>
@@ -101,12 +105,15 @@ const SearchBar = () => {
     };
 
     return (
-        <SearchWrap ref={inputRef}>
+        <SearchWrap isFocused={!submitted} ref={inputRef}>
             {!submitted && search.length === 0 ? (
                 <RecomandKeywords
                     keywords={keywordList}
                     clickListener={(keyword) => {
                         moveToResultPage(keyword);
+                    }}
+                    closeListener={() => {
+                        setSubmitted(true);
                     }}
                 />
             ) : null}
@@ -116,6 +123,7 @@ const SearchBar = () => {
                 onReset={() => handleReset()}
             >
                 <SearchInput
+                    placeholder="Search"
                     value={search ? search : ""}
                     onChange={inputHandler}
                     // value={value ? value : ""}
@@ -128,6 +136,7 @@ const SearchBar = () => {
 
             <img
                 alt="검색"
+                className="header-search"
                 src={SearchIcon}
                 onClick={() => (search ? moveToResultPage(search) : null)}
             />

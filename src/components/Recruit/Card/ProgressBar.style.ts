@@ -1,6 +1,8 @@
+import themes from "@/styles/themes";
 import styled from "@emotion/styled";
 
 export const ProgressContainer = styled.div`
+    z-index: 5;
     position: relative;
     margin-left: 2rem;
     margin-right: 2rem;
@@ -9,14 +11,14 @@ export const ProgressContainer = styled.div`
 `;
 export const ProgressWrap = styled.div`
     height: 10px;
-    background-color: grey;
+    background-color: ${themes.colors.gray_900};
     border-radius: 10px;
 `;
 
 export const Progress = styled.div<{ progress: number }>`
     width: ${({ progress }) => `${progress}%`};
     height: 100%;
-    background-color: black;
+    background-color: white;
     border-radius: 10px;
 `;
 

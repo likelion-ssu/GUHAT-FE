@@ -1,3 +1,4 @@
+import { IRecruitItem } from "@/types/recruitLecture.types";
 import Recruit from "@components/Recruit/Card/Recruit";
 import {
     RecruitingListContainer,
@@ -5,7 +6,7 @@ import {
 } from "./RecruitingList.style";
 
 interface Props {
-    recruitingList?: any[];
+    recruitingList?: IRecruitItem[];
 }
 const RecruitingList = ({ recruitingList }: Props) => {
     return (
@@ -13,7 +14,7 @@ const RecruitingList = ({ recruitingList }: Props) => {
             <RecruitingListWrapper>
                 {recruitingList
                     ? recruitingList.map((recruit, idx) => {
-                          return <Recruit recruit={null} />;
+                          return <Recruit recruit={recruit} />;
                       })
                     : null}
             </RecruitingListWrapper>

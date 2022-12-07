@@ -7,9 +7,14 @@ import {
 interface Props {
     keywords?: string[];
     clickListener?: (keyword: string) => void;
+    closeListener?: () => void;
 }
 
-const RecomandKeywords = ({ keywords, clickListener }: Props) => {
+const RecomandKeywords = ({
+    keywords,
+    clickListener,
+    closeListener,
+}: Props) => {
     return (
         <RecomandkeywordsWrapper>
             <h1>추천 검색어</h1>
@@ -26,6 +31,10 @@ const RecomandKeywords = ({ keywords, clickListener }: Props) => {
                       })
                     : null}
             </RecomandkeywordList>
+            <hr />
+            <button className="close-btn" onClick={closeListener}>
+                닫기
+            </button>
         </RecomandkeywordsWrapper>
     );
 };

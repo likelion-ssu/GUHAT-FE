@@ -3,7 +3,7 @@ import MyPostingList from "../List/MyPostingList";
 import { MyInfoWrapper } from "./MyInfoLayout.style";
 
 const MyInfoLayout = () => {
-    const list = [1, 2, 3, 4, 5, 6];
+    const list = [1, 2, 3, 4, 5, 6, 7];
     return (
         <>
             <MyInfoWrapper>

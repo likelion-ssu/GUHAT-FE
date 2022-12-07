@@ -1,4 +1,5 @@
 import { css, Global } from "@emotion/react";
+import themes from "./themes";
 
 export default function GlobalStyle() {
     return <Global styles={global} />;
@@ -18,7 +19,7 @@ const global = css`
             Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo",
             "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
             "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-        font-size: 62.5%;
+        font-size: 75%;
         font-weight: 400;
     }
     html,
@@ -27,6 +28,9 @@ const global = css`
         height: 100%;
         padding: 0;
         margin: 0;
+        background-color: ${themes.colors.bgColor};
+        /* overflow: scroll !important;
+        overflow-y: scroll !important; */
     }
     a {
         margin: 0;
@@ -61,6 +65,14 @@ const global = css`
         cursor: pointer;
         padding: 0;
         overflow: visible;
+
+        &:disabled {
+            cursor: default;
+            opacity: 0.5;
+        }
+        :active {
+            filter: brightness(0.8);
+        }
     }
     img {
         border: none;

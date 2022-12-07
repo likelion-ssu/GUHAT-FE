@@ -1,16 +1,19 @@
 import styled from "@emotion/styled";
-const SearchWrap = styled.div`
+import themes from "@styles/themes";
+
+const SearchWrap = styled.div<{ isFocused?: boolean }>`
     z-index: 10;
-    background-color: white;
-    border-radius: 20px;
-    border: 1px solid black;
+    background-color: ${(props) =>
+        props.isFocused ? themes.colors.gray_300 : "white"};
+    border-radius: 12px;
+    border: 1px solid ${themes.colors.gray_500};
     position: absolute;
     display: flex;
-    left: calc(7% + 10rem);
-    transform: translate(calc(-7% -10rem));
-    min-width: 40vw;
+    left: calc(8rem + 6rem);
+    transform: translate(calc(8rem + 6rem));
+    min-width: 35vw;
 
-    img {
+    .header-search {
         z-index: 10;
         width: 10%;
         height: 2.2rem;
@@ -20,7 +23,7 @@ const SearchWrap = styled.div`
         transform: translate(1rem, -50%);
         margin: 0 auto;
     }
-    img:active {
+    .header-search:active {
         filter: brightness(0.8);
     }
 `;
@@ -30,6 +33,7 @@ const SearchInput = styled.input`
     background-color: transparent;
     padding: 1rem 2rem;
     width: 80%;
+    font-size: 1.5rem;
 `;
 
 export { SearchWrap, SearchInput };

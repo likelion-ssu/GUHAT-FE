@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 
-import ScheduleIcon from "@assets/Schedule.svg";
+import ProfileIcon from "@/assets/header_profile.svg";
+import ScheduleIcon from "@/assets/header_schedule.svg";
 import { useNavigate } from "react-router-dom";
-import { HeaderWrap, Title } from "./Header.style";
+import { HeaderIcon, HeaderWrap, IconWrapper, Title } from "./Header.style";
 import PostButton from "./PostButton";
 import SearchBar from "./SearchBar";
 
@@ -14,6 +15,9 @@ type HeaderProps = {
 function Header({ title }: HeaderProps) {
     const [isSSR, setIsSSR] = useState(true);
     const navigator = useNavigate();
+    const onClickTitle = () => {
+        navigator("/");
+    };
     useEffect(() => {
         setIsSSR(false);
     }, []);
@@ -24,25 +28,14 @@ function Header({ title }: HeaderProps) {
                 <>
                     {title && (
                         <>
-                            <Title
-                                onClick={() => {
-                                    navigator("/");
-                                }}
-                            >
-                                {title}
-                            </Title>
+                            <Title onClick={onClickTitle}>{title}</Title>
                             <SearchBar />
-                            <PostButton />
-                            <img
-                                id="header-schedule-btn"
-                                src={ScheduleIcon}
-                                alt="스케줄 아이콘"
-                            />
-                            <img
-                                id="header-profile-btn"
-                                src={ScheduleIcon}
-                                alt="프로필 아이콘"
-                            />
+                            <IconWrapper>
+                                <HeaderIcon img={ProfileIcon} />
+                                <HeaderIcon img={ScheduleIcon} />
+
+                                <PostButton />
+                            </IconWrapper>
                         </>
                     )}
                 </>

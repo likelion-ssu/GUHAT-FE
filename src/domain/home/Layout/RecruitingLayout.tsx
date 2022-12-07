@@ -1,7 +1,12 @@
+import { IRecruitItem } from "@/types/recruitLecture.types";
 import RecruitingList from "../List/RecruitingList";
 import { RecruitingListLayoutWrapper } from "./RecruitingLayout.style";
-const RecruitingLayout = () => {
-    const list = [1, 2, 3, 4, 5, 6];
+
+interface Props {
+    list: IRecruitItem[];
+}
+
+const RecruitingLayout = ({ list }: Props) => {
     return (
         <>
             <RecruitingListLayoutWrapper>
@@ -14,7 +19,9 @@ const RecruitingLayout = () => {
                     <p>모집글이에요!</p>
                 </div>
 
-                <RecruitingList recruitingList={list} />
+                <RecruitingList
+                    recruitingList={list.length > 4 ? list.slice(0, 4) : list}
+                />
                 <div style={{ width: "100%", position: "relative" }}>
                     <button className="recruiting-more">더보기</button>
                 </div>

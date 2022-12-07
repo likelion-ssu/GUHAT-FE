@@ -1,8 +1,8 @@
 import ViewCountIcon from "../../../assets/viewCount.svg";
 import { ViewCountWrap } from "./ViewCount.style";
-const ViewCount = ({ count }: { count: number }) => {
+const ViewCount = ({ count, type }: { count: number; type?: string }) => {
     return (
-        <ViewCountWrap>
+        <ViewCountWrap type={type}>
             <img src={ViewCountIcon}></img>
             {count}
         </ViewCountWrap>

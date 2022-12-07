@@ -1,4 +1,9 @@
-import { ProfileImg, ProfileWrap } from "./Profile.style";
+import {
+    ProfileImg,
+    ProfileImgBgCircle,
+    ProfileImgWrap,
+    ProfileWrap,
+} from "./Profile.style";
 
 interface Props {
     profileImg?: string | null;
@@ -9,10 +14,14 @@ interface Props {
 const Profile = ({ profileImg, level, nickname }: Props) => {
     return (
         <div style={{ display: "flex", flexDirection: "row" }}>
-            <ProfileImg img={undefined} />
+            <ProfileImgWrap>
+                <ProfileImgBgCircle />
+                <ProfileImg img={undefined} />
+            </ProfileImgWrap>
+
             <ProfileWrap>
-                <p id="recruit-profile-level">{level}</p>
                 <p id="recruit-profile-nickname">{nickname}</p>
+                <p id="recruit-profile-level">{level}</p>
             </ProfileWrap>
         </div>
     );

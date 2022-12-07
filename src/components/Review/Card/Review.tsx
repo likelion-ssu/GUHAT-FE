@@ -1,56 +1,52 @@
-import commentIcon from "../../../assets/comment.svg";
-import ImgIcon from "../../../assets/ImageIcon.svg";
-import thumbIcon from "../../../assets/thumbUp.svg";
-import Profile from "./Profile";
+import Profile from "@/components/MyPost/Card/Profile";
+import { IReview } from "../../../types/review.types";
 import {
+    ReviewContainer,
     ReviewContent,
-    ReviewIconContainer,
-    ReviewIconWrap,
+    ReviewLecturenWrap,
+    ReviewLikeCount,
+    ReviewLikeTagWrap,
+    ReviewProfileInfo,
+    ReviewTagThumb,
     ReviewTitle,
-    ReviewWrap,
+    ReviewTitleWrap,
 } from "./Review.style";
-
-interface Props {
-    title: string;
-    file?: string[];
-    likeCount?: number | null;
-    commentCount?: number | null;
-}
-
-const Review = ({ title, file, likeCount, commentCount }: Props) => {
+const Review = ({ review }: { review: IReview }) => {
     return (
-        <ReviewWrap>
-            <ReviewTitle>{title}</ReviewTitle>
-            <ReviewIconWrap style={{ margin: "1rem" }}>
-                <img src={ImgIcon} alt="좋아요" />
-                <p>{file ? file.length : 0}</p>
-            </ReviewIconWrap>
-            <ReviewContent>
-                {
-                    "안녕하세요. 저는 나랏말싸미 듕귁에 달아 물자와로 서로 사맛디 아니할쎄 내 이를 어녀삐녀겨 새로 스물 여덟 글..."
-                }
-            </ReviewContent>
-            <div
-                style={{
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    padding: "1rem",
-                }}
-            >
-                <ReviewIconContainer>
-                    <ReviewIconWrap>
-                        <img src={thumbIcon} alt="좋아요" />
-                        <p>{likeCount ? likeCount : 0}</p>
-                    </ReviewIconWrap>
-                    <ReviewIconWrap>
-                        <img src={commentIcon} alt="좋아요" />
-                        <p>{commentCount ? commentCount : 0}</p>
-                    </ReviewIconWrap>
-                </ReviewIconContainer>
-                <Profile level="LV2" nickname="닉네임" />
-            </div>
-        </ReviewWrap>
+        <ReviewContainer>
+            <ReviewLikeTagWrap />
+            <ReviewTagThumb />
+            <ReviewLikeCount>+1</ReviewLikeCount>
+            <ReviewTitleWrap>
+                <ReviewTitle>{review.title}</ReviewTitle>
+                <ReviewLecturenWrap>
+                    <p>{review.lecture.name} / </p>
+                    <p>
+                        {review.lecture.professors?.map((p, i) => {
+                            if (i === 0) return p;
+                            else return ` / ${p}`;
+                        })}
+                    </p>
+                </ReviewLecturenWrap>
+            </ReviewTitleWrap>
+            <ReviewContent>{review.detail}</ReviewContent>
+            <ReviewProfileInfo>
+                <p className="lecture-info">
+                    {`${review.lecture.year?.substring(2, 4)} 년도 ${
+                        review.lecture.semester
+                    } `}
+                    수강자
+                </p>
+                <Profile
+                    level={
+                        review.writer.level?.toString()
+                            ? review.writer.level?.toString()
+                            : "0"
+                    }
+                    nickname={review.writer.nickname}
+                />
+            </ReviewProfileInfo>
+        </ReviewContainer>
     );
 };
 

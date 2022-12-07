@@ -1,20 +1,17 @@
 const themes = {
     colors: {
-        // primary: {
-        //     gray_100: "#FAFAFB",
-        //     gray_200: "#F5F7FA",
-        //     gray_300: "#EBEFF5",
-        //     gray_400: "#E1E8F2",
-        // },
-        // secondary: {
-        //     black: "#1C1C1C",
-        //     red: "#FF4E16",
-        //     blue: "#315EFF",
-        // },
-        // basic: {
-        //     black: "#000000",
-        //     white: "#ffffff",
-        // },
+        gray_100: "#EBEBEB",
+        gray_300: "#E6E6E6",
+        gray_500: "#BABABA",
+        gray_600: "#B5B5B5",
+        gray_700: "#9A9A9A",
+        gray_900: "#999999",
+        gray_1000: "#595959",
+        navy_500: "#14141433",
+        black: "#000000",
+        black_500: "#303644",
+        white: "#ffffff",
+        bgColor: "#F3F3F3",
     },
 };
 
