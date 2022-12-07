@@ -2,12 +2,14 @@ import styled from "@emotion/styled";
 
 export const SearchResultWrapper = styled.ul`
     position: absolute;
-    top: calc(5.5rem);
+    top: calc(6rem);
     min-width: calc(35vw);
     padding: 2rem;
     padding-bottom: 0;
     flex-direction: column;
     background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+        rgba(0, 0, 0, 0.22) 0px 10px 10px;
 
     #search-empty {
         font-size: 1.2rem;

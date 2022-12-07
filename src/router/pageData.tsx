@@ -5,7 +5,6 @@ import SearchDetail from "@pages/SearchDetail";
 import routerType from "@_types/router.types";
 import RecruitPost from "../pages/RecruitPost";
 import RecruitView from "../pages/RecruitView";
-import Search from "../pages/Search";
 const pagesData: routerType[] = [
     {
         name: "Home",

@@ -1,3 +1,5 @@
+import moreIcon from "@assets/dropdown.svg";
+import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 import themes from "@styles/themes";
 
@@ -5,12 +7,12 @@ const SearchWrap = styled.div<{ isFocused?: boolean }>`
     z-index: 10;
     background-color: ${(props) =>
         props.isFocused ? themes.colors.gray_300 : "white"};
-    border-radius: 12px;
+    border-radius: 0 12px 12px 0;
     border: 1px solid ${themes.colors.gray_500};
     position: absolute;
     display: flex;
-    left: calc(8rem + 6rem);
-    transform: translate(calc(8rem + 6rem));
+    left: calc(8rem + 10rem);
+    transform: translate(calc(8rem + 10rem));
     min-width: 35vw;
 
     .header-search {
@@ -32,8 +34,75 @@ const SearchInput = styled.input`
     z-index: 20;
     background-color: transparent;
     padding: 1rem 2rem;
-    width: 80%;
+    width: calc(100% - 3rem);
     font-size: 1.5rem;
 `;
 
-export { SearchWrap, SearchInput };
+const SearchKeyword = styled.button<{ active?: boolean }>`
+    z-index: 99;
+
+    position: absolute;
+    left: calc(14rem);
+    transform: translate(calc(14rem));
+    ${({ active }) =>
+        `${
+            !active
+                ? `background-color : ${themes.colors.gray_500} ` +
+                  " border-radius: 12px 0 0 12px;"
+                : "#f18904; border-radius : none;"
+        }`};
+    width: 8rem;
+    display: flex;
+    padding-left: 1.5rem;
+    align-items: center;
+    height: calc(100% - 3rem);
+    font-size: 1.2rem;
+    text-align: left;
+
+    background-image: url(${moreIcon});
+    background-repeat: no-repeat;
+    background-position: 90% 50%;
+    background-size: 1.2rem;
+`;
+
+const drowDownAnmiation = keyframes`
+
+      0% {
+                opacity: 0;
+                transform:  translate(calc(13rem), -1rem);
+        }
+   
+     100% {
+                 opacity: 1;
+                transform: scaleY(1) translate(calc(13rem));
+    }
+`;
+
+const SearchKeywordOption = styled.ul`
+    z-index: -1;
+    top: calc(6rem);
+    position: absolute;
+    left: calc(13rem);
+    transform: translate(calc(13rem));
+    width: 7rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    animation: ${drowDownAnmiation} 0.4s;
+
+    li {
+        text-align: center;
+        background-color: #f18904;
+        color: white;
+        padding: 0.7rem 0rem;
+        font-size: 1.1rem;
+        border-radius: 1rem;
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+            rgba(0, 0, 0, 0.23) 0px 6px 6px;
+        :hover {
+            filter: brightness(0.9);
+            transform: scale(1.05);
+        }
+    }
+`;
+export { SearchWrap, SearchInput, SearchKeyword, SearchKeywordOption };

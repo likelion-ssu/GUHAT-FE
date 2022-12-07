@@ -4,15 +4,25 @@ import { useNavigate } from "react-router-dom";
 import { useKeywordResults } from "../../apis/search/keyword/index";
 
 import RecomandKeywords from "./RecomandKeywords";
-import { SearchInput, SearchWrap } from "./SearchBar.style";
+import {
+    SearchInput,
+    SearchKeyword,
+    SearchKeywordOption,
+    SearchWrap,
+} from "./SearchBar.style";
 import SearchResult from "./SearchResult";
 
-import debounce from "@/util/debounce";
+import { debounce } from "@/util/debounce";
 import SearchIcon from "@assets/Search.svg";
 
 const SearchBar = () => {
     const navigator = useNavigate();
     const inputRef: React.RefObject<HTMLDivElement> = useRef(null);
+
+    const options = ["수업명", "교수님", "스택"];
+
+    const [active, setActive] = useState(false);
+    const [option, setOption] = useState(options[0]);
 
     const [search, setSearch] = useState<string>("");
     const [apiQuery, setApiQuery] = useState<string>("");
@@ -54,24 +64,17 @@ const SearchBar = () => {
         setSearch("");
     };
 
-    const onDebouncedChangeListener = debounce(
+    const inputHandler = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
-            console.log("action", e.target.value);
-            if (e.target.value !== "") setApiQuery(e.target.value);
+            e.preventDefault();
+            if (e.target.value.length <= 0 && submitted) {
+                return handleReset();
+            }
+            debounce(setSearch(e.target.value), 2000);
+            //TODO search API & Delay
         },
-        500
+        [search]
     );
-
-    const callApi = useCallback(onDebouncedChangeListener, []);
-
-    const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault();
-        if (e.target.value.length <= 0 && submitted) {
-            return handleReset();
-        }
-        setSearch(e.target.value);
-        callApi(e);
-    };
 
     const moveToResultPage = (searchKeyword: string) => {
         setSearch(searchKeyword);
@@ -105,42 +108,69 @@ const SearchBar = () => {
     };
 
     return (
-        <SearchWrap isFocused={!submitted} ref={inputRef}>
-            {!submitted && search.length === 0 ? (
-                <RecomandKeywords
-                    keywords={keywordList}
-                    clickListener={(keyword) => {
-                        moveToResultPage(keyword);
-                    }}
-                    closeListener={() => {
-                        setSubmitted(true);
-                    }}
-                />
-            ) : null}
-            {data ? getDataByStatus() : null}
-            <form
-                onSubmit={(event) => handleSubmit(event)}
-                onReset={() => handleReset()}
+        <>
+            <SearchKeyword
+                active={active}
+                onClick={() => {
+                    setActive((prev) => !prev);
+                }}
             >
-                <SearchInput
-                    placeholder="Search"
-                    value={search ? search : ""}
-                    onChange={inputHandler}
-                    // value={value ? value : ""}
-                    // onChange={handleChange}
-                    onFocus={(e) => {
-                        setSubmitted(false);
-                    }}
-                />
-            </form>
+                {option}
+            </SearchKeyword>
+            {active && !submitted ? (
+                <SearchKeywordOption>
+                    {options.map((op, index) => {
+                        return (
+                            <li
+                                onClick={(e: any) => {
+                                    setActive((prev) => !prev);
+                                    setOption(e.target.innerText);
+                                }}
+                            >
+                                {op}
+                            </li>
+                        );
+                    })}{" "}
+                </SearchKeywordOption>
+            ) : null}
 
-            <img
-                alt="검색"
-                className="header-search"
-                src={SearchIcon}
-                onClick={() => (search ? moveToResultPage(search) : null)}
-            />
-        </SearchWrap>
+            <SearchWrap isFocused={!submitted} ref={inputRef}>
+                {!submitted && search.length === 0 ? (
+                    <RecomandKeywords
+                        keywords={keywordList}
+                        clickListener={(keyword) => {
+                            moveToResultPage(keyword);
+                        }}
+                        closeListener={() => {
+                            setSubmitted(true);
+                        }}
+                    />
+                ) : null}
+                {data ? getDataByStatus() : null}
+
+                <form
+                    style={{ width: "100%", position: "relative" }}
+                    onSubmit={(event) => handleSubmit(event)}
+                    onReset={() => handleReset()}
+                >
+                    <SearchInput
+                        placeholder="Search"
+                        value={search ? search : ""}
+                        onChange={inputHandler}
+                        onFocus={(e) => {
+                            setSubmitted(false);
+                        }}
+                    />
+                </form>
+
+                <img
+                    alt="검색"
+                    className="header-search"
+                    src={SearchIcon}
+                    onClick={() => (search ? moveToResultPage(search) : null)}
+                />
+            </SearchWrap>
+        </>
     );
 };
 
