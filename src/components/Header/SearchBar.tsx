@@ -49,6 +49,7 @@ const SearchBar = () => {
     const clickInputOutside = (event: any) => {
         if (inputRef.current && !inputRef.current.contains(event.target)) {
             setSubmitted(true);
+            setActive(false);
         }
     };
 
@@ -117,7 +118,7 @@ const SearchBar = () => {
             >
                 {option}
             </SearchKeyword>
-            {active && !submitted ? (
+            {active ? (
                 <SearchKeywordOption>
                     {options.map((op, index) => {
                         return (
