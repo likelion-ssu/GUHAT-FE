@@ -5,6 +5,7 @@ declare namespace NodeJS {
         PUBLIC_URL: string;
         REACT_APP_TEST: string;
         BASE_URL: string;
+        REACT_APP_BASE_URL: string;
         AUTH_BASE_URL: string;
         REACT_APP_AUTH_BASE_URL: "https://auth.likelion-join-ssu.shop";
         REACT_APP_CURRENT_URL: string;

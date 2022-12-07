@@ -5,18 +5,18 @@ const cookies = new Cookies();
 
 export const setRefreshToken = (refreshToken: refreshTokenType) => {
     const today = new Date();
-    const expireDate = today.setMinutes(today.getMinutes() + 2); // today.setDate(today.getDate() + 7);
+    const expireDate = today.setHours(today.getHours() + 1); // today.setDate(today.getDate() + 7);
     console.log(new Date(expireDate));
 
     //더 짧게 설정
     localStorage.setItem(
         "expiresAt",
-        moment().add(1, "minute").format("yyyy-MM-DD HH:mm:ss")
+        moment().add(1, "hour").format("yyyy-MM-DD HH:mm:ss")
         //moment().add(1, "hour").format("yyyy-MM-DD HH:mm:ss")
     );
     console.log(
         `new Exipre date : ${moment()
-            .add(1, "minute")
+            .add(1, "hour")
             .format("yyyy-MM-DD HH:mm:ss")}`
     );
 

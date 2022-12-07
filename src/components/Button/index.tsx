@@ -2,7 +2,7 @@ import themes from "@/styles/themes";
 import styled from "@emotion/styled";
 import { ReactNode } from "react";
 
-const MainButtonContainer = styled.button<{ width?: string }>`
+export const MainButtonContainer = styled.button<{ width?: string }>`
     padding: 1rem;
     background-color: ${themes.colors.black_500};
     border-radius: 1rem;
@@ -12,12 +12,18 @@ const MainButtonContainer = styled.button<{ width?: string }>`
 
 const MainButton = ({
     children,
+    clickListener,
     width,
 }: {
     children?: ReactNode;
+    clickListener: () => void;
     width?: string;
 }) => {
-    return <MainButtonContainer width={width}>{children}</MainButtonContainer>;
+    return (
+        <MainButtonContainer width={width} onClick={clickListener}>
+            {children}
+        </MainButtonContainer>
+    );
 };
 
 export default MainButton;

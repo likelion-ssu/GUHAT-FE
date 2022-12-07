@@ -31,8 +31,8 @@ export const Router = () => {
 export default Router;
 
 export function PrivateRoute({ Component }: React.ReactNode | any) {
-    useResetRecoilState(errorState);
-    useResetRecoilState(loadingState);
+    // useResetRecoilState(errorState);
+    // useResetRecoilState(loadingState);
     const setErrorState = useSetRecoilState(errorState);
     const setLoadingState = useSetRecoilState(loadingState);
     setLoadingState(true);

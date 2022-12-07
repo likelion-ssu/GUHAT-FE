@@ -1,6 +1,7 @@
 import Home from "@pages/Home";
 import Landing from "@pages/Landing";
 import routerType from "@_types/router.types";
+import RecruitPost from "../pages/RecruitPost";
 import RecruitView from "../pages/RecruitView";
 import Search from "../pages/Search";
 const pagesData: routerType[] = [
@@ -30,7 +31,7 @@ const pagesData: routerType[] = [
     {
         name: "RecruitPost",
         path: "/recruit/post",
-        component: <RecruitView />,
+        component: <RecruitPost />,
     },
     {
         name: "Notfound",
