@@ -5,6 +5,11 @@ export const loadingState = atom({
     default: true,
 });
 
+export const loadingMessage = atom({
+    key: "Recoil-loadinMessagegStore",
+    default: "",
+});
+
 export const errorState = atom<string | null>({
     key: "Recoil-errorStore",
     default: null,

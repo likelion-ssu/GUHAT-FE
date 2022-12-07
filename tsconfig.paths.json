@@ -17,8 +17,10 @@
             "@_types/*": ["src/types/*"],
             "@styles/": ["src/styles"],
             "@styles/*": ["src/styles/*"],
-            "@domain/": ["src/domain"],
-            "@domain/*": ["src/domain/*"]
+
+            "@domain/*": ["src/domain/*"],
+            "@storage/*": ["src/storage/*"],
+            "@hoc/*": ["src/hoc/*"]
         }
     }
 }

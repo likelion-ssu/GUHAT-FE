@@ -1,17 +1,14 @@
-import { errorState, loadingState } from "@/storage/recoil/loadingState";
+import {
+    errorState,
+    loadingMessage,
+    loadingState,
+} from "@/storage/recoil/loadingState";
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { LoadingContainer } from "./LoadingLayout.style";
-const LoadingLayout = ({
-    msg,
-    error,
-    success,
-}: {
-    msg?: string;
-    error?: string;
-    success?: boolean;
-}) => {
+const LoadingLayout = ({ msg }: { msg?: string }) => {
     const [loading, setLoading] = useRecoilState(loadingState);
+    const [loadingMsg, setLoadingMsg] = useRecoilState(loadingMessage);
     const errorMsg = useRecoilValue(errorState);
     const [timeout, setTimoutState] = useState<ReturnType<
         typeof setTimeout
@@ -21,6 +18,7 @@ const LoadingLayout = ({
     );
 
     useEffect(() => {
+        console.log(loading);
         if (loading) {
             if (timeout !== null) {
                 let state = setTimeout(() => {
@@ -34,17 +32,23 @@ const LoadingLayout = ({
             if (timeout) clearTimeout(timeout);
         } else {
             if (timeout) clearTimeout(timeout);
-            //  setTimoutState(null);
+            setLoadingMsg("");
         }
     }, [loading]);
 
     useEffect(() => {}, [errorMsg]);
-
+    useEffect(() => {}, [loadingMsg]);
     return (
         <>
             {loading || errorMsg ? (
                 <LoadingContainer>
-                    {errorMsg ? <h1>{errorMsg}</h1> : <h1>{message}</h1>}
+                    {errorMsg ? (
+                        <h1>{errorMsg}</h1>
+                    ) : loadingMsg ? (
+                        <h1>{loadingMsg}</h1>
+                    ) : (
+                        <h1>{message}</h1>
+                    )}
                 </LoadingContainer>
             ) : null}
         </>
