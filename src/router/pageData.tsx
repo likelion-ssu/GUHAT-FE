@@ -31,6 +31,11 @@ const pagesData: routerType[] = [
         name: "RecruitPost",
         path: "/recruit/post",
         component: <RecruitView />,
+=======
+        name: "Notfound",
+        path: "*",
+        component: <h1>Notfound</h1>,
+>>>>>>> 1c564d4... feat : 인증 redirect
     },
 ];
 

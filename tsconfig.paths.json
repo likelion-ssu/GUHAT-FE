@@ -18,7 +18,13 @@
             "@styles/": ["src/styles"],
             "@styles/*": ["src/styles/*"],
             "@domain/": ["src/domain"],
+<<<<<<< HEAD
             "@domain/*": ["src/domain/*"]
+=======
+            "@domain/*": ["src/domain/*"],
+            "@storage/*": ["src/storage/*"],
+            "@hoc/*": ["src/hoc/*"]
+>>>>>>> 1c564d4... feat : 인증 redirect
         }
     }
 }
