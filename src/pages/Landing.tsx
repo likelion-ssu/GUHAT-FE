@@ -1,17 +1,29 @@
-import MyProfile from "@components/MyProfile/MyProfile";
-const Landing = () => {
-    return (
-        <div style={{ width: "5rem" }}>
-            <h1>Landing Page</h1>
+import MainButton from "@/components/Button";
+import LabelFilledBox from "@/components/InputBox/LabelFilledBox";
+import APILayout from "@/components/Layout/APILayout";
+import { loadingState } from "@/storage/recoil/loadingState";
+import { modalState } from "@/storage/recoil/modalState";
+import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 
-            <MyProfile
-                nickName="닉네임1107"
-                name="홍길동"
-                semester="22년도 2학기 수강자"
-                major="컴퓨터학부"
-                univ="IT대학"
-            />
-        </div>
+const Landing = () => {
+    const [loading, setLoading] = useRecoilState(loadingState);
+    const [modalVisible, setModalVisible] = useRecoilState(modalState);
+    const [id, setId] = useState("");
+    const [pw, setPw] = useState("");
+    useEffect(() => {
+        setLoading(false);
+        setModalVisible(false);
+    }, []);
+
+    return (
+        <APILayout modal={null}>
+            <div>
+                <LabelFilledBox label={"ID"} text={"id"} />
+                {/* <InputFiled value={id} handler={setId} /> */}
+                <MainButton width="7rem">로그인</MainButton>
+            </div>
+        </APILayout>
     );
 };
 
