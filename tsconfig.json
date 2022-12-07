@@ -29,5 +29,14 @@
         "allowJs": true,
         "typeRoots": ["./node_modules/@types", "src/types"]
     },
-    "include": ["src", "craco.config.js", "next-env.d.ts"]
+    "ts-node": {
+        "files": true
+    },
+    "include": [
+        "src",
+        "craco.config.js",
+        "react-app-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx"
+    ]
 }

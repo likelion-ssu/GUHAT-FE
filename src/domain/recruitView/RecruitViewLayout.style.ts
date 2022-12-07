@@ -63,7 +63,7 @@ export const StickRecruitkBtn = styled.button`
     :hover {
         background-color: #c6e7fa;
         color: #303644;
-        transform: scale(1.2);
+        transform: scale(1.1);
         :disabled {
             background: #303644;
             color: white;
@@ -73,5 +73,9 @@ export const StickRecruitkBtn = styled.button`
 
     :active {
         filter: brightness(0.8);
+    }
+
+    :disabled {
+        opacity: 0.5;
     }
 `;
