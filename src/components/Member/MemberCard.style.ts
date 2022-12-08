@@ -5,13 +5,19 @@ export const MemberCardContainer = styled.button<{
     member: any;
     disabled?: boolean;
 }>`
+    color: white;
     font-size: 0.9rem;
-    background-color: ${({ member }) =>
-        member !== null ? " #303644" : `#505b73`};
+    /* background-color: ${({ member }) =>
+        member !== null ? " " : `#505b73`}; */
+    ${({ member }) =>
+        member !== null
+            ? "background-color : none; background-image: linear-gradient(to top, #09203f 0%, #537895 100%);"
+            : `background-color : #fcfafa ; color : black; border : 1px solid darkgray;  background-image : none;`}
+
     /* background: #303644; */
     box-shadow: 4px 4px 0px #e6e6ee;
     border-radius: 0.8rem;
-    color: white;
+
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -31,5 +37,9 @@ export const MemberCardContainer = styled.button<{
         text-align: center;
         align-items: center;
         display: flex;
+    }
+
+    :disabled {
+        opacity: 1;
     }
 `;

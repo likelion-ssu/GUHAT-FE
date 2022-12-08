@@ -8,6 +8,7 @@ const Search = () => {
     const location = useLocation();
 
     const [keyword, setKeyword] = useState<string | null>("");
+    const [option, setOptoin] = useState("");
 
     useEffect(() => {
         const queryData = QueryString.parse(location.search, {
@@ -15,12 +16,14 @@ const Search = () => {
         });
         if (queryData.keyword) setKeyword(queryData.keyword.toString());
         else setKeyword("");
+        if (queryData.option) setOptoin(queryData.option.toString());
     }, [keyword, location]);
 
     return (
         <>
             <MainLayout>
                 <SearchResultLayout
+                    option={option}
                     keyword={keyword ? keyword : ""}
                 ></SearchResultLayout>
             </MainLayout>

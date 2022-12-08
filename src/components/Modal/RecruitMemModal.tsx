@@ -42,7 +42,9 @@ const RecruitMemModal = ({ members }: { members: any[] }) => {
         console.log("applicant", applicantList);
     }, [applicantList]);
 
-    useEffect(() => {}, [checkedMem]);
+    useEffect(() => {
+        console.log(checkedMem);
+    }, [checkedMem]);
 
     useEffect(() => {}, [selecteMember]);
 
@@ -154,10 +156,15 @@ const RecruitMemModal = ({ members }: { members: any[] }) => {
         addMember(clickedApplicant);
     };
 
-    const checkValidation = (member: any, title: string): boolean => {
+    const checkValidation = (
+        member: any,
+        title: string,
+        id: string | number
+    ): boolean => {
+        console.log("checkMem", checkedMem);
+        console.log("ini mem", member);
         if (checkedMem === null || checkedMem.title === title) return true;
-        // if (checkedMem.title !== title) return false;
-        if (member?.isNew !== undefined && member?.isNew) return true;
+        if (member?.isNew !== undefined && member?.isNew) return false;
         else {
             if (checkedMem.id === undefined) {
                 return false;
@@ -177,27 +184,41 @@ const RecruitMemModal = ({ members }: { members: any[] }) => {
             ></button>
             <RecruitMemModalList>
                 <h1 className="list-label">지원자 목록</h1>
+
                 {checkedMem && applicantList ? (
-                    applicantList[
-                        checkedMem ? checkedMem.titleIndex : 0
-                    ].applicant.map((a: any, idx: number) => {
-                        return (
-                            <RecruitApplyItem
-                                key={"recruit-modal-apply-item" + a.title + idx}
-                                nickname={a.nickname}
-                                id={a.id}
-                                level={a.level}
-                                clickListener={() => {
-                                    onClickApplyItem({
-                                        titleIndex: checkedMem.titleIndex,
-                                        index: idx,
-                                        id: a.id,
-                                        ...a,
-                                    });
-                                }}
-                            />
-                        );
-                    })
+                    applicantList[checkedMem ? checkedMem.titleIndex : 0]
+                        .applicant.length !== 0 ? (
+                        applicantList[
+                            checkedMem ? checkedMem.titleIndex : 0
+                        ].applicant.map((a: any, idx: number) => {
+                            return (
+                                <RecruitApplyItem
+                                    key={
+                                        "recruit-modal-apply-item" +
+                                        a.title +
+                                        idx
+                                    }
+                                    nickname={a.nickname}
+                                    id={a.id}
+                                    level={a.level}
+                                    clickListener={() => {
+                                        onClickApplyItem({
+                                            titleIndex: checkedMem.titleIndex,
+                                            index: idx,
+                                            id: a.id,
+                                            ...a,
+                                        });
+                                    }}
+                                />
+                            );
+                        })
+                    ) : (
+                        <div className="recruit-modal-empty-state">
+                            <h2 className="recruit-modal-empty-state">
+                                아직 지원자가 없습니다
+                            </h2>
+                        </div>
+                    )
                 ) : (
                     <div className="recruit-modal-empty-state">
                         <h2>오른쪽 팀 현황 박스에서 추가하고 </h2>
@@ -227,8 +248,13 @@ const RecruitMemModal = ({ members }: { members: any[] }) => {
                                                       }
                                                       checked={checkValidation(
                                                           m,
-                                                          mem.title
+                                                          mem.title,
+                                                          mem.id
                                                       )}
+                                                      mem={m}
+                                                      isNew={
+                                                          m === null || m.isNew
+                                                      }
                                                   >
                                                       <MemberCard
                                                           member={

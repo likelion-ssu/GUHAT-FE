@@ -53,6 +53,10 @@ const RecruitPostLayout = () => {
             setLoading(false);
             console.log(res.data.data);
             const data = res.data.data;
+            if (data.length === 0) {
+                alert("휴학 중인 경우 모집글 작성이 불가능 합니다!");
+                window.history.back();
+            }
             scheduleParseer(data);
         });
 

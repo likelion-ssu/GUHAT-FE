@@ -23,7 +23,7 @@ const pagesData: routerType[] = [
     },
     {
         name: "Seach",
-        path: "/search/:keyword",
+        path: "/search/lecture/",
         component: <SearchDetail />,
     },
 

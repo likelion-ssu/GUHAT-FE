@@ -23,12 +23,18 @@ export const ResultTitleWrap = styled.div`
 
 export const ResultItemListWrapper = styled.div`
     width: 100%;
-
     display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
     padding: 1rem 5rem;
+`;
+
+export const ResultItemContentWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    flex-wrap: wrap;
 `;
 
 export const ResultMoreButton = styled.button`

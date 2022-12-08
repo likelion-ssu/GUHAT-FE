@@ -14,13 +14,19 @@ const MainButton = ({
     children,
     clickListener,
     width,
+    disabled,
 }: {
     children?: ReactNode;
     clickListener: () => void;
     width?: string;
+    disabled?: boolean;
 }) => {
     return (
-        <MainButtonContainer width={width} onClick={clickListener}>
+        <MainButtonContainer
+            width={width}
+            onClick={clickListener}
+            disabled={disabled}
+        >
             {children}
         </MainButtonContainer>
     );

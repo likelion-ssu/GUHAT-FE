@@ -7,7 +7,7 @@ const SearchWrap = styled.div<{ isFocused?: boolean }>`
     z-index: 10;
     background-color: ${(props) =>
         props.isFocused ? themes.colors.gray_300 : "white"};
-    border-radius: 0 12px 12px 0;
+    border-radius: 12px;
     border: 1px solid ${themes.colors.gray_500};
     position: absolute;
     display: flex;
@@ -40,7 +40,6 @@ const SearchInput = styled.input`
 
 const SearchKeyword = styled.button<{ active?: boolean }>`
     z-index: 99;
-
     position: absolute;
     left: calc(14rem);
     transform: translate(calc(14rem));
@@ -61,7 +60,7 @@ const SearchKeyword = styled.button<{ active?: boolean }>`
 
     background-image: url(${moreIcon});
     background-repeat: no-repeat;
-    background-position: 90% 50%;
+    background-position: 85% 50%;
     background-size: 1.2rem;
 `;
 
@@ -91,6 +90,7 @@ const SearchKeywordOption = styled.ul`
     animation: ${drowDownAnmiation} 0.4s;
 
     li {
+        z-index: 90;
         text-align: center;
         background-color: #f18904;
         color: white;

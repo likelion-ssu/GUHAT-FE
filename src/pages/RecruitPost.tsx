@@ -1,6 +1,6 @@
 import BackArrowBtn from "@/components/Button/BackArrow";
 import APILayout from "@/components/Layout/APILayout";
-import RecruitPostLayout from "@/domain/home/recruitPost/Layout/RecruitPostLayout";
+import RecruitPostLayout from "@/domain/recruitPost/Layout/RecruitPostLayout";
 import { StickBackBtn } from "@/domain/recruitView/RecruitViewLayout.style";
 
 const RecruitPost = () => {

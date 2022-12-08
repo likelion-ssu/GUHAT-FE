@@ -46,10 +46,20 @@ const SearchBar = () => {
         };
     });
 
+    useEffect(() => {
+        if (submitted) {
+            setActive(false);
+        }
+    }, [submitted]);
+
+    useEffect(() => {
+        optionHandler(search);
+    }, [option]);
+
     const clickInputOutside = (event: any) => {
         if (inputRef.current && !inputRef.current.contains(event.target)) {
+            //setActive(false);
             setSubmitted(true);
-            setActive(false);
         }
     };
 
@@ -65,22 +75,35 @@ const SearchBar = () => {
         setSearch("");
     };
 
-    const inputHandler = useCallback(
+    const optionHandler = (op: string) => {
+        moveToResultPage(search);
+        setSubmitted(true);
+        setSearch("");
+    };
+
+    const onDebouncedChangeListener = debounce(
         (e: React.ChangeEvent<HTMLInputElement>) => {
-            e.preventDefault();
-            if (e.target.value.length <= 0 && submitted) {
-                return handleReset();
-            }
-            debounce(setSearch(e.target.value), 2000);
-            //TODO search API & Delay
+            console.log("action", e.target.value);
+            if (e.target.value !== "") setApiQuery(e.target.value);
         },
-        [search]
+        500
     );
+
+    const callApi = useCallback(onDebouncedChangeListener, []);
+
+    const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault();
+        if (e.target.value.length <= 0 && submitted) {
+            return handleReset();
+        }
+        setSearch(e.target.value);
+        callApi(e);
+    };
 
     const moveToResultPage = (searchKeyword: string) => {
         setSearch(searchKeyword);
         setSubmitted(true);
-        navigator(`/search?keyword=${searchKeyword}`);
+        navigator(`/search?keyword=${searchKeyword}&&option=${option}`);
     };
 
     const getDataByStatus = () => {
@@ -123,9 +146,10 @@ const SearchBar = () => {
                     {options.map((op, index) => {
                         return (
                             <li
+                                key={op}
                                 onClick={(e: any) => {
-                                    setActive((prev) => !prev);
                                     setOption(e.target.innerText);
+                                    setActive((prev) => !prev);
                                 }}
                             >
                                 {op}

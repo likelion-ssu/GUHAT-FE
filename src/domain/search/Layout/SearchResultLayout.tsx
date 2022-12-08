@@ -1,7 +1,11 @@
+import { useLectureResults } from "@/apis/search/lecture";
 import LectureItem from "@/components/Lecture/LectureItem";
 import SearchResultTab from "@/components/Tab/SearchResultTab/SearchResultTab";
+import { errorState, loadingState } from "@/storage/recoil/loadingState";
 import SearchIcon from "@assets/Search.svg";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import {
     ResultContainer,
     ResultItemListWrapper,
@@ -11,17 +15,97 @@ import {
 
 interface Props {
     keyword: string;
+    option: string;
 }
 
-const SearchResultLayout = ({ keyword }: Props) => {
+const SearchResultLayout = ({ keyword, option }: Props) => {
     const navigator = useNavigate();
-    const lectures = [
-        { title: "현성서", professor: "유유유" },
-        { title: "현성서", professor: "유유유" },
+    const [loading, setLoading] = useRecoilState(loadingState);
+    const [error, setError] = useRecoilState(errorState);
+    const { status, data } = useLectureResults(
+        new Date().getMinutes().toString()
+    );
+    const faker = [
+        {
+            id: 1, // 과목id
+            title: "수업이름",
+            professor: ["교수명"],
+            year: "2022",
+            semester: "2학기",
+            time: "월 수 10:30",
+            place: "진리관",
+        },
+        {
+            id: 1, // 과목id
+            title: "수업이름",
+            professor: ["교수명"],
+            year: "2022",
+            semester: "2학기",
+            time: "월 수 10:30",
+            place: "진리관",
+        },
+        {
+            id: 1, // 과목id
+            title: "수업이름",
+            professor: ["교수명"],
+            year: "2022",
+            semester: "2학기",
+            time: "월 수 10:30",
+            place: "진리관",
+        },
+        {
+            id: 1, // 과목id
+            title: "수업이름",
+            professor: ["교수명"],
+            year: "2022",
+            semester: "2학기",
+            time: "월 수 10:30",
+            place: "진리관",
+        },
+        {
+            id: 1, // 과목id
+            title: "수업이름",
+            professor: ["교수명"],
+            year: "2022",
+            semester: "2학기",
+            time: "월 수 10:30",
+            place: "진리관",
+        },
+        {
+            id: 1, // 과목id
+            title: "수업이름",
+            professor: ["교수명"],
+            year: "2022",
+            semester: "2학기",
+            time: "월 수 10:30",
+            place: "진리관",
+        },
+        {
+            id: 1, // 과목id
+            title: "수업이름",
+            professor: ["교수명"],
+            year: "2022",
+            semester: "2학기",
+            time: "월 수 10:30",
+            place: "진리관",
+        },
     ];
 
+    useEffect(() => {
+        getFetchData();
+    }, []);
+
+    const getFetchData = () => {
+        if (status === "loading") {
+            setLoading(true);
+        } else if (status === "error") {
+            setError(status);
+        } else {
+            setLoading(false);
+        }
+    };
     const moveToLectureDetail = () => {
-        navigator(`/search/${keyword}`);
+        navigator(`/search/lecture?keyword=${keyword}`);
     };
 
     return (
@@ -29,18 +113,14 @@ const SearchResultLayout = ({ keyword }: Props) => {
             <ResultContainer>
                 <ResultTitleWrap>
                     <img src={SearchIcon} alt="검색" />
+                    <p> {option} </p>
                     <p className="keyword"> "{keyword}"</p>
-                    <p>에 대한 검색 결과</p>
+                    <p> 에 대한 검색 결과</p>
                 </ResultTitleWrap>
-                <SearchResultTab title={"수업명"} count={21} />
+                <SearchResultTab title={"수업명"} count={faker.length} />
                 <ResultItemListWrapper>
-                    {lectures.map((lecture, idx) => {
-                        return (
-                            <LectureItem
-                                title={lecture.title}
-                                professor={lecture.professor}
-                            />
-                        );
+                    {faker.slice(0, 6).map((item, index) => {
+                        return <LectureItem {...item} />;
                     })}
                     <ResultMoreButton
                         onClick={() => {

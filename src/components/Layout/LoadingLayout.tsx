@@ -3,9 +3,11 @@ import {
     loadingMessage,
     loadingState,
 } from "@/storage/recoil/loadingState";
-import { useEffect, useState } from "react";
+import lottie from "lottie-web";
+import { useEffect, useRef, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { LoadingContainer } from "./LoadingLayout.style";
+
 const LoadingLayout = ({ msg }: { msg?: string }) => {
     const [loading, setLoading] = useRecoilState(loadingState);
     const [loadingMsg, setLoadingMsg] = useRecoilState(loadingMessage);
@@ -16,9 +18,16 @@ const LoadingLayout = ({ msg }: { msg?: string }) => {
     const [message, setMessage] = useState<string | null>(
         msg ? msg : "Loading..."
     );
+    const loadingRef = useRef(null);
 
     useEffect(() => {
-        console.log(loading);
+        lottie.loadAnimation({
+            container: loadingRef.current!!,
+            renderer: "svg",
+            loop: true,
+            autoplay: true,
+            animationData: require("../../assets/loading.json"),
+        });
         if (loading) {
             if (timeout !== null) {
                 let state = setTimeout(() => {
@@ -42,6 +51,7 @@ const LoadingLayout = ({ msg }: { msg?: string }) => {
         <>
             {loading || errorMsg ? (
                 <LoadingContainer>
+                    <div className="loading-img" ref={loadingRef}></div>
                     {errorMsg ? (
                         <h1>{errorMsg}</h1>
                     ) : loadingMsg ? (

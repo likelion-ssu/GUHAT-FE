@@ -140,6 +140,17 @@ const RecruitView = () => {
                                     }),
                                 };
                             })}
+
+                            // members={dummyRes.group.map((g, titleIndex) => {
+                            //     return {
+                            //         roleId: g.roleId,
+                            //         title: g.title,
+                            //         member: g.member.filter(
+                            //             (m: any, index: number) => m === null
+                            //         ),
+                            //         isNew: false,
+                            //     };
+                            // })}
                         />
                     ) : (
                         <RecruitApplyModal
