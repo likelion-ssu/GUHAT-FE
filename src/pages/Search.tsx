@@ -15,7 +15,7 @@ const Search = () => {
             ignoreQueryPrefix: true,
         });
         if (queryData.keyword) setKeyword(queryData.keyword.toString());
-        else setKeyword("");
+
         if (queryData.option) setOptoin(queryData.option.toString());
     }, [keyword, location]);
 

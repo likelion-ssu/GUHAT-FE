@@ -37,7 +37,10 @@ function Header({ title }: HeaderProps) {
                                     {" "}
                                     <SearchBar />
                                     <IconWrapper>
-                                        <HeaderIcon img={ProfileIcon} />
+                                        <HeaderIcon
+                                            img={ProfileIcon}
+                                            onClick={() => navigator("/mypage")}
+                                        />
                                         <HeaderIcon img={ScheduleIcon} />
 
                                         <PostButton />

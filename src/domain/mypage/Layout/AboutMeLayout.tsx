@@ -7,7 +7,7 @@ const AboutmeContainer = styled.div`
     display: flex;
     flex-direction: column;
     background-color: white;
-    margin-left: calc(27rem);
+    margin-left: calc(22rem);
     padding: 0rem 6rem;
 
     .aboutme-nickname {

@@ -65,8 +65,10 @@ const SearchBar = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        moveToResultPage(search);
         console.log("submit", search);
+        setTimeout(() => {
+            moveToResultPage(search);
+        }, 200);
     };
 
     const handleReset = () => {
@@ -103,7 +105,8 @@ const SearchBar = () => {
     const moveToResultPage = (searchKeyword: string) => {
         setSearch(searchKeyword);
         setSubmitted(true);
-        navigator(`/search?keyword=${searchKeyword}&&option=${option}`);
+        if (searchKeyword !== "")
+            navigator(`/search?keyword=${searchKeyword}&&option=${option}`);
     };
 
     const getDataByStatus = () => {

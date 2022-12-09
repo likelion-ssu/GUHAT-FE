@@ -7,7 +7,7 @@ import { IComment } from "../../../types/comment.types";
 
 const ScoreLayoutContainer = styled.div`
     display: flex;
-    margin-left: calc(27rem);
+    margin-left: calc(22rem);
     background-color: white;
     margin-top: 2rem;
     padding: 3rem;
@@ -24,7 +24,7 @@ const ScoreLayoutContainer = styled.div`
 
 export const ScoreWrapper = styled.div`
     display: flex;
-    width: 10vw;
+    width: 8vw;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -42,12 +42,11 @@ export const ScoreWrapper = styled.div`
 `;
 
 const CommentLayout = styled.div`
-    min-width: 30vw;
+    min-width: 25vw;
     max-width: 100%;
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    padding-top: 1rem;
     padding-bottom: 1rem;
     .title {
         font-size: 2.5rem;

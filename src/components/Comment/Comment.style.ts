@@ -11,6 +11,7 @@ export const CommentContainer = styled.div`
     flex-direction: column;
     padding: 1rem;
     padding-left: 5rem;
+    margin-bottom: 0.5rem;
     gap: 0.5rem;
     .day-label {
         color: gray;

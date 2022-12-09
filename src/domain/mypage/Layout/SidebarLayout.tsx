@@ -9,7 +9,7 @@ const SidebarLayoutContainer = styled.div`
     left: 10%;
     background: ${themes.colors.black_500};
     min-height: 60vh;
-    width: 25rem;
+    width: 20rem;
     display: flex;
     flex-direction: column;
     justify-content: left;

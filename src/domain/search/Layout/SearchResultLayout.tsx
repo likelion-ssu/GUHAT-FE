@@ -105,6 +105,7 @@ const SearchResultLayout = ({ keyword, option }: Props) => {
         }
     };
     const moveToLectureDetail = () => {
+        console.log("moving here");
         navigator(`/search/lecture?keyword=${keyword}`);
     };
 
