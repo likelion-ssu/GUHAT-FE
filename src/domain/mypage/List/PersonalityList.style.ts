@@ -1,4 +1,3 @@
-import themes from "@/styles/themes";
 import styled from "@emotion/styled";
 import PersonalitBg from "../../../assets/personality_bar.svg";
 export const PersonalityContainer = styled.div`
@@ -50,7 +49,6 @@ export const PersonalityWrapper = styled.div`
 `;
 
 const setProgress = (progress: number) => {
-    console.log("progress", progress);
     switch (progress) {
         case 0:
             return "transform: translate(0.21rem, -50%);";
@@ -71,8 +69,10 @@ export const CheckItem = styled.button<{ progress: number; checked: boolean }>`
     width: 1.3rem;
     height: 1.3rem;
     border-radius: 3rem;
-    background-color: ${({ checked }) =>
-        checked ? `${themes.colors.black_500}` : `#D9D9D9`};
+    background-color: ${({ checked }) => (checked ? `#FFBB91` : `white`)};
     background-image: none;
+    :disabled {
+        opacity: 1;
+    }
     ${({ progress }) => setProgress(progress)}
 `;

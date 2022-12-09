@@ -1,22 +1,32 @@
 import EditButton from "@/components/Button/EditButton";
-import SkillChip from "@/components/Chip/SkillChip";
-import FileItem from "@/components/FileItem";
 import styled from "@emotion/styled";
 import { useState } from "react";
 import PersonalityList from "../List/PersonalityList";
+import ChipList from "../List/SkilChipList";
 import TeamHistoryList from "../List/TeamHistoryList";
-const SubContentLayoutContainer = styled.div`
+import PortFolioLayout from "./PortFolioLayout";
+const SubContentLayoutContainer = styled.div<{ mode: number }>`
+    z-index: 70;
     position: relative;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    background-color: white;
+
     margin-left: calc(22rem);
     gap: 2rem 1rem;
     padding: 3rem;
     margin-top: 2rem;
     margin-bottom: 5rem;
+
+    background-color: white;
+    ${({ mode }) =>
+        mode
+            ? `background: #E6E6EE;
+border: 2px solid #999999; `
+            : ``}
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 
     .content-label {
         font-weight: 700;
@@ -28,28 +38,12 @@ const SubContentLayoutContainer = styled.div`
         width: calc(50% - 1rem);
         max-width: 50%;
     }
-`;
-const ChipLayout = styled.div`
-    flex-wrap: wrap;
-    display: flex;
-    width: 100%;
-    gap: 0.8rem;
-`;
 
-const PortfolioListcontainer = styled.div`
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    padding: 0;
-    max-height: 20rem;
-    overflow-y: auto;
-    position: relative;
-    .file-content-wrapper {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        padding: 0;
-        gap: 1rem;
+    .prevent-click {
+        button {
+            cursor: ${({ mode }) =>
+                (mode ? "not-allowed" : "click") + "!important"};
+        }
     }
 `;
 
@@ -94,6 +88,10 @@ const SubContentLayout = () => {
     ];
 
     const [personality, setPersonality] = useState([1, 2, 0]);
+    const MODE_VIEW = 0;
+    const MODE_EDIT = 1;
+    const [mode, setMode] = useState(MODE_VIEW);
+
     const onClickPersonality = (progress: number, index: number) => {
         const newArray = [...personality];
         newArray[index] = progress;
@@ -101,37 +99,32 @@ const SubContentLayout = () => {
     };
 
     return (
-        <SubContentLayoutContainer>
+        <SubContentLayoutContainer mode={mode}>
             <EditWrapper>
-                <EditButton />
+                <EditButton
+                    saveMode={true}
+                    clickListener={() => {
+                        setMode((prev) => (prev ? MODE_VIEW : MODE_EDIT));
+                    }}
+                />
             </EditWrapper>
 
             <div className="content-wrapper">
                 <h1 className="content-label">PORTFOLIO</h1>
-                <PortfolioListcontainer>
-                    <div className="file-content-wrapper">
-                        <FileItem file={1} />
-                        <FileItem file={1} />
-                        <FileItem file={1} />
-                        <FileItem />
-                    </div>
-                </PortfolioListcontainer>
+                <PortFolioLayout mode={mode} />
             </div>
             <div className="content-wrapper">
                 <h1 className="content-label">SKILL</h1>
-                <ChipLayout>
-                    {[1, 2, 3, 4, 5, 5, 6].map((i) => (
-                        <SkillChip text={"리액트"} />
-                    ))}
-                </ChipLayout>
+                <ChipList mode={mode} list={["somethig"]} />
             </div>
             <div className="content-wrapper">
                 <h1 className="content-label">TEAM HISTORY</h1>
                 <TeamHistoryList list={teamhistory} />
             </div>
-            <div className="content-wrapper">
+            <div className="content-wrapper ">
                 <h1 className="content-label">Personality</h1>
                 <PersonalityList
+                    mode={mode}
                     progress={personality[0]}
                     option={["안전추구형", "모험추구형"]}
                     clickListener={(p) => {
@@ -139,6 +132,7 @@ const SubContentLayout = () => {
                     }}
                 />
                 <PersonalityList
+                    mode={mode}
                     progress={personality[1]}
                     option={["업무중심형", "관계중심형"]}
                     clickListener={(p) => {
@@ -146,6 +140,7 @@ const SubContentLayout = () => {
                     }}
                 />
                 <PersonalityList
+                    mode={mode}
                     progress={personality[2]}
                     option={["리더형", "팔로워형"]}
                     clickListener={(p) => {

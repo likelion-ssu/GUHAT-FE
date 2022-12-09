@@ -5,10 +5,12 @@ import {
     PersonalityWrapper,
 } from "./PersonalityList.style";
 const PersonalityList = ({
+    mode,
     progress,
     option,
     clickListener,
 }: {
+    mode: number;
     progress: number;
     option: string[];
     clickListener?: (check: any) => any | void;
@@ -19,6 +21,7 @@ const PersonalityList = ({
             <p>{option[0]}</p>
             <PersonalityWrapper>
                 <CheckItem
+                    disabled={mode === 0}
                     checked={0 === progress}
                     progress={0}
                     onClick={() => {
@@ -26,6 +29,7 @@ const PersonalityList = ({
                     }}
                 />
                 <CheckItem
+                    disabled={mode === 0}
                     checked={1 === progress}
                     progress={1}
                     onClick={() => {
@@ -33,6 +37,7 @@ const PersonalityList = ({
                     }}
                 />
                 <CheckItem
+                    disabled={mode === 0}
                     checked={2 === progress}
                     progress={2}
                     onClick={() => {
@@ -40,6 +45,7 @@ const PersonalityList = ({
                     }}
                 />
                 <CheckItem
+                    disabled={mode === 0}
                     checked={3 === progress}
                     progress={3}
                     onClick={() => {

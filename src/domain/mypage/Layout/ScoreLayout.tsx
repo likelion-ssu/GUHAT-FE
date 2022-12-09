@@ -14,6 +14,7 @@ const ScoreLayoutContainer = styled.div`
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
+
     .empty {
         width: 100%;
         text-align: center;

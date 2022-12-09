@@ -1,7 +1,7 @@
 import DownloadIcon from "@/assets/download.svg";
 import PDFIcon from "@/assets/pdfIcon.svg";
 import styled from "@emotion/styled";
-const FileItemLayout = styled.div`
+const FileItemLayout = styled.button`
     display: flex;
     justify-content: space-between;
     padding: 1rem;
@@ -15,6 +15,8 @@ const FileItemLayout = styled.div`
         width: 100%;
         display: flex;
         flex-direction: column;
+        text-align: left;
+        margin-left: 1rem;
 
         h1 {
             font-weight: 700;
@@ -27,21 +29,35 @@ const FileItemLayout = styled.div`
     }
 `;
 const FileItem = ({ file }: { file?: any }) => {
+    const onDownload = () => {
+        const objectURL = window.URL.createObjectURL(file);
+        console.log(objectURL);
+        window.open(objectURL);
+    };
+
     return (
         <FileItemLayout>
             {file ? (
                 <>
                     <img src={PDFIcon} alt="pdf 아이콘" />
                     <div className="file-content">
-                        <h1>파일 이름</h1>
-                        <p>3MB</p>
+                        <h1>{file.name}</h1>
+                        <p>{file.size}KB</p>
                     </div>
-                    <img src={DownloadIcon} alt="pdf 아이콘" />
+                    <img
+                        src={DownloadIcon}
+                        alt="pdf 아이콘"
+                        onClick={onDownload}
+                    />
                 </>
             ) : (
                 <>
                     <h1>파일 업로드</h1>
-                    <img src={DownloadIcon} alt="pdf 아이콘" />
+                    <img
+                        src={DownloadIcon}
+                        onClick={onDownload}
+                        alt="pdf 아이콘"
+                    />
                 </>
             )}
         </FileItemLayout>
