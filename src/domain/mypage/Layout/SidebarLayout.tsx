@@ -1,5 +1,7 @@
+import Toggle from "@/components/Toggle";
 import themes from "@/styles/themes";
 import styled from "@emotion/styled";
+import { useState } from "react";
 import IconList from "../../../assets/profile_my_work.png";
 import IconReview from "../../../assets/profile_review_icon.png";
 import MyProfile from "./Myprofile";
@@ -29,6 +31,15 @@ const SidebarLayoutContainer = styled.div`
     }
 `;
 
+const ToggleWrpper = styled.div`
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    color: white;
+    padding: 1rem;
+    margin-top: 1rem;
+`;
+
 const SidebarLabel = styled.div`
     margin-top: 8rem;
     margin-bottom: 1rem;
@@ -46,11 +57,17 @@ const SidebarLayout = () => {
         semester: "2022",
         major: "IT대학",
     };
+    const [isPublic, setPublic] = useState(false);
+
     return (
         <SidebarLayoutContainer>
             <div style={{ padding: "0rem 2rem", width: "90%" }}>
                 <MyProfile {...profile} />
             </div>
+            <ToggleWrpper>
+                <Toggle listener={setPublic} init={true} />
+            </ToggleWrpper>
+
             <SidebarLabel>참여이력</SidebarLabel>
 
             <div className="sub-label">

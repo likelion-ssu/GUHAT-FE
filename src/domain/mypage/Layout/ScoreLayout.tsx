@@ -14,7 +14,8 @@ const ScoreLayoutContainer = styled.div`
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
-
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     .empty {
         width: 100%;
         text-align: center;
@@ -43,14 +44,14 @@ export const ScoreWrapper = styled.div`
 `;
 
 const CommentLayout = styled.div`
-    min-width: 25vw;
+    width: 22vw;
     max-width: 100%;
     display: flex;
     flex-direction: column;
     gap: 2rem;
     padding-bottom: 1rem;
     .title {
-        font-size: 2.5rem;
+        font-size: 2rem;
         font-weight: 700;
     }
     .content {
@@ -128,7 +129,7 @@ const ScoreLayout = ({ coments }: { coments: IComment[] | [] }) => {
                     </div>
 
                     <CommentLayout>
-                        <h1 className="title">COMMENT</h1>
+                        <h1 className="title">Comment</h1>
                         <div className="content">
                             {coments.map((comment, i) => {
                                 return <Comment {...comment} />;

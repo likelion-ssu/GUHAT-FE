@@ -73,6 +73,7 @@ const Myprofile = ({ ...props }: Props) => {
             <p className="sub-content">
                 {props.year}/{props.semester}
             </p>
+
             <p className="sub-content">{props.major}</p>
         </MyProfileWrapper>
     );
