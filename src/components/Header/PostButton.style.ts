@@ -11,7 +11,7 @@ export const PostBtnWrap = styled.button`
     width: 70%;
     justify-content: center;
     align-items: center;
-    padding: 0.9rem 1.6rem;
+    padding: 0.9rem 1rem;
     gap: 0.5rem;
     margin: 0.25rem;
 

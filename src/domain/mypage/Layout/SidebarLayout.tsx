@@ -11,7 +11,7 @@ const SidebarLayoutContainer = styled.div`
     left: 10%;
     background: ${themes.colors.black_500};
     min-height: 60vh;
-    width: 20rem;
+    width: 23rem;
     display: flex;
     flex-direction: column;
     justify-content: left;
@@ -20,14 +20,20 @@ const SidebarLayoutContainer = styled.div`
 
     .sub-label {
         width: 100%;
+
         padding-right: 3rem;
         background: none;
         display: flex;
         justify-content: right;
         color: white;
         gap: 0.5rem;
-        margin-top: 1rem;
+        margin-top: 1.5rem;
         font-size: 1.1rem;
+        font-weight: 600;
+        :hover {
+            transition-duration: 0.3s;
+            transform: scale(1.2) translate(-30px, 0);
+        }
     }
 `;
 
@@ -41,6 +47,8 @@ const ToggleWrpper = styled.div`
 `;
 
 const SidebarLabel = styled.div`
+    font-weight: 700;
+    font-size: 1.2rem;
     margin-top: 8rem;
     margin-bottom: 1rem;
     background: rgba(230, 230, 238, 0.1);
@@ -49,14 +57,12 @@ const SidebarLabel = styled.div`
     color: white;
 `;
 
-const SidebarLayout = () => {
-    const profile = {
-        nickname: "Guhat",
-        level: "1",
-        year: "2022",
-        semester: "2022",
-        major: "IT대학",
-    };
+interface Props {
+    profile?: any;
+    tabController: (tab: string) => void;
+}
+
+const SidebarLayout = ({ profile, tabController }: Props) => {
     const [isPublic, setPublic] = useState(false);
 
     return (
@@ -69,14 +75,31 @@ const SidebarLayout = () => {
             </ToggleWrpper>
 
             <SidebarLabel>참여이력</SidebarLabel>
-
-            <div className="sub-label">
+            <button
+                className="sub-label"
+                onClick={() => {
+                    tabController("main");
+                }}
+            >
+                <img src={IconReview} alt="홈"></img>메인
+            </button>
+            <button
+                className="sub-label"
+                onClick={() => {
+                    tabController("recruit");
+                }}
+            >
                 <img src={IconReview} alt="내팀플"></img>강의팀플
-            </div>
+            </button>
 
-            <div className="sub-label">
+            <button
+                className="sub-label"
+                onClick={() => {
+                    tabController("review");
+                }}
+            >
                 <img src={IconList} alt="리뷰아이콘"></img>팀플리뷰
-            </div>
+            </button>
             <SidebarLabel>참여이력</SidebarLabel>
         </SidebarLayoutContainer>
     );

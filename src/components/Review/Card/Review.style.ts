@@ -12,7 +12,7 @@ export const ReviewContainer = styled.div`
     border-radius: 1rem;
     background-color: white;
     padding: 2.54rem;
-
+    overflow: hidden;
     box-shadow: 12px 12px 0px #999999;
     :active {
         filter: brightness(0.8);

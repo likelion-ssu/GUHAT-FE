@@ -1,8 +1,11 @@
-import AboutMeLayout from "./AboutMeLayout";
+import { useState } from "react";
+import AboutMeLayout from "./Layout/AboutMeLayout";
+import LectureHistoryLayout from "./Layout/LectureHistoryLayout";
+import ReviewHistoryLayout from "./Layout/ReviewHistoryLayout";
+import ScoreLayout from "./Layout/ScoreLayout";
+import SidebarLayout from "./Layout/SidebarLayout";
+import SubContentLayout from "./Layout/SubContentLayout";
 import { MypageLayoutContainer } from "./MypageLayout.style";
-import ScoreLayout from "./ScoreLayout";
-import SidebarLayout from "./SidebarLayout";
-import SubContentLayout from "./SubContentLayout";
 const MypageLayout = () => {
     const UnsmileEmoji = "../../assets/unsmile_emoji.png";
     const coments: any[] = [
@@ -42,12 +45,48 @@ const MypageLayout = () => {
         사막이다. 살 꾸며 생생하며, 유소년에게서 그들은
         소리다.이것은 되려니와, 풍부하게 인생을 것이다.`,
     };
+
+    const profile = {
+        nickname: "Guhat",
+        level: "1",
+        year: "2022",
+        semester: "2022",
+        major: "IT대학",
+    };
+
+    const [tab, setTab] = useState("main");
+
+    const getTabPage = () => {
+        switch (tab) {
+            case "main":
+                return (
+                    <>
+                        <AboutMeLayout {...introduction} />
+                        <ScoreLayout coments={coments} />
+                        <SubContentLayout />
+                    </>
+                );
+            case "review":
+                return <ReviewHistoryLayout />;
+
+            case "recruit":
+                return <LectureHistoryLayout />;
+
+            default:
+                return (
+                    <>
+                        <AboutMeLayout {...introduction} />
+                        <ScoreLayout coments={coments} />
+                        <SubContentLayout />
+                    </>
+                );
+        }
+    };
+
     return (
         <MypageLayoutContainer>
-            <SidebarLayout />
-            <AboutMeLayout {...introduction} />
-            <ScoreLayout coments={coments} />
-            <SubContentLayout />
+            <SidebarLayout profile={profile} tabController={setTab} />
+            {getTabPage()}
         </MypageLayoutContainer>
     );
 };

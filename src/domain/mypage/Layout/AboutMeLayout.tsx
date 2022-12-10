@@ -8,7 +8,7 @@ const AboutmeContainer = styled.div<{ mode: number }>`
     position: relative;
     display: flex;
     flex-direction: column;
-    margin-left: calc(22rem);
+    margin-left: calc(25rem);
     padding: 0rem 6rem;
 
     background-color: white;

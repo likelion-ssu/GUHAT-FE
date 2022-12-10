@@ -7,7 +7,7 @@ import { IComment } from "../../../types/comment.types";
 
 const ScoreLayoutContainer = styled.div`
     display: flex;
-    margin-left: calc(22rem);
+    margin-left: calc(25rem);
     background-color: white;
     margin-top: 2rem;
     padding: 3rem;
@@ -101,7 +101,7 @@ const ScoreLayout = ({ coments }: { coments: IComment[] | [] }) => {
                         style={{ display: "flex", gap: "10px", width: "10vw" }}
                     >
                         <ScoreProgress
-                            label="`1점"
+                            label="1점"
                             percent={(mylevel[1] / coments.length) * 100}
                             active={mylevel[1] === max}
                         />

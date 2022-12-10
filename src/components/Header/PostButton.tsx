@@ -1,4 +1,4 @@
-import AddButton from "@assets/header_post_add.svg";
+import AddButton from "@assets/plus.svg";
 import { useNavigate } from "react-router-dom";
 import { PostBtnWrap } from "./PostButton.style";
 const PostButton = () => {
