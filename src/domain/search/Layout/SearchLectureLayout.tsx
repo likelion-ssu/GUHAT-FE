@@ -1,9 +1,12 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+
 import { errorState, loadingState } from "@/storage/recoil/loadingState";
 import { useLectureResults } from "@apis/search/lecture/index";
 import SearchIcon from "@assets/Search.svg";
 import LectureItem from "@components/Lecture/LectureItem";
-import { useEffect } from "react";
-import { useRecoilState } from "recoil";
+
 import {
     ResultItemContentWrapper,
     ResultItemListWrapper,
@@ -15,7 +18,6 @@ interface Props {
 }
 
 const SearchLectureLayout = ({ lectureName }: Props) => {
-    
     const [loading, setLoading] = useRecoilState(loadingState);
     const [error, setError] = useRecoilState(errorState);
     const { status, data } = useLectureResults(
@@ -69,6 +71,8 @@ const SearchLectureLayout = ({ lectureName }: Props) => {
         },
     ];
 
+    const navigator = useNavigate();
+
     useEffect(() => {
         getFetchData();
     }, []);
@@ -93,7 +97,14 @@ const SearchLectureLayout = ({ lectureName }: Props) => {
                 </ResultTitleWrap>
                 <ResultItemContentWrapper>
                     {faker.map((item, idx) => {
-                        return <LectureItem {...item} />;
+                        return (
+                            <LectureItem
+                                {...item}
+                                clickListener={() => {
+                                    navigator("/lecture/" + item.id);
+                                }}
+                            />
+                        );
                     })}
                 </ResultItemContentWrapper>
             </ResultItemListWrapper>

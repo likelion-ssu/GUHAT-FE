@@ -121,7 +121,15 @@ const SearchResultLayout = ({ keyword, option }: Props) => {
                 <SearchResultTab title={"수업명"} count={faker.length} />
                 <ResultItemListWrapper>
                     {faker.slice(0, 6).map((item, index) => {
-                        return <LectureItem {...item} />;
+                        return (
+                            <LectureItem
+                                {...item}
+                                clickListener={() => {
+                                    alert("click");
+                                    navigator("/lecture/" + item.id);
+                                }}
+                            />
+                        );
                     })}
                     <ResultMoreButton
                         onClick={() => {

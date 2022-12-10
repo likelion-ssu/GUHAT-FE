@@ -81,6 +81,7 @@ export const ProgressWrapper = styled.div<{ major?: boolean }>`
     bottom: 3rem;
     right: 3rem;
     background-color: darkgray;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 
     .progress-label {
         position: absolute;
@@ -91,19 +92,19 @@ export const ProgressWrapper = styled.div<{ major?: boolean }>`
         color: white;
         font-weight: 600;
         font-size: 1.2rem;
-        gap: 0.5rem;
+        gap: 0.2rem;
 
         ${({ major }) =>
             major
-                ? "background: #303644; color:whie; "
-                : "background: #C6E7FA; color:black;"};
+                ? "background: #303644; color:darkgray; "
+                : "background: #C6E7FA; color:darkgray;"};
     }
     .total {
         color: lightgray;
         ${({ major }) =>
             major
-                ? "background: #303644; color:whie; "
-                : "background: #C6E7FA; color:darkgray;"};
+                ? "background: #303644; color:white; "
+                : "background: #C6E7FA; color:gray;"};
     }
 `;
 

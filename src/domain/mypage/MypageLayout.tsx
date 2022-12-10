@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { loadingState } from "@/storage/recoil/loadingState";
+import { modalState } from "@/storage/recoil/modalState";
+import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 import AboutMeLayout from "./Layout/AboutMeLayout";
 import LectureHistoryLayout from "./Layout/LectureHistoryLayout";
 import ReviewHistoryLayout from "./Layout/ReviewHistoryLayout";
@@ -7,6 +10,13 @@ import SidebarLayout from "./Layout/SidebarLayout";
 import SubContentLayout from "./Layout/SubContentLayout";
 import { MypageLayoutContainer } from "./MypageLayout.style";
 const MypageLayout = () => {
+    const [loading, setLoading] = useRecoilState(loadingState);
+    const [modalVisible, setModalVisible] = useRecoilState(modalState);
+    useEffect(() => {
+        setLoading(false);
+        setModalVisible(false);
+    }, []);
+
     const UnsmileEmoji = "../../assets/unsmile_emoji.png";
     const coments: any[] = [
         {

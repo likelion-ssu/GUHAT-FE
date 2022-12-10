@@ -1,11 +1,11 @@
-import MainLayout from "@/components/Layout/MainLayout";
 import MypageLayout from "@/domain/mypage/MypageLayout";
+import APILayout from "../components/Layout/APILayout";
 
 const MyPage = () => {
     return (
-        <MainLayout>
+        <APILayout modal={null}>
             <MypageLayout />
-        </MainLayout>
+        </APILayout>
     );
 };
 

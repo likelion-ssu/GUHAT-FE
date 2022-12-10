@@ -21,7 +21,7 @@ const LectureHistoryLayout = () => {
             title: "팀플 제목",
             detail: "상세글",
             total: 5, // 모집 총 인원
-            currrent: 3, // 현재 모집된 인원
+            current: 3, // 현재 모집된 인원
             endDate: "2022-12-31",
             createdAt: "2022-02-02", // 작성일,
             lectureName: "현대인과성서",
@@ -34,7 +34,7 @@ const LectureHistoryLayout = () => {
             title: "팀플 제목",
             detail: "상세글",
             total: 5, // 모집 총 인원
-            currrent: 3, // 현재 모집된 인원
+            current: 3, // 현재 모집된 인원
             endDate: "2022-12-31",
             createdAt: "2022-02-02", // 작성일,
             lectureName: "현대인과성서",
@@ -47,7 +47,7 @@ const LectureHistoryLayout = () => {
             title: "팀플 제목",
             detail: "상세글",
             total: 5, // 모집 총 인원
-            currrent: 3, // 현재 모집된 인원
+            current: 3, // 현재 모집된 인원
             endDate: "2022-12-31",
             createdAt: "2022-02-02", // 작성일,
             lectureName: "현대인과성서",
@@ -57,8 +57,7 @@ const LectureHistoryLayout = () => {
 
     return (
         <LectureContainer>
-            <LectureHistory type="major" />
-            <LectureHistory type="elective" />
+            <LectureHistory {...posts[0]} />
         </LectureContainer>
     );
 };
