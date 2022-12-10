@@ -1,17 +1,16 @@
 import IconMenu from "@/assets/menu.svg";
-import Toggle from "@/components/Toggle";
+import IconList from "@/assets/profile_my_work.png";
+import IconReview from "@/assets/recruit_icon.svg";
 import themes from "@/styles/themes";
 import styled from "@emotion/styled";
-import { useState } from "react";
-import IconList from "../../../assets/profile_my_work.png";
-import IconReview from "../../../assets/profile_review_icon.png";
-import MyProfile from "./Myprofile";
 
 const SidebarLayoutContainer = styled.div`
-    position: absolute;
+    z-index: 0;
+    position: sticky;
+    top: 7rem;
     left: 10%;
     background: ${themes.colors.black_500};
-    min-height: 60vh;
+    height: 80vh;
     width: 23rem;
     display: flex;
     flex-direction: column;
@@ -38,13 +37,35 @@ const SidebarLayoutContainer = styled.div`
     }
 `;
 
-const ToggleWrpper = styled.div`
+const LectureWrpper = styled.div`
+    position: relative;
+    padding: 3rem;
     display: flex;
+    flex-direction: column;
     gap: 1rem;
-    align-items: center;
     color: white;
     padding: 1rem;
     margin-top: 1rem;
+    margin-right: 2rem;
+
+    p {
+        padding-left: 2rem;
+        font-size: 1.4rem;
+    }
+    .lecture-title {
+        font-size: 2rem;
+        font-weight: 600;
+    }
+
+    .lecture-bar {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 0.8rem;
+        height: 100%;
+        background: rgba(230, 230, 238, 0.1);
+        border-radius: 12px;
+    }
 `;
 
 const SidebarLabel = styled.div`
@@ -62,25 +83,21 @@ const SidebarLabel = styled.div`
 `;
 
 interface Props {
-    profile?: any;
+    lecture?: any;
     tabController: (tab: string) => void;
 }
 
-const SidebarLayout = ({ profile, tabController }: Props) => {
-    const [isPublic, setPublic] = useState(false);
-
+const SidebarLayout = ({ lecture, tabController }: Props) => {
     return (
         <SidebarLayoutContainer>
-            <div style={{ padding: "0rem 2rem", width: "90%" }}>
-                <MyProfile {...profile} />
-            </div>
-            <ToggleWrpper>
-                <Toggle listener={setPublic} init={true} />
-            </ToggleWrpper>
-
+            <LectureWrpper>
+                <p className="lecture-title">과목 이름</p>
+                <p>교수님 이름</p>
+                <div className="lecture-bar"></div>
+            </LectureWrpper>
             <SidebarLabel>
-                참여이력
-                <img src={IconMenu} alt="참여이력" />
+                팀플모집
+                <img src={IconMenu} alt="메뉴아이콘" />
             </SidebarLabel>
             <button
                 className="sub-label"
@@ -88,16 +105,13 @@ const SidebarLayout = ({ profile, tabController }: Props) => {
                     tabController("main");
                 }}
             >
-                <img src={IconReview} alt="홈"></img>메인
+                <img src={IconReview} alt="모집글조회"></img>모집글 조회
             </button>
-            <button
-                className="sub-label"
-                onClick={() => {
-                    tabController("recruit");
-                }}
-            >
-                <img src={IconReview} alt="내팀플"></img>강의팀플
-            </button>
+
+            <SidebarLabel>
+                팀플후기
+                <img src={IconMenu} alt="메뉴아이콘" />
+            </SidebarLabel>
 
             <button
                 className="sub-label"
@@ -107,10 +121,6 @@ const SidebarLayout = ({ profile, tabController }: Props) => {
             >
                 <img src={IconList} alt="리뷰아이콘"></img>팀플리뷰
             </button>
-            <SidebarLabel>
-                참여이력
-                <img src={IconMenu} alt="참여이력" />
-            </SidebarLabel>
         </SidebarLayoutContainer>
     );
 };

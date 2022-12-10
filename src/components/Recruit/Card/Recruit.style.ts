@@ -29,19 +29,48 @@ export const RecruitWrap = styled.button<{ lectureType?: string }>`
     }
 `;
 
+export const RecruitLectureTitle = styled.p`
+    position: relative !important;
+    width: 100%;
+    font-weight: 700;
+    font-size: 1.8rem;
+    text-align: center;
+    align-items: center;
+    margin: 1rem;
+`;
+
+export const RecruitSubTitle = styled.p<{ type?: string }>`
+    position: relative !important;
+    width: 100%;
+    font-weight: 600;
+    font-size: 1.5rem;
+    text-align: center;
+    align-items: center;
+    color: #9a9a9a;
+`;
+
+export const RecruitViewCount = styled.p<{ type?: string }>`
+    display: flex;
+    width: 100%;
+    font-weight: 700;
+    text-align: center;
+    align-items: center;
+    color: ${({ type }) => (type === "major" ? `white` : ` black`)};
+`;
+
 export const RecruitBgPogress = styled.div<{
     progress?: number;
     type?: string;
 }>`
+    position: absolute;
     width: ${({ progress }) =>
         progress
             ? progress === 1
                 ? `100%`
-                : `calc((100% - 4rem) * ${progress} + 2rem)`
-            : `0%`};
+                : `calc((100% - 4rem) * ${progress} + 2rem);`
+            : `0%;`};
     max-width: 100%;
     height: 100%;
-    position: absolute;
     z-index: 1;
 
     top: 0;
@@ -52,27 +81,4 @@ export const RecruitBgPogress = styled.div<{
         )
         rgba(15, 52, 114, 0.05);
     box-shadow: none;
-`;
-
-export const RecruitLectureTitle = styled.p`
-    font-weight: 700;
-    font-size: 1.8rem;
-    text-align: center;
-    align-items: center;
-    margin: 1rem;
-`;
-
-export const RecruitSubTitle = styled.p<{ type?: string }>`
-    font-weight: 600;
-    font-size: 1.5rem;
-    text-align: center;
-    align-items: center;
-    color: #9a9a9a;
-`;
-
-export const RecruitViewCount = styled.p<{ type?: string }>`
-    font-weight: 700;
-    text-align: center;
-    align-items: center;
-    color: ${({ type }) => (type === "major" ? `white` : ` black`)};
 `;

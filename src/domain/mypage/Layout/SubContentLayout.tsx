@@ -13,7 +13,7 @@ const SubContentLayoutContainer = styled.div<{ mode: number }>`
     flex-wrap: wrap;
     justify-content: space-between;
 
-    margin-left: calc(22rem);
+    margin-left: calc(25rem);
     gap: 2rem 1rem;
     padding: 3rem;
     margin-top: 2rem;

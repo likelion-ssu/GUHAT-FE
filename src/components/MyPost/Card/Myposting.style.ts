@@ -49,6 +49,12 @@ export const MyPostLecturenWrap = styled.div`
     margin: 1rem 0;
     font-size: 1.2rem;
     color: ${themes.colors.gray_700};
+
+    img {
+        filter: brightness(0) saturate(100%) invert(66%) sepia(0%) saturate(3%)
+            hue-rotate(192deg) brightness(94%) contrast(84%);
+        width: 1.5rem;
+    }
 `;
 
 export const MyPostingBgImg = styled.div<{ type?: string }>`

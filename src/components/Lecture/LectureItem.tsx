@@ -14,6 +14,8 @@ interface Props {
     semester: string;
     time: string[] | string;
     place: string;
+
+    clickListener: () => void;
 }
 
 const faker = [
@@ -38,7 +40,9 @@ const LectureItem = ({ ...props }: Props) => {
             <LectureItemDetail>
                 {props.time} [ {props.place} ]
             </LectureItemDetail>
-            <LectureMoreButton>더보기</LectureMoreButton>
+            <LectureMoreButton onClick={props.clickListener}>
+                더보기
+            </LectureMoreButton>
         </LectureItemWrap>
     );
 };

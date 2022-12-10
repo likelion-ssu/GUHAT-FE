@@ -32,7 +32,6 @@ const Recruit = ({ recruit }: { recruit: IRecruitItem }) => {
 
     return (
         <RecruitWrap lectureType={recruit.type} onClick={onClickRecruitCard}>
-            <RecruitBgPogress progress={recruit.current / recruit.total} />
             <RecruitContentChip type={recruit.type} />
             <RecruitLectureTitle>{recruit.title}</RecruitLectureTitle>
             <RecruitSubTitle>
@@ -48,7 +47,15 @@ const Recruit = ({ recruit }: { recruit: IRecruitItem }) => {
                 })}
             </RecruitSubTitle>
             <ViewCount count={recruit.viewCount} type={recruit.type} />
-            <ProgressBar total={recruit.total} current={recruit.current} />
+            <div
+                style={{
+                    width: "100%",
+                    position: "relative",
+                }}
+            >
+                <ProgressBar total={recruit.total} current={recruit.current} />
+            </div>
+
             <RecruitContent
                 title="최지웅 사인페 버스 운영합니다"
                 detail={
@@ -58,6 +65,7 @@ const Recruit = ({ recruit }: { recruit: IRecruitItem }) => {
             >
                 <Profile level={"Lv1.새내기"} nickname={"닉네임107"} />
             </RecruitContent>
+            <RecruitBgPogress progress={recruit.current / recruit.total} />
         </RecruitWrap>
     );
 };

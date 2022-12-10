@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 
 export const ViewCountWrap = styled.div<{ type?: string }>`
     display: flex;
+    width: 100%;
     align-items: center;
     justify-content: center;
     gap: 0.3rem;
