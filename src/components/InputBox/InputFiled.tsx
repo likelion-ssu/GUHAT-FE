@@ -1,7 +1,7 @@
 import themes from "@/styles/themes";
 import styled from "@emotion/styled";
 
-export const InputFiledContainer = styled.textarea`
+export const InputFiledContainer = styled.input`
     width: 100%;
     display: flex;
 
