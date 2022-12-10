@@ -26,7 +26,7 @@ export const MyProfileBgProgress = styled.div<{ progress?: number }>`
     max-width: 100%;
     position: absolute;
     z-index: 1;
-    height: 100%;
+    height: calc(100% - 4rem);
     top: 0;
     background: linear-gradient(
             269.66deg,
@@ -92,7 +92,7 @@ export const MyProfileSubText = styled.p`
 `;
 
 export const MyProfileBtnWrap = styled.div`
-    z-index: 5;
+    z-index: 10;
     width: 100%;
     height: 4rem;
     display: flex;
@@ -100,7 +100,8 @@ export const MyProfileBtnWrap = styled.div`
     align-items: center;
 `;
 
-export const MyProfileInfoBtn = styled.div`
+export const MyProfileInfoBtn = styled.button`
+    z-index: 10;
     width: 50%;
     padding: 0;
     text-align: center;
@@ -113,9 +114,11 @@ export const MyProfileInfoBtn = styled.div`
         filter: brightness(0.9);
         opacity: 0.5;
     }
+    color: white;
 `;
 
 export const MyProfileLogOutBtn = styled(MyProfileInfoBtn)`
+    z-index: 10;
     background-color: darkgray;
     background: rgba(20, 20, 20, 0.2);
 `;

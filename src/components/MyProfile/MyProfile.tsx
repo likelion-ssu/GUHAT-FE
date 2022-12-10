@@ -1,3 +1,5 @@
+import { removeCookieToken } from "@/storage/cookie";
+import { useNavigate } from "react-router-dom";
 import LevelProgress from "./LevelProgress";
 import {
     MyProfileBgProgress,
@@ -11,7 +13,6 @@ import {
     MyProfileSubText,
     MyProfileWrap,
 } from "./MyProfile.style";
-
 interface Props {
     nickName: string;
     name: string;
@@ -24,6 +25,8 @@ interface Props {
 const MyProfile = ({ nickName, name, semester, univ, major, level }: Props) => {
     const total = 300;
     const current = 159;
+
+    const navgator = useNavigate();
 
     return (
         <MyProfileWrap>
@@ -55,7 +58,15 @@ const MyProfile = ({ nickName, name, semester, univ, major, level }: Props) => {
             <LevelProgress total={total} current={current} />
             <MyProfileBtnWrap>
                 <MyProfileInfoBtn>내정보</MyProfileInfoBtn>
-                <MyProfileLogOutBtn>로그아웃</MyProfileLogOutBtn>
+                <MyProfileLogOutBtn
+                    onClick={() => {
+                        alert("로그아웃");
+                        removeCookieToken();
+                        navgator("/login");
+                    }}
+                >
+                    로그아웃
+                </MyProfileLogOutBtn>
             </MyProfileBtnWrap>
         </MyProfileWrap>
     );

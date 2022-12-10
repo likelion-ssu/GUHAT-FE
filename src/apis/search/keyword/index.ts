@@ -20,7 +20,7 @@ const getResultByKeyword = async (keyword: string) => {
     return data;
 };
 
-export const useResults = (keyword: string) => {
+export const useKeywordResults = (keyword: string) => {
     return useQuery(["keyword", keyword], () => getResultByKeyword(keyword), {
         enabled: !!keyword,
         select: (data) => data.slice(0, 10),

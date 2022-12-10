@@ -61,7 +61,7 @@ export const RecruitMemModalList = styled.ul`
     flex-direction: column;
     border-radius: 1rem;
     padding: 2rem;
-    background-color: #f0f0f0;
+    background-color: #f2f2f2;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 
     .recruit-modal-empty-state {
@@ -98,11 +98,20 @@ export const RecruitMemCardList = styled.div`
     }
 `;
 
-export const RecruitMemCardWrapper = styled.div<{ checked?: boolean }>`
+export const RecruitMemCardWrapper = styled.div<{
+    checked?: boolean;
+    mem?: any;
+    isNew?: boolean;
+}>`
     z-index: 140;
     width: 6rem;
     min-width: 4rem;
     padding: 0;
-    transform: ${({ checked }) => (checked ? "scale(1.05)" : "default")};
+    transform: ${({ checked, isNew }) =>
+        checked && isNew ? "scale(1.05)" : "default"};
     ${({ checked }) => (checked ? "opacity : 1" : "opacity : 0.7")};
+    ${({ mem, isNew }) =>
+        isNew || (!isNew && !mem)
+            ? "opacity : 1"
+            : "opacity : 0.7; filter: brightness(0.6);"};
 `;

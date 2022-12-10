@@ -24,7 +24,7 @@ const Landing = () => {
     }, []);
 
     const onClickLogin = () => {
-        if (id && pw) {
+        if (id && pw && !loading) {
             setLoading(true);
             login(id, pw)
                 .then((res) => {
@@ -56,26 +56,40 @@ const Landing = () => {
 
     return (
         <APILayout modal={null}>
-            <div
-                style={{
-                    display: "flex",
-                    height: "80vh",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    width: "30rem",
-                    gap: "1rem",
-                    margin: "0 auto",
+            <form
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    onClickLogin();
                 }}
             >
-                <InputFiled text={id} handler={setId} hint="Usaint ID" />
-                <InputFiled
-                    text={pw}
-                    handler={setPw}
-                    hint="Usaint Password"
-                    type="password"
-                />
-                <MainButton clickListener={onClickLogin}>로그인</MainButton>
-            </div>
+                <div
+                    style={{
+                        display: "flex",
+                        height: "80vh",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        width: "30rem",
+                        gap: "1rem",
+                        margin: "0 auto",
+                    }}
+                >
+                    <InputFiled text={id} handler={setId} hint="Usaint ID" />
+                    <InputFiled
+                        text={pw}
+                        handler={setPw}
+                        hint="Usaint Password"
+                        type="password"
+                    />
+
+                    <MainButton
+                        width="100%"
+                        clickListener={onClickLogin}
+                        disabled={!id && !pw}
+                    >
+                        로그인
+                    </MainButton>
+                </div>
+            </form>
         </APILayout>
     );
 };

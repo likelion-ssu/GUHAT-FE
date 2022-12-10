@@ -8,6 +8,7 @@ const themes = {
         gray_900: "#999999",
         gray_1000: "#595959",
         navy_500: "#14141433",
+        blue_500: "#6cc9ff",
         black: "#000000",
         black_500: "#303644",
         white: "#ffffff",

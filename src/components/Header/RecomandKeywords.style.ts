@@ -9,6 +9,8 @@ export const RecomandkeywordsWrapper = styled.div`
     display: flex;
     flex-direction: column;
     background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+        rgba(0, 0, 0, 0.22) 0px 10px 10px;
 
     h1 {
         padding-left: 2rem;

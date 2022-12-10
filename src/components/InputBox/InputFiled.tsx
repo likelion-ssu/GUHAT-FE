@@ -1,7 +1,7 @@
 import themes from "@/styles/themes";
 import styled from "@emotion/styled";
 
-export const InputFiledContainer = styled.input`
+export const InputFiledContainer = styled.textarea`
     width: 100%;
     display: flex;
 
@@ -29,7 +29,6 @@ const InputFiled = ({
 }) => {
     return (
         <InputFiledContainer
-            type={type}
             placeholder={hint}
             value={text}
             onChange={(e) => {

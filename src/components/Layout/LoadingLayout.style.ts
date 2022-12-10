@@ -10,6 +10,7 @@ export const LoadingContainer = styled.div`
     overflow: hidden !important;
     opacity: 0.6;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
@@ -17,5 +18,9 @@ export const LoadingContainer = styled.div`
         font-weight: 500;
         font-size: 1.8rem;
         color: white;
+    }
+
+    .loading-img {
+        width: 20vw;
     }
 `;
