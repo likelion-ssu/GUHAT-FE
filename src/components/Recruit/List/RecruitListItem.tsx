@@ -3,6 +3,7 @@ import {
     Progress,
     ProgressWrapper,
 } from "@/components/History/LectureHistory.style";
+import { useNavigate } from "react-router-dom";
 import { calculateData } from "../../../util/calculateData";
 import { RecruitItemContainer } from "./RecruitListItem.style";
 
@@ -26,8 +27,13 @@ interface Props {
 }
 
 const RecruitListItem = ({ ...props }: Props) => {
+    const navigator = useNavigate();
+    const onClickItem = () => {
+        navigator("/recruit/" + props.id);
+    };
+
     return (
-        <RecruitItemContainer>
+        <RecruitItemContainer onClick={onClickItem}>
             <div className="title-wrapper content-wrapper">
                 <p className="lecture-title bold">{props.title}</p>
                 <p>

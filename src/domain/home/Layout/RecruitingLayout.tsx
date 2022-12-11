@@ -1,4 +1,5 @@
 import { IRecruitItem } from "@/types/recruitLecture.types";
+import { useNavigate } from "react-router-dom";
 import RecruitingList from "../List/RecruitingList";
 import { RecruitingListLayoutWrapper } from "./RecruitingLayout.style";
 
@@ -7,6 +8,8 @@ interface Props {
 }
 
 const RecruitingLayout = ({ list }: Props) => {
+    const navigator = useNavigate();
+
     return (
         <>
             <RecruitingListLayoutWrapper>
@@ -20,10 +23,17 @@ const RecruitingLayout = ({ list }: Props) => {
                 </div>
 
                 <RecruitingList
-                    recruitingList={list.length > 4 ? list.slice(0, 4) : list}
+                    recruitingList={list.length > 4 ? list.slice(0, 3) : list}
                 />
                 <div style={{ width: "100%", position: "relative" }}>
-                    <button className="recruiting-more">더보기</button>
+                    <button
+                        className="recruiting-more"
+                        onClick={() => {
+                            navigator("/recruits");
+                        }}
+                    >
+                        더보기
+                    </button>
                 </div>
             </RecruitingListLayoutWrapper>
         </>

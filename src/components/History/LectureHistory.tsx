@@ -32,7 +32,11 @@ const LectureHistory = ({ ...props }: Props) => {
                 <img className="edit-img" src={Edit} alt="편집 아이콘" />
             </div>
             <div className="recruit-sub-title">
-                <h1>{calculateData(props.createdAt)}</h1>
+                <h1>
+                    {parseInt(calculateData(props.endDate)) < 0
+                        ? "모집마감"
+                        : `D-${calculateData(props.endDate)}`}
+                </h1>
                 <p>
                     {props.lectureName}/{props.professor}
                 </p>

@@ -37,6 +37,7 @@ const ReviewListLayout = ({ list }: { list: any[] }) => {
     const onClickPost = () => {
         navigator("/review/post");
     };
+
     return (
         <>
             <RecruitContainer>

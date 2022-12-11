@@ -18,7 +18,9 @@ const ProgressBar = ({ total, current }: Props) => {
                     <Progress progress={(current / total) * 100} />
                 ) : null}
             </ProgressWrap>
-            <ProgressText>{current}명 남았어요!</ProgressText>
+            {total !== undefined && current !== undefined ? (
+                <ProgressText>{total - current}명 남았어요!</ProgressText>
+            ) : null}
         </ProgressContainer>
     );
 };

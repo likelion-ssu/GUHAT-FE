@@ -80,7 +80,7 @@ const RecruitPostLayout = () => {
 
     const [title, setTitle] = useState("공통");
     const [max, setMax] = useState("1");
-    const [group, setGroup] = useState<any[]>([{ name: title, max: max }]);
+    const [group, setGroup] = useState<any[]>([{ name: "공통", max: "1" }]);
 
     const scheduleload = () => {
         setLoadingMsg(
@@ -103,7 +103,8 @@ const RecruitPostLayout = () => {
 
     const submitClick = () => {
         console.log("submit");
-
+        console.log();
+        setLoading(true);
         const body: requestPosting = {
             title: postTitle,
             lecture_id: lectureCode[lecture.index],
@@ -118,6 +119,7 @@ const RecruitPostLayout = () => {
         submitPosting({ ...body })
             .then((res) => {
                 console.log(res);
+                setLoading(false);
             })
             .catch((e) => {
                 console.log(e);
@@ -143,7 +145,7 @@ const RecruitPostLayout = () => {
         setTitle("");
         setMax("0");
         const prev = [...group];
-        prev.push({ _title, _max });
+        prev.push({ name: _title, max: _max });
         console.log(prev);
         setGroup(prev);
     };
@@ -267,7 +269,9 @@ const RecruitPostLayout = () => {
                                         <p className="label-group">파트</p>
                                         <div style={{ width: "5rem" }}>
                                             <InputFiled
-                                                text={g.max !== 0 ? g.max : max}
+                                                text={
+                                                    g.max !== "0" ? g.max : max
+                                                }
                                                 handler={(e: any) =>
                                                     setMax(e.item)
                                                 }
@@ -281,9 +285,7 @@ const RecruitPostLayout = () => {
                             <RecruitAddbtn
                                 width="5rem"
                                 onClick={() => {
-                                    if (group.length > 0)
-                                        onChangeGroup(title, max);
-                                    else onChangeGroup("", "");
+                                    onChangeGroup(title, max);
                                 }}
                             >
                                 +
