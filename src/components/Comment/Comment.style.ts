@@ -9,6 +9,7 @@ export const CommentContainer = styled.div`
     border-radius: 12px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     padding: 1rem;
     padding-left: 5rem;
     margin-bottom: 0.5rem;
@@ -16,6 +17,11 @@ export const CommentContainer = styled.div`
     .day-label {
         color: gray;
     }
+`;
+
+export const InfoWrapper = styled.div`
+    display: flex;
+    gap: 1rem;
 `;
 
 export const EmojiContainer = styled.div`
@@ -33,6 +39,9 @@ export const EmojiContainer = styled.div`
     .emoji-img {
         width: 2rem;
         height: 2rem;
+    }
+    .like-img {
+        height: 60%;
     }
     .star-img {
         width: 1rem;

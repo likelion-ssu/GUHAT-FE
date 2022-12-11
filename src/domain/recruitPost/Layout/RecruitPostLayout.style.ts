@@ -36,10 +36,6 @@ export const RecruitContentLayout = styled.div<{ isFilled?: boolean }>`
         border-radius: 0.5rem;
         border: 1px solid black;
         padding: 2rem 2rem;
-        /* ${({ isFilled }) =>
-            !isFilled
-                ? ` background : ${themes.colors.gray_100} ; border: none;`
-                : null}; */
     }
     .content-input-count {
         width: 100%;
