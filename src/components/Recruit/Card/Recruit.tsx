@@ -29,15 +29,16 @@ const Recruit = ({ recruit }: { recruit: IRecruitItem }) => {
         },
         []
     );
-
+    const day = calculateDate(recruit.endDate);
     return (
         <RecruitWrap lectureType={recruit.type} onClick={onClickRecruitCard}>
+            <RecruitBgPogress progress={recruit.current / recruit.total} />
             <RecruitContentChip type={recruit.type} />
-            <RecruitLectureTitle>{recruit.title}</RecruitLectureTitle>
+            <RecruitLectureTitle>{recruit.lecture.name}</RecruitLectureTitle>
             <RecruitSubTitle>
                 {recruit.lecture.schedule?.map((s, i) => {
-                    if (i === 0) return s;
-                    else return ` / ${s}`;
+                    if (i === 0) return s.day + " " + s.time;
+                    else return ` / ${s.day + " " + s.time}`;
                 })}
             </RecruitSubTitle>
             <RecruitSubTitle>
@@ -47,25 +48,17 @@ const Recruit = ({ recruit }: { recruit: IRecruitItem }) => {
                 })}
             </RecruitSubTitle>
             <ViewCount count={recruit.viewCount} type={recruit.type} />
-            <div
-                style={{
-                    width: "100%",
-                    position: "relative",
-                }}
-            >
-                <ProgressBar total={recruit.total} current={recruit.current} />
-            </div>
-
+            <ProgressBar total={recruit.total} current={recruit.current} />
             <RecruitContent
-                title="최지웅 사인페 버스 운영합니다"
-                detail={
-                    "안녕하세요. 저는 나랏말싸미 듕귁에 달아 물자와로 서로 사맛디 아니할쎄 내 이를 어녀삐녀겨 새로 스물 여덟 글..."
-                }
-                endDate={calculateDate(recruit.endDate)}
+                title={recruit.title}
+                detail={recruit.detail}
+                endDate={parseInt(day) < 0 ? "모집마감" : `D-${day}`}
             >
-                <Profile level={"Lv1.새내기"} nickname={"닉네임107"} />
+                <Profile
+                    level={recruit.writer.level}
+                    nickname={recruit.writer.nickname}
+                />
             </RecruitContent>
-            <RecruitBgPogress progress={recruit.current / recruit.total} />
         </RecruitWrap>
     );
 };

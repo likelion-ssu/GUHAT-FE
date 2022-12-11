@@ -1,3 +1,4 @@
+import RecruitMore from "@/pages/RecruitMore";
 import Home from "@pages/Home";
 import Landing from "@pages/Landing";
 import Search from "@pages/Search";
@@ -73,6 +74,13 @@ const pagesData: routerType[] = [
         name: "ReviewView",
         path: "/review/:id",
         component: <ReviewView />,
+        exact: false,
+    },
+
+    {
+        name: "RecruitsList",
+        path: "/recruits",
+        component: <RecruitMore />,
         exact: false,
     },
 

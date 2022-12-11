@@ -9,9 +9,3 @@ export interface Ilecture {
     schedule?: any[] | null;
     year?: string;
 }
-
-interface lectureSchedule {
-    day?: string[] | string | null;
-    time?: string | null;
-    place?: string;
-}

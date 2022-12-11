@@ -2,6 +2,7 @@ import fileIcon from "@/assets/file-icon.svg";
 import thumbIcon from "@/assets/thumbUp.svg";
 import viewIcon from "@/assets/viewCount.svg";
 import { MyPostLecturenWrap } from "@/components/MyPost/Card/Myposting.style";
+import { useNavigate } from "react-router-dom";
 import { ReviewItemContainer } from "./ReviewListItem.style";
 
 interface Props {
@@ -21,8 +22,12 @@ interface Props {
     likeCnt: number | string;
 }
 const ReviewListItem = ({ ...props }: Props) => {
+    const navigator = useNavigate();
+    const onClickItem = () => {
+        navigator("/review/" + props.id);
+    };
     return (
-        <ReviewItemContainer>
+        <ReviewItemContainer onClick={onClickItem}>
             <div className="title-wrapper content-wrapper">
                 <p className="lecture-title bold"> {props.title}</p>
                 <p>

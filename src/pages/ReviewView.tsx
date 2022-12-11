@@ -1,4 +1,6 @@
+import BackArrowBtn from "@/components/Button/BackArrow";
 import MainLayout from "@/components/Layout/MainLayout";
+import { StickBackBtn } from "@/domain/recruitView/RecruitViewLayout.style";
 import CommentLayout from "@/domain/reviewView/Layout/CommentLayout";
 import styled from "@emotion/styled";
 import { useParams } from "react-router-dom";
@@ -69,13 +71,21 @@ const ReviewView = () => {
             },
         ],
     };
+    const onClickBack = () => {
+        window.history.back();
+    };
     return (
-        <MainLayout>
-            <ReviewViewContainer>
-                <ReviewViewLayout {...review} />
-                <CommentLayout {...comment} reviewId={id ? id : 0} />
-            </ReviewViewContainer>
-        </MainLayout>
+        <>
+            <StickBackBtn>
+                <BackArrowBtn clickListener={onClickBack} />
+            </StickBackBtn>
+            <MainLayout>
+                <ReviewViewContainer>
+                    <ReviewViewLayout {...review} />
+                    <CommentLayout {...comment} reviewId={id ? id : 0} />
+                </ReviewViewContainer>
+            </MainLayout>
+        </>
     );
 };
 

@@ -11,12 +11,18 @@ import {
     ReviewTitle,
     ReviewTitleWrap,
 } from "./Review.style";
-const Review = ({ review }: { review: IReview }) => {
+const Review = ({
+    review,
+    clickListener,
+}: {
+    review: IReview;
+    clickListener: () => void;
+}) => {
     return (
-        <ReviewContainer>
+        <ReviewContainer onClick={clickListener}>
             <ReviewLikeTagWrap />
             <ReviewTagThumb />
-            <ReviewLikeCount>+1</ReviewLikeCount>
+            <ReviewLikeCount>+{review.likeCount}</ReviewLikeCount>
             <ReviewTitleWrap>
                 <ReviewTitle>{review.title}</ReviewTitle>
                 <ReviewLecturenWrap>
@@ -24,7 +30,7 @@ const Review = ({ review }: { review: IReview }) => {
                     <p>
                         {review.lecture.professors?.map((p, i) => {
                             if (i === 0) return p;
-                            else return ` / ${p}`;
+                            else return ` ${p}`;
                         })}
                     </p>
                 </ReviewLecturenWrap>

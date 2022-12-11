@@ -18,7 +18,7 @@ const RecruitContent = ({ title, detail, endDate, children }: Props) => {
             <RecruitContentTitle>{title}</RecruitContentTitle>
             <RecruitContentDetail>{detail}</RecruitContentDetail>
             {children}
-            <RecruitContentDDay>D-{endDate}</RecruitContentDDay>
+            <RecruitContentDDay>{endDate}</RecruitContentDDay>
         </RecruitContentWrap>
     );
 };

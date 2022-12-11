@@ -31,7 +31,7 @@ export const RecruitWrap = styled.button<{ lectureType?: string }>`
 
 export const RecruitLectureTitle = styled.p`
     position: relative !important;
-    width: 100%;
+    width: 90%;
     font-weight: 700;
     font-size: 1.8rem;
     text-align: center;

@@ -31,7 +31,7 @@ export interface IRecruit {
     id: number;
     title: string; // 공지 제목
     time: [];
-    professor: [];
+    professor: [] | string | any;
     type: string | "major" | "elective";
     writer: IUser;
     endDate: string;

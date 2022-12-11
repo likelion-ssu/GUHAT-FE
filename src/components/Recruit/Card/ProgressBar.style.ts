@@ -2,7 +2,7 @@ import themes from "@/styles/themes";
 import styled from "@emotion/styled";
 
 export const ProgressContainer = styled.div`
-    max-width: 100%;
+    width: calc(100% - 4rem);
     z-index: 5;
     position: relative;
     margin-left: 2rem;
