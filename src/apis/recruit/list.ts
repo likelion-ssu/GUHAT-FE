@@ -24,8 +24,9 @@ export const useRecentRecruit = (page: number) => {
                     total: item.total,
                     current: item.current,
                     endDate: item.endDate,
-                    createdAt: "들어올거야 나중에",
-                    lectureName: item.lecture.title,
+                    createdAt: item.createdAt,
+                    lectureName: item.lecture.name,
+                    type: item.type,
                     professor: item.lecture.professors,
                 };
             }),

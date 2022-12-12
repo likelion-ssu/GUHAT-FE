@@ -8,7 +8,9 @@ import IconReview from "../../../assets/profile_review_icon.png";
 import MyProfile from "./Myprofile";
 
 const SidebarLayoutContainer = styled.div`
-    position: absolute;
+    z-index: 79;
+    position: fixed;
+    top: 6rem;
     left: 10%;
     background: ${themes.colors.black_500};
     min-height: 60vh;

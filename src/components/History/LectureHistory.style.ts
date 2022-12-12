@@ -40,6 +40,11 @@ export const LectureHistoryContainer = styled.div`
         overflow: hidden;
         line-height: 1.5rem;
     }
+
+    .recruit-class {
+        font-size: 1rem;
+        font-weight: 600;
+    }
 `;
 
 export const LectureProgressContainer = styled.div<{ major?: boolean }>`

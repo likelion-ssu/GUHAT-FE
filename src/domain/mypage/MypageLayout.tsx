@@ -8,7 +8,10 @@ import ReviewHistoryLayout from "./Layout/ReviewHistoryLayout";
 import ScoreLayout from "./Layout/ScoreLayout";
 import SidebarLayout from "./Layout/SidebarLayout";
 import SubContentLayout from "./Layout/SubContentLayout";
-import { MypageLayoutContainer } from "./MypageLayout.style";
+import {
+    MypageContentLayout,
+    MypageLayoutContainer,
+} from "./MypageLayout.style";
 const MypageLayout = () => {
     const [loading, setLoading] = useRecoilState(loadingState);
     const [modalVisible, setModalVisible] = useRecoilState(modalState);
@@ -71,9 +74,11 @@ const MypageLayout = () => {
             case "main":
                 return (
                     <>
-                        <AboutMeLayout {...introduction} />
-                        <ScoreLayout coments={coments} />
-                        <SubContentLayout />
+                        <MypageContentLayout>
+                            <AboutMeLayout {...introduction} />
+                            <ScoreLayout coments={coments} />
+                            <SubContentLayout />
+                        </MypageContentLayout>
                     </>
                 );
             case "review":
@@ -81,23 +86,16 @@ const MypageLayout = () => {
 
             case "recruit":
                 return <LectureHistoryLayout />;
-
-            default:
-                return (
-                    <>
-                        <AboutMeLayout {...introduction} />
-                        <ScoreLayout coments={coments} />
-                        <SubContentLayout />
-                    </>
-                );
         }
     };
 
     return (
-        <MypageLayoutContainer>
-            <SidebarLayout profile={profile} tabController={setTab} />
-            {getTabPage()}
-        </MypageLayoutContainer>
+        <>
+            <MypageLayoutContainer>
+                <SidebarLayout profile={profile} tabController={setTab} />
+                {getTabPage()}
+            </MypageLayoutContainer>
+        </>
     );
 };
 

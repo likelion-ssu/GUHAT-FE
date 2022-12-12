@@ -11,7 +11,7 @@ const ReviewLayout = ({ list }: { list: IReview[] }) => {
                     style={{
                         display: "flex",
                         gap: "0.5rem",
-                        marginBottom: "1rem",
+                        marginBottom: "1.8rem",
                     }}
                 >
                     <p>방금 올라온 </p>

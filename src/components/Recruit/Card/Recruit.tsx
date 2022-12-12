@@ -35,13 +35,13 @@ const Recruit = ({ recruit }: { recruit: IRecruitItem }) => {
             <RecruitBgPogress progress={recruit.current / recruit.total} />
             <RecruitContentChip type={recruit.type} />
             <RecruitLectureTitle>{recruit.lecture.name}</RecruitLectureTitle>
-            <RecruitSubTitle>
+            <RecruitSubTitle type={recruit.type}>
                 {recruit.lecture.schedule?.map((s, i) => {
                     if (i === 0) return s.day + " " + s.time;
                     else return ` / ${s.day + " " + s.time}`;
                 })}
             </RecruitSubTitle>
-            <RecruitSubTitle>
+            <RecruitSubTitle type={recruit.type}>
                 {recruit.lecture.professors?.map((s, i) => {
                     if (i === 0) return s;
                     else return ` / ${s}`;

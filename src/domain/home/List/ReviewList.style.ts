@@ -10,6 +10,5 @@ export const ReviewListWrapper = styled.div`
     display: flex;
     flex-direction: row;
     gap: 2rem;
-    overflow: hidden;
     padding: 1rem;
 `;

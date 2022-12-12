@@ -1,4 +1,4 @@
-import MemberDefault from "@assets/member_default.svg";
+import MemberDefault from "@assets/member_default2.svg";
 import { MemberCardContainer } from "./MemberCard.style";
 
 interface Props {

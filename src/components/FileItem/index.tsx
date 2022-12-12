@@ -1,6 +1,8 @@
 import DownloadIcon from "@/assets/download.svg";
 import PDFIcon from "@/assets/pdfIcon.svg";
+import XIcon from "@assets/close.svg";
 import styled from "@emotion/styled";
+
 const FileItemLayout = styled.button`
     display: flex;
     justify-content: space-between;
@@ -28,38 +30,72 @@ const FileItemLayout = styled.button`
         }
     }
 `;
-const FileItem = ({ file }: { file?: any }) => {
+const FileItem = ({
+    file,
+    mode = "view",
+    deleteListener,
+}: {
+    file?: any;
+    mode?: string;
+    deleteListener?: (url: string) => void;
+}) => {
     const onDownload = () => {
-        const objectURL = window.URL.createObjectURL(file);
-        console.log(objectURL);
-        window.open(objectURL);
+        console.log(file);
+        if (file.location) window.open(file.location);
+        else {
+            const objectURL = window.URL.createObjectURL(file);
+            console.log(objectURL);
+            window.open(objectURL);
+        }
+    };
+
+    const onDelete = () => {
+        deleteListener?.(file.location ? file.location : file);
+        // if (file.location) deleteProfile(file.location);
+        // else if (file.include("aws")) deleteProfile(file);
     };
 
     return (
         <FileItemLayout>
             {file ? (
-                <>
-                    <img src={PDFIcon} alt="pdf 아이콘" />
-                    <div className="file-content">
-                        <h1>{file.name}</h1>
-                        <p>{file.size}KB</p>
-                    </div>
-                    <img
-                        src={DownloadIcon}
-                        alt="pdf 아이콘"
-                        onClick={onDownload}
-                    />
-                </>
-            ) : (
-                <>
-                    <h1>파일 업로드</h1>
-                    <img
-                        src={DownloadIcon}
-                        onClick={onDownload}
-                        alt="pdf 아이콘"
-                    />
-                </>
-            )}
+                mode === "edit" ? (
+                    <>
+                        <img src={PDFIcon} alt="pdf 아이콘" />
+                        <div className="file-content" onClick={onDownload}>
+                            <h1>
+                                {file.originalname
+                                    ? file.originalname
+                                    : file.slice(file.indexOf("_"))}
+                            </h1>
+                            <p>{file.size}KB</p>
+                        </div>
+
+                        <img
+                            src={XIcon}
+                            alt="pdf 아이콘"
+                            onClick={onDelete}
+                            style={{ width: "1rem", marginRight: "1rem" }}
+                        />
+                    </>
+                ) : (
+                    <>
+                        <img src={PDFIcon} alt="pdf 아이콘" />
+                        <div className="file-content">
+                            <h1>
+                                {file.originalname
+                                    ? file.originalname
+                                    : file.slice(file.indexOf("_"))}
+                            </h1>
+                            <p>{file.size}KB</p>
+                        </div>
+                        <img
+                            src={DownloadIcon}
+                            alt="pdf 아이콘"
+                            onClick={onDownload}
+                        />
+                    </>
+                )
+            ) : null}
         </FileItemLayout>
     );
 };
