@@ -3,7 +3,8 @@ import styled from "@emotion/styled";
 
 import ReviewThumb from "@assets/review_thumb.svg";
 
-export const ReviewContainer = styled.div`
+export const ReviewContainer = styled.button`
+    z-index: 20;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -13,10 +14,19 @@ export const ReviewContainer = styled.div`
     background-color: white;
     padding: 2.54rem;
     overflow: hidden;
-    box-shadow: 12px 12px 0px #999999;
+    /* box-shadow: 12px 12px 0px #999999; */
+
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+        rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+        rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
     :active {
         filter: brightness(0.8);
         box-shadow: none;
+    }
+    :hover {
+        transition-duration: 0.4s;
+        transform: translate(0, -20px) scale(1.01);
     }
 `;
 

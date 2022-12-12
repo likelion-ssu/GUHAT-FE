@@ -6,4 +6,5 @@ export const MainLayoutContainer = styled.div`
     padding: 0;
     margin: 0 auto;
     background-color: ${themes.colors.bgColor};
+    padding-top: 7rem;
 `;

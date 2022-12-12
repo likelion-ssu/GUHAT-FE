@@ -5,12 +5,12 @@ export const RecruitWrap = styled.button<{ lectureType?: string }>`
     position: relative;
     display: flex block;
     flex-direction: column;
-    justify-content: center;
     width: calc(100% / 3);
+    height: 40rem;
     border-radius: 1rem;
     color: ${({ lectureType }) =>
         lectureType === "major"
-            ? ` ${themes.colors.gray_300}`
+            ? ` ${themes.colors.white}`
             : ` ${themes.colors.black_500}`};
     //filter: drop-shadow(6px 6px 0px #999999);
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
@@ -31,22 +31,26 @@ export const RecruitWrap = styled.button<{ lectureType?: string }>`
 
 export const RecruitLectureTitle = styled.p`
     position: relative !important;
+    display: flex;
+    justify-content: center;
+    height: 6rem;
     width: 90%;
-    font-weight: 700;
-    font-size: 1.8rem;
+    font-weight: 600;
+    font-size: 1.7rem;
     text-align: center;
     align-items: center;
+    align-self: center;
     margin: 1rem;
 `;
 
 export const RecruitSubTitle = styled.p<{ type?: string }>`
     position: relative !important;
     width: 100%;
-    font-weight: 600;
-    font-size: 1.5rem;
+    font-weight: 500;
+    font-size: 1.2rem;
     text-align: center;
     align-items: center;
-    color: #9a9a9a;
+    color: ${({ type }) => (type === "major" ? `white;` : ` black`)};
 `;
 
 export const RecruitViewCount = styled.p<{ type?: string }>`
@@ -55,7 +59,8 @@ export const RecruitViewCount = styled.p<{ type?: string }>`
     font-weight: 700;
     text-align: center;
     align-items: center;
-    color: ${({ type }) => (type === "major" ? `white` : ` black`)};
+    color: ${({ type }) =>
+        type === "major" ? `white` : ` ${themes.colors.black_500}`};
 `;
 
 export const RecruitBgPogress = styled.div<{

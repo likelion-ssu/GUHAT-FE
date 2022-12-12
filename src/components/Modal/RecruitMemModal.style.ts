@@ -104,8 +104,8 @@ export const RecruitMemCardWrapper = styled.div<{
     isNew?: boolean;
 }>`
     z-index: 140;
-    width: 6rem;
-    min-width: 4rem;
+    width: 6.5rem;
+    min-width: 5rem;
     padding: 0;
     transform: ${({ checked, isNew }) =>
         checked && isNew ? "scale(1.05)" : "default"};
