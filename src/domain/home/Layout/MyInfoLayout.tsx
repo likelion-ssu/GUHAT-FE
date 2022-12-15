@@ -1,21 +1,26 @@
+import { userState } from "@/storage/recoil/userState";
 import MyProfile from "@components/MyProfile/MyProfile";
+import { useRecoilValue } from "recoil";
 import MyPostingList from "../List/MyPostingList";
 import { MyInfoWrapper } from "./MyInfoLayout.style";
 
 const MyInfoLayout = () => {
     const list = [1, 2, 3, 4, 5, 6, 7];
+    const userInfo = useRecoilValue(userState);
     return (
         <>
-            <MyInfoWrapper>
-                <MyProfile
-                    nickName="닉네임1107"
-                    name="홍길동"
-                    semester="22년도 2학기 수강자"
-                    major="컴퓨터학부"
-                    univ="IT대학"
-                />
-                <MyPostingList postList={list} />
-            </MyInfoWrapper>
+            {userInfo ? (
+                <MyInfoWrapper>
+                    <MyProfile
+                        nickName={userInfo?.nickname}
+                        name={userInfo?.name!!}
+                        semester={`${userInfo.grade}학년 ${userInfo.semester}학기 수강자`}
+                        major={`${userInfo.major}`}
+                        univ={`${userInfo.univ}`}
+                    />
+                    <MyPostingList postList={list} />
+                </MyInfoWrapper>
+            ) : null}
         </>
     );
 };

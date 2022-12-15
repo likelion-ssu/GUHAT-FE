@@ -1,6 +1,8 @@
+import { updateProfileMode } from "@/apis/profile";
 import IconMenu from "@/assets/menu.svg";
 import Toggle from "@/components/Toggle";
 import themes from "@/styles/themes";
+import { debounce } from "@/util/debounce";
 import styled from "@emotion/styled";
 import { useState } from "react";
 import IconList from "../../../assets/profile_my_work.png";
@@ -8,7 +10,7 @@ import IconReview from "../../../assets/profile_review_icon.png";
 import MyProfile from "./Myprofile";
 
 const SidebarLayoutContainer = styled.div`
-    z-index: 79;
+    z-index: 20;
     position: fixed;
     top: 6rem;
     left: 10%;
@@ -69,7 +71,11 @@ interface Props {
 }
 
 const SidebarLayout = ({ profile, tabController }: Props) => {
-    const [isPublic, setPublic] = useState(false);
+    const [isPublic, setPublic] = useState(profile.mode === "public");
+
+    const toggleHandler = (_isPublic: boolean) => {
+        debounce(updateProfileMode(_isPublic ? "public" : "private"), 500);
+    };
 
     return (
         <SidebarLayoutContainer>
@@ -77,7 +83,13 @@ const SidebarLayout = ({ profile, tabController }: Props) => {
                 <MyProfile {...profile} />
             </div>
             <ToggleWrpper>
-                <Toggle listener={setPublic} init={true} />
+                <Toggle
+                    listener={(mode) => {
+                        setPublic(mode);
+                        toggleHandler(mode);
+                    }}
+                    init={isPublic}
+                />
             </ToggleWrpper>
 
             <SidebarLabel>

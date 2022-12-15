@@ -1,6 +1,9 @@
+import { updateDetail } from "@/apis/profile";
 import EditButton from "@/components/Button/EditButton";
+import { loadingState } from "@/storage/recoil/loadingState";
 import styled from "@emotion/styled";
 import { useState } from "react";
+import { useRecoilState } from "recoil";
 import PersonalityList from "../List/PersonalityList";
 import ChipList from "../List/SkilChipList";
 import TeamHistoryList from "../List/TeamHistoryList";
@@ -54,7 +57,7 @@ const EditWrapper = styled.div`
     font-size: 2.4rem !important;
 `;
 
-const SubContentLayout = () => {
+const SubContentLayout = ({ ...props }) => {
     const teamhistory = [
         {
             id: 1,
@@ -86,8 +89,9 @@ const SubContentLayout = () => {
             title: "사용자이터페이스 사람구함",
         },
     ];
-
-    const [personality, setPersonality] = useState([1, 2, 0]);
+    const [loading, setLoading] = useRecoilState(loadingState);
+    const [personality, setPersonality] = useState(props.personality);
+    const [skill, setSkill] = useState(props.skill);
     const MODE_VIEW = 0;
     const MODE_EDIT = 1;
     const [mode, setMode] = useState(MODE_VIEW);
@@ -98,24 +102,39 @@ const SubContentLayout = () => {
         setPersonality(newArray);
     };
 
+    const onClickSubmit = () => {
+        setMode((prev) => (prev ? MODE_VIEW : MODE_EDIT));
+        updateDetail(skill, personality).then((res) => {
+            console.log(res);
+        });
+    };
+
     return (
         <SubContentLayoutContainer mode={mode}>
             <EditWrapper>
                 <EditButton
                     saveMode={true}
                     clickListener={() => {
-                        setMode((prev) => (prev ? MODE_VIEW : MODE_EDIT));
+                        if (mode === MODE_VIEW)
+                            setMode((prev) => (prev ? MODE_VIEW : MODE_EDIT));
+                        else onClickSubmit();
                     }}
                 />
             </EditWrapper>
 
             <div className="content-wrapper">
                 <h1 className="content-label">PORTFOLIO</h1>
-                <PortFolioLayout mode={mode} />
+                <PortFolioLayout mode={mode} files={props.files} />
             </div>
             <div className="content-wrapper">
                 <h1 className="content-label">SKILL</h1>
-                <ChipList mode={mode} list={["somethig"]} />
+                <ChipList
+                    mode={mode}
+                    list={skill}
+                    handler={(list) => {
+                        setSkill(list);
+                    }}
+                />
             </div>
             <div className="content-wrapper">
                 <h1 className="content-label">TEAM HISTORY</h1>

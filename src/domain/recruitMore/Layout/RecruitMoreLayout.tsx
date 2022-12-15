@@ -10,7 +10,7 @@ import { useRecoilState } from "recoil";
 const RecruitMoreContainer = styled.div`
     width: 100%;
     display: flex;
-    padding: 0 5rem;
+    padding: 0 10rem;
     justify-content: center;
     flex-direction: column;
     align-items: center;

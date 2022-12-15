@@ -11,6 +11,7 @@ import { loadingMessage, loadingState } from "@/storage/recoil/loadingState";
 import { modalState } from "@/storage/recoil/modalState";
 import { requestPosting } from "@/types/posting.type";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import {
     RecruitAddbtn,
@@ -27,7 +28,7 @@ const RecruitPostLayout = () => {
     const [loading, setLoading] = useRecoilState(loadingState);
     const [modalVisible, setModalVisible] = useRecoilState(modalState);
     const [loadingMsg, setLoadingMsg] = useRecoilState(loadingMessage);
-
+    const navigator = useNavigate();
     const scheduleParseer = (data: any[]) => {
         const result = data.reduce((acc: any, v: any) => {
             return acc.find((x: any) => x.name === v.name) ? acc : [...acc, v];
@@ -124,7 +125,9 @@ const RecruitPostLayout = () => {
                 setLoadingMsg("작성완료!");
                 setTimeout(() => {
                     setLoading(false);
-                    window.history.back();
+                    const postId = res.data.postId;
+                    console.log("postId", postId);
+                    navigator("/recruit/" + postId);
                 }, 1000);
             })
             .catch((e) => {

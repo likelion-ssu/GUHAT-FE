@@ -7,7 +7,6 @@ export const MypageLayoutContainer = styled.div`
 export const MypageContentLayout = styled.div`
     position: absolute;
     top: 0;
-    z-index: 90;
     display: flex;
     max-height: 200vh;
     flex-direction: column;
