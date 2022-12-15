@@ -1,3 +1,4 @@
+import RecruitMore from "@/pages/RecruitMore";
 import Home from "@pages/Home";
 import Landing from "@pages/Landing";
 import Search from "@pages/Search";
@@ -7,6 +8,8 @@ import Lecture from "../pages/Lecture";
 import MyPage from "../pages/MyPage";
 import RecruitPost from "../pages/RecruitPost";
 import RecruitView from "../pages/RecruitView";
+import ReviewPost from "../pages/ReviewPost";
+import ReviewView from "../pages/ReviewView";
 const pagesData: routerType[] = [
     {
         name: "Home",
@@ -59,6 +62,28 @@ const pagesData: routerType[] = [
         component: <Lecture />,
         exact: false,
     },
+
+    {
+        name: "ReviewPost",
+        path: "/review/post",
+        component: <ReviewPost />,
+        exact: false,
+    },
+
+    {
+        name: "ReviewView",
+        path: "/review/:id",
+        component: <ReviewView />,
+        exact: false,
+    },
+
+    {
+        name: "RecruitsList",
+        path: "/recruits",
+        component: <RecruitMore />,
+        exact: false,
+    },
+
     {
         name: "Notfound",
         path: "*",

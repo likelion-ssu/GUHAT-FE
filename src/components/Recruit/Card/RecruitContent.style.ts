@@ -5,7 +5,8 @@ import styled from "@emotion/styled";
 
 export const RecruitContentWrap = styled.div`
     z-index: 5;
-    position: relative;
+    position: absolute;
+    bottom: 0;
     width: 100%;
     padding: 2.5rem;
     background-color: white;

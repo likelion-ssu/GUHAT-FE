@@ -1,0 +1,102 @@
+import ProfileLayout from "@/domain/recruitView/ProfileLayout";
+import {
+    ReviewViewinfoWrapper,
+    ReviewViewLayoutContainer,
+} from "./ReviewViewLayout.style";
+
+interface Props {
+    isOwner: boolean;
+    title: string;
+    year: string | number;
+    semester: string | number;
+    createdAt: string;
+
+    profileImg?: string;
+    writerId: string;
+    nickname: string;
+    writerLevel: number;
+
+    memberNum: number;
+    startDate: string;
+    endDate: string;
+    reviewLevel: string;
+
+    subject: string;
+    detail: string;
+}
+
+// {
+//     isLike: false,
+//     year: "2022",
+//     semester: "1학기",
+//     createdAt: "2022-01-01 12:40:00",
+//     comment: "내용내요요요애뇽",
+// },
+
+const ReviewViewLayout = ({ ...props }: Props) => {
+    return (
+        <ReviewViewLayoutContainer>
+            <h1 className="title">{props.title}</h1>
+            <p className="lecture-info">
+                {props.year}년 {props.semester} 수강자
+            </p>
+            <div className="content">
+                <ProfileLayout
+                    nickname={props.nickname}
+                    id={props.writerId}
+                    level={props.writerLevel}
+                    endDate={props.createdAt}
+                    isOwner={props.isOwner ? true : false}
+                ></ProfileLayout>
+            </div>
+            <hr />
+            <div className="content">
+                <ReviewViewinfoWrapper>
+                    <div className="info-wrapper">
+                        <p className="label-content">필요인원</p>
+                        <p>{props.memberNum}명</p>
+                    </div>
+                    <div className="info-wrapper">
+                        <p className="label-content">팀플기간</p>
+                        <p>{props.startDate}</p>
+                        <p>~</p>
+                        <p>{props.endDate}</p>
+                    </div>
+                    <div className="info-wrapper">
+                        <p> </p>
+                        <p className="label-content">난이도</p>
+                        <p
+                            className={`${
+                                props.reviewLevel === "상" ? "check" : ""
+                            }`}
+                        >
+                            상
+                        </p>
+                        <p
+                            className={`${
+                                props.reviewLevel === "중" ? "check" : ""
+                            }`}
+                        >
+                            중
+                        </p>
+                        <p
+                            className={`${
+                                props.reviewLevel === "하" ? "check" : ""
+                            }`}
+                        >
+                            하
+                        </p>
+                    </div>
+                </ReviewViewinfoWrapper>
+            </div>
+            <hr />
+            <h2 className="subtitle">주제</h2>
+            <div className="text-content">{props.subject}</div>
+            <hr />
+            <h2 className="subtitle">상세 설명</h2>
+            <div className="text-content">{props.detail}</div>
+        </ReviewViewLayoutContainer>
+    );
+};
+
+export default ReviewViewLayout;

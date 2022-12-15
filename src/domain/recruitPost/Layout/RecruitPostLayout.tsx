@@ -11,6 +11,7 @@ import { loadingMessage, loadingState } from "@/storage/recoil/loadingState";
 import { modalState } from "@/storage/recoil/modalState";
 import { requestPosting } from "@/types/posting.type";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import {
     RecruitAddbtn,
@@ -27,6 +28,7 @@ const RecruitPostLayout = () => {
     const [loading, setLoading] = useRecoilState(loadingState);
     const [modalVisible, setModalVisible] = useRecoilState(modalState);
     const [loadingMsg, setLoadingMsg] = useRecoilState(loadingMessage);
+    const navigator = useNavigate();
     const scheduleParseer = (data: any[]) => {
         const result = data.reduce((acc: any, v: any) => {
             return acc.find((x: any) => x.name === v.name) ? acc : [...acc, v];
@@ -80,7 +82,7 @@ const RecruitPostLayout = () => {
 
     const [title, setTitle] = useState("공통");
     const [max, setMax] = useState("1");
-    const [group, setGroup] = useState<any[]>([{ name: title, max: max }]);
+    const [group, setGroup] = useState<any[]>([{ name: "공통", max: "1" }]);
 
     const scheduleload = () => {
         setLoadingMsg(
@@ -103,7 +105,8 @@ const RecruitPostLayout = () => {
 
     const submitClick = () => {
         console.log("submit");
-
+        console.log();
+        setLoading(true);
         const body: requestPosting = {
             title: postTitle,
             lecture_id: lectureCode[lecture.index],
@@ -111,13 +114,21 @@ const RecruitPostLayout = () => {
             period: duration,
             detail: detail,
             priority: priority,
-            role: group,
+            role: group.filter((g) => g.name !== ""),
             chatLink: link,
         };
 
         submitPosting({ ...body })
             .then((res) => {
                 console.log(res);
+
+                setLoadingMsg("작성완료!");
+                setTimeout(() => {
+                    setLoading(false);
+                    const postId = res.data.postId;
+                    console.log("postId", postId);
+                    navigator("/recruit/" + postId);
+                }, 1000);
             })
             .catch((e) => {
                 console.log(e);
@@ -139,12 +150,18 @@ const RecruitPostLayout = () => {
         if (link.length < 99) setLink(e.target.value);
     };
 
-    const onChangeGroup = (_title: string, _max: string) => {
-        setTitle("");
-        setMax("0");
+    const onChangeGroup = (_title: string, _max: string, idx: number) => {
+        setTitle(_title);
+        setMax(max);
         const prev = [...group];
-        prev.push({ _title, _max });
+        if (idx < group.length) prev[idx] = { name: _title, max: _max };
         console.log(prev);
+        setGroup(prev);
+    };
+
+    const onClickAddBtn = () => {
+        const prev = [...group].filter((v) => v.name !== "");
+        prev.push({ name: "", max: 0 });
         setGroup(prev);
     };
 
@@ -254,22 +271,18 @@ const RecruitPostLayout = () => {
                                     <RecruitGroupFlexWrapper>
                                         <div style={{ width: "10rem" }}>
                                             <InputFiled
-                                                text={
-                                                    g.name === ""
-                                                        ? title
-                                                        : g.name
-                                                }
+                                                text={group[i].name}
                                                 handler={(e: any) =>
-                                                    setTitle(e.item)
+                                                    onChangeGroup(e, g.max, i)
                                                 }
                                             />
                                         </div>
                                         <p className="label-group">파트</p>
                                         <div style={{ width: "5rem" }}>
                                             <InputFiled
-                                                text={g.max !== 0 ? g.max : max}
+                                                text={group[i].max}
                                                 handler={(e: any) =>
-                                                    setMax(e.item)
+                                                    onChangeGroup(g.name, e, i)
                                                 }
                                             />
                                         </div>
@@ -281,9 +294,7 @@ const RecruitPostLayout = () => {
                             <RecruitAddbtn
                                 width="5rem"
                                 onClick={() => {
-                                    if (group.length > 0)
-                                        onChangeGroup(title, max);
-                                    else onChangeGroup("", "");
+                                    onClickAddBtn();
                                 }}
                             >
                                 +

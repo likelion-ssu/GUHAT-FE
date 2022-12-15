@@ -1,12 +1,34 @@
+import { getHomeRecruitList } from "@/apis/recruit/list";
+import APILayout from "@/components/Layout/APILayout";
+import { loadingState } from "@/storage/recoil/loadingState";
+import { modalState } from "@/storage/recoil/modalState";
 import { IRecruitItem } from "@/types/recruitLecture.types";
 import { IReview } from "@/types/review.types";
-import MainLayout from "@components/Layout/MainLayout";
 import Banner from "@domain/home/Banner/Banner";
 import MyInfoLayout from "@domain/home/Layout/MyInfoLayout";
+import { useEffect } from "react";
+import { useQueries } from "react-query";
+import { useRecoilState } from "recoil";
 import RecruitingLayout from "../domain/home/Layout/RecruitingLayout";
 import ReviewLayout from "../domain/home/Layout/ReviewLayout";
 
 const Home = () => {
+    const [loading, setLoading] = useRecoilState(loadingState);
+    const [modalVisible, setModalVisible] = useRecoilState(modalState);
+    const result = useQueries([
+        {
+            queryKey: ["getRecruits"],
+            queryFn: () => getHomeRecruitList(),
+        },
+    ]);
+    console.log(result[0].data);
+
+    useEffect(() => {
+        setModalVisible(false);
+    }, []);
+
+    setLoading(result.some((result) => result.isLoading));
+
     const recruits: IRecruitItem[] = [
         {
             id: 1,
@@ -147,15 +169,24 @@ const Home = () => {
     ];
     return (
         <>
-            <MainLayout>
+            <APILayout>
                 <Banner />
-                <MyInfoLayout />
-                <div style={{ width: "100%", height: "7vh" }}></div>
-                <RecruitingLayout list={recruits} />
-                <div style={{ width: "100%", height: "5vh" }}></div>
-                <ReviewLayout list={reviews} />
-                <div style={{ width: "100%", height: "10vh" }}></div>
-            </MainLayout>
+                {!loading ? (
+                    <>
+                        {" "}
+                        <MyInfoLayout />
+                        <div style={{ width: "100%", height: "7vh" }}></div>
+                        {result[0].data ? (
+                            <RecruitingLayout
+                                list={result[0].data?.data.data}
+                            />
+                        ) : null}
+                        <div style={{ width: "100%", height: "5vh" }}></div>
+                        <ReviewLayout list={reviews} />
+                        <div style={{ width: "100%", height: "10vh" }}></div>
+                    </>
+                ) : null}
+            </APILayout>
         </>
     );
 };

@@ -19,7 +19,7 @@ export const DropdownContainer = styled.div<{
     button {
         ${({ active }) =>
             active
-                ? `background-color:white; border:1px solid black; color:black; border-radius : 1rem 1rem 0 0  !important;`
+                ? `background-color:white; border:1px solid black; color:black; border-radius : 1rem 1rem 0 0  !important; `
                 : null}
     }
 `;
@@ -27,17 +27,18 @@ export const DropdownContainer = styled.div<{
 export const DropDownMenu = styled.div`
     position: absolute;
     width: 100%;
-    top: 2.6rem;
+    top: 3rem;
     z-index: 80;
     max-height: 8rem;
     overflow-y: scroll;
     border: 1px solid black;
+    background-color: white;
 `;
 
 export const DrowdownList = styled.ul`
     /* max-height: 6rem; */
     z-index: 80;
-    border-top: 0;
+    border-top: none;
     width: 100%;
     display: flex;
     flex-direction: column;

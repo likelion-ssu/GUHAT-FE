@@ -14,6 +14,7 @@ export const MemberListLayout = styled.div`
         font-size: 1.2rem;
     }
     .member-list {
+        padding: 1rem;
         display: flex;
         gap: 1.3rem;
         padding-left: 2rem;

@@ -14,7 +14,7 @@ const RecruitingList = ({ recruitingList }: Props) => {
             <RecruitingListWrapper>
                 {recruitingList
                     ? recruitingList.map((recruit, idx) => {
-                          return <Recruit recruit={recruit} />;
+                          return <Recruit key={recruit.id} recruit={recruit} />;
                       })
                     : null}
             </RecruitingListWrapper>

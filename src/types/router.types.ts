@@ -4,4 +4,5 @@ export default interface routerType {
     name: string;
     path: string;
     component: ReactNode;
+    exact?: boolean;
 }

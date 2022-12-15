@@ -25,7 +25,7 @@ const AddButton = styled.button`
 interface Props {
     mode: number;
     list: string[];
-    handler?: () => void;
+    handler?: (list: any[]) => void;
 }
 
 const ChipList = ({ mode, list, handler }: Props) => {
@@ -34,6 +34,7 @@ const ChipList = ({ mode, list, handler }: Props) => {
 
     useEffect(() => {
         setInput("");
+        handler?.(skills);
     }, [skills]);
 
     const addListener = (keyword: string) => {
@@ -48,6 +49,7 @@ const ChipList = ({ mode, list, handler }: Props) => {
             (k: string) => k !== keyword && k !== ""
         );
         setSkills(newArray);
+        // handler?.(newArray);
     };
 
     return (

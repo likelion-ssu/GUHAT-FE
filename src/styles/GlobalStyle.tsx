@@ -25,7 +25,7 @@ const global = css`
     html,
     body {
         width: 100%;
-        height: 100%;
+        //height: 100%;
         padding: 0;
         margin: 0;
         background-color: ${themes.colors.bgColor};
@@ -96,5 +96,9 @@ const global = css`
     nav,
     section {
         display: block;
+    }
+
+    #root {
+        max-height: 200vh;
     }
 `;

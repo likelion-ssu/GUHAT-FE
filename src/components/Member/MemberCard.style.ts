@@ -11,8 +11,8 @@ export const MemberCardContainer = styled.button<{
         member !== null ? " " : `#505b73`}; */
     ${({ member }) =>
         member !== null
-            ? "background-color : none; background-image: linear-gradient(to top, #09203f 0%, #537895 100%);"
-            : `background-color : #fcfafa ; color : black; border : 1px solid darkgray;  background-image : none;`}
+            ? "background-color:#537791;color white; font-weight : 500;"
+            : `background-color :#0077A850; color : black; border : none;  background-image : none; opacity:1;`}
 
     /* background: #303644; */
     box-shadow: 4px 4px 0px #e6e6ee;

@@ -1,5 +1,7 @@
 import { removeCookieToken } from "@/storage/cookie";
+import { userState } from "@/storage/recoil/userState";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 import LevelProgress from "./LevelProgress";
 import {
     MyProfileBgProgress,
@@ -23,17 +25,23 @@ interface Props {
 }
 
 const MyProfile = ({ nickName, name, semester, univ, major, level }: Props) => {
-    const total = 300;
-    const current = 159;
+    const total = 100;
 
+    const userInfo = useRecoilValue(userState);
     const navgator = useNavigate();
+
+    console.log(userInfo);
 
     return (
         <MyProfileWrap>
-            <MyProfileBgProgress progress={current / total} />
+            <MyProfileBgProgress
+                progress={(userInfo?.score ? userInfo.score : 0) / 100}
+            />
 
             <MyProfileInfoContainer>
-                <MyProfileImg />
+                <MyProfileImg
+                    img={userInfo?.profileImg ? userInfo?.profileImg : null}
+                />
                 <MyprofileinfoWrap>
                     <p className="profile-number">3</p>
                     <p className="profile-label">진행중인 팀플</p>
@@ -44,18 +52,25 @@ const MyProfile = ({ nickName, name, semester, univ, major, level }: Props) => {
                 </MyprofileinfoWrap>
             </MyProfileInfoContainer>
 
-            <MyProfileMainText>{nickName}</MyProfileMainText>
-            <MyProfileSubText>{name}</MyProfileSubText>
+            <MyProfileMainText>{userInfo?.nickname}</MyProfileMainText>
+            <div style={{ marginTop: "1rem" }}></div>
+            <MyProfileSubText>{userInfo?.name}</MyProfileSubText>
             <div style={{ marginTop: "1.5rem" }}>
-                <MyProfileSubText>{semester}</MyProfileSubText>
                 <MyProfileSubText>
-                    {univ} {major}
+                    {userInfo?.grade}학년 {userInfo?.semester}학기
+                </MyProfileSubText>
+                <MyProfileSubText>
+                    {userInfo?.univ} {userInfo?.major}
                 </MyProfileSubText>
             </div>
             <div style={{ marginTop: "2rem" }}>
-                <MyProfileSubText>{level}</MyProfileSubText>
+                <MyProfileSubText>{}</MyProfileSubText>
             </div>
-            <LevelProgress total={total} current={current} />
+            <LevelProgress
+                total={total}
+                current={userInfo?.score ? userInfo.score : 0}
+                level={userInfo?.level}
+            />
             <MyProfileBtnWrap>
                 <MyProfileInfoBtn>내정보</MyProfileInfoBtn>
                 <MyProfileLogOutBtn

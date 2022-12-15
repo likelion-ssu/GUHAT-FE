@@ -2,8 +2,11 @@ import MainButton from "@/components/Button";
 import FileItem from "@/components/FileItem";
 import styled from "@emotion/styled";
 
+import { deleteProfile, uploadFiiles } from "@/apis/profile";
 import UploadImg from "@/assets/upload.svg";
-import { useRef, useState } from "react";
+import { loadingMessage, loadingState } from "@/storage/recoil/loadingState";
+import { useEffect, useRef, useState } from "react";
+import { useRecoilState } from "recoil";
 
 const PortfolioListcontainer = styled.div`
     display: flex;
@@ -29,42 +32,81 @@ interface Props {
     files?: any[];
 }
 
+const MODE_VIEW = 0;
+const MODE_EDIT = 1;
+
 const PortFolioLayout = ({ mode, files }: Props) => {
+    const [loading, setLoading] = useRecoilState(loadingState);
+    const [loadingMsg, setLoadingMsg] = useRecoilState(loadingMessage);
+
+    const [buttonLoading, setBtnLoading] = useState(false);
+
     const fileRef = useRef<HTMLInputElement>(null);
-    const [fileList, setFileList] = useState(files ? files : []);
-    const [sendFile, setSendFile] = useState<FormData>();
+    const [pathFile, setPathFile] = useState<string[]>(
+        files ? files.map((f) => f.file) : []
+    );
 
     const onClickUplod = () => {
-        alert("파일업로드");
         if (fileRef) fileRef.current!!.click();
     };
 
+    useEffect(() => {}, [pathFile]);
+    useEffect(() => {
+        console.log("바뀌잖아", loading);
+    }, [loading]);
     const fileHandleChange = (e: any) => {
-        console.log(e.target.files);
-        const newFiles = [...fileList];
         const files = [...e.target.files];
-        const form = new FormData();
+        const profile = new FormData();
         files.forEach((element: File) => {
-            newFiles.push(element);
-            form.append("file", element);
+            profile.append("profile", element);
         });
-        setSendFile(form);
-        setFileList(newFiles);
+        setBtnLoading(true);
+        uploadFiiles(profile)
+            .then((res: any) => {
+                const result = res.data.data;
+                setBtnLoading(false);
+                setPathFile(result);
+            })
+            .catch((err: any) => console.log(err));
+    };
+
+    const onClickDelete = (file: string, index: number) => {
+        pathFile.splice(index, 1);
+        setPathFile([...pathFile]);
+        setLoading(true);
+        deleteProfile(file)
+            .then((res: any) => {
+                console.log(res);
+                console.log(pathFile);
+                setLoading(false);
+            })
+            .catch((err: any) => console.log(err));
     };
 
     return (
         <div>
             <PortfolioListcontainer>
                 <div className="file-content-wrapper">
-                    {fileList?.map((file) => (
-                        <FileItem file={file} />
+                    {pathFile?.map((file, index) => (
+                        <FileItem
+                            key={file}
+                            file={file}
+                            mode={mode ? "edit" : "view"}
+                            deleteListener={(path) =>
+                                onClickDelete(path, index)
+                            }
+                        />
                     ))}
                 </div>
             </PortfolioListcontainer>
             {mode ? (
                 <>
-                    <MainButton width="50%" clickListener={onClickUplod}>
-                        파일 업로드
+                    <MainButton
+                        width="50%"
+                        clickListener={onClickUplod}
+                        disabled={buttonLoading}
+                    >
+                        {buttonLoading ? "업로드 중" : " 파일 업로드"}
                         <img
                             src={UploadImg}
                             alt="업로드이미지"
@@ -74,6 +116,7 @@ const PortFolioLayout = ({ mode, files }: Props) => {
                             }}
                         />
                     </MainButton>
+
                     <input
                         multiple
                         ref={fileRef}
