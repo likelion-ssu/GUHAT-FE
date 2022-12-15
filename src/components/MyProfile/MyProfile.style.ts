@@ -1,6 +1,6 @@
 import themes from "@/styles/themes";
+import DefaultIcon from "@assets/member_default.svg";
 import styled from "@emotion/styled";
-
 export const MyProfileWrap = styled.div`
     position: relative;
     display: flex;
@@ -38,13 +38,18 @@ export const MyProfileBgProgress = styled.div<{ progress?: number }>`
     box-shadow: none;
 `;
 
-export const MyProfileImg = styled.div<{ img?: string }>`
+export const MyProfileImg = styled.div<{ img?: any | null }>`
     width: 6rem;
     height: 6rem;
     padding: 1rem 0;
     border-radius: 6.25rem;
-    background-image: ${(img) => (img ? `url(${img})` : null)};
-    background-color: lightgray;
+    background-color: white;
+    ${({ img }) =>
+        img
+            ? `background-image : url(${img});`
+            : `background-image : url( ${DefaultIcon});`}
+    /* background-image: ${(img) => (img ? `url(${img})` : null)}; */
+    background-size: contain;
     background-position: center;
 `;
 export const MyProfileInfoContainer = styled.div`

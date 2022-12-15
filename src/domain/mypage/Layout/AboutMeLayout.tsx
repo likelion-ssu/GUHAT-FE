@@ -1,7 +1,10 @@
+import { updateIntro } from "@/apis/profile";
 import EditButton from "@/components/Button/EditButton";
 import InputFiled from "@/components/InputBox/InputFiled";
+import { loadingState } from "@/storage/recoil/loadingState";
 import styled from "@emotion/styled";
 import { useState } from "react";
+import { useRecoilState } from "recoil";
 
 const AboutmeContainer = styled.div<{ mode: number }>`
     margin-top: 3rem;
@@ -55,7 +58,8 @@ border: 2px solid #999999;`
 
         textarea {
             height: 10rem !important;
-            padding: 2rem 2rem;
+            padding: 2rem 2import { updateIntro } from '../../../apis/profile/index';
+rem;
             line-height: 2rem;
             font-size: 1.1rem;
         }
@@ -104,20 +108,31 @@ const AboutMeLayout = ({ ...props }: Props) => {
     const MODE_EDIT = 1;
     const [mode, setMode] = useState(MODE_VIEW);
 
+    const [loading, setLoading] = useRecoilState(loadingState);
+
     const [about, setAbout] = useState(props.detail);
     const [intro, setIntro] = useState(props.introduction);
 
     // useEffect(() => {
     //     console.log(mode);
     // }, [mode]);
-
+    console.log("proifle", props);
+    const onClickSubmit = () => {
+        setLoading(true);
+        updateIntro(intro, about).then((res) => {
+            console.log(res);
+            setLoading(false);
+            setMode((prev) => (prev ? MODE_VIEW : MODE_EDIT));
+        });
+    };
     return (
         <AboutmeContainer mode={mode}>
             <EditWrapper>
                 <EditButton
                     saveMode={true}
                     clickListener={() => {
-                        setMode((prev) => (prev ? MODE_VIEW : MODE_EDIT));
+                        if (mode === MODE_EDIT) onClickSubmit();
+                        else setMode((prev) => (prev ? MODE_VIEW : MODE_EDIT));
                     }}
                 />
             </EditWrapper>

@@ -24,7 +24,7 @@ const ProfileLayout = ({ ...props }: Props) => {
         <ProfileLayoutContainer>
             <ProfileImgWrap>
                 <ProfileImgBgCircle />
-                <ProfileImg img={undefined} />
+                <ProfileImg img={props.profileImg} />
             </ProfileImgWrap>
             <div style={{ marginLeft: "1rem" }}>
                 <p className="nickname">{props.nickname}</p>

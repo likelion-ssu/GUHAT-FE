@@ -42,14 +42,18 @@ const PortFolioLayout = ({ mode, files }: Props) => {
     const [buttonLoading, setBtnLoading] = useState(false);
 
     const fileRef = useRef<HTMLInputElement>(null);
-    const [fileList, setFileList] = useState(files ? files : []);
-    const [pathFile, setPathFile] = useState<string[]>([]);
+    const [pathFile, setPathFile] = useState<string[]>(
+        files ? files.map((f) => f.file) : []
+    );
 
     const onClickUplod = () => {
         if (fileRef) fileRef.current!!.click();
     };
 
     useEffect(() => {}, [pathFile]);
+    useEffect(() => {
+        console.log("바뀌잖아", loading);
+    }, [loading]);
     const fileHandleChange = (e: any) => {
         const files = [...e.target.files];
         const profile = new FormData();
@@ -67,13 +71,14 @@ const PortFolioLayout = ({ mode, files }: Props) => {
     };
 
     const onClickDelete = (file: string, index: number) => {
+        pathFile.splice(index, 1);
+        setPathFile([...pathFile]);
         setLoading(true);
         deleteProfile(file)
             .then((res: any) => {
+                console.log(res);
                 console.log(pathFile);
                 setLoading(false);
-                pathFile.splice(index, 1);
-                setPathFile([...pathFile]);
             })
             .catch((err: any) => console.log(err));
     };

@@ -39,7 +39,7 @@ export const ProfileImgBgCircle = styled.div`
 export const ProfileImg = styled.div<{ img: string | undefined }>`
     /* background-image: ${(img) => `url(${img})`}; */
     position: absolute;
-    background-color: ${themes.colors.gray_600};
+    background-color: ${themes.colors.gray_100};
     width: 3.5rem;
     height: 3.5rem;
     left: 0;

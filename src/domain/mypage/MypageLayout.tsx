@@ -1,7 +1,11 @@
+import { getProfile } from "@/apis/profile";
 import { loadingState } from "@/storage/recoil/loadingState";
 import { modalState } from "@/storage/recoil/modalState";
+import { userState } from "@/storage/recoil/userState";
 import { useEffect, useState } from "react";
+import { useQueries } from "react-query";
 import { useRecoilState } from "recoil";
+import { getPortfolio } from "../../apis/profile/index";
 import AboutMeLayout from "./Layout/AboutMeLayout";
 import LectureHistoryLayout from "./Layout/LectureHistoryLayout";
 import ReviewHistoryLayout from "./Layout/ReviewHistoryLayout";
@@ -15,10 +19,34 @@ import {
 const MypageLayout = () => {
     const [loading, setLoading] = useRecoilState(loadingState);
     const [modalVisible, setModalVisible] = useRecoilState(modalState);
+    const [userInfo, setUserInfo] = useRecoilState(userState);
+    const [myProfile, setProfile] = useState(null);
+
+    const result = useQueries([
+        {
+            queryKey: ["my-portfolio"],
+            queryFn: () => getPortfolio(),
+            onSuccess: (data: any) => {
+                setProfile(data);
+            },
+        },
+
+        {
+            queryKey: ["getUserinfo"],
+            queryFn: () => getProfile(),
+            onSuccess: (data: any) => {
+                setUserInfo(data);
+            },
+        },
+    ]);
     useEffect(() => {
-        setLoading(false);
+        //setLoading(false);
         setModalVisible(false);
     }, []);
+    setLoading(result.some((result) => result.isLoading));
+    useEffect(() => {
+        console.log("재로딩", loading);
+    }, [loading]);
 
     const UnsmileEmoji = "../../assets/unsmile_emoji.png";
     const coments: any[] = [
@@ -48,25 +76,6 @@ const MypageLayout = () => {
         },
     ];
 
-    const introduction = {
-        nickname: "효민효민",
-        introduction: "이게 왜 안됨",
-        detail: ` 안앞이 우는 길지 거선의 트고, 그리하였는가? 두손을 스며들어
-        이성은 몸이 속에서 놀이 철환하였는가? 날카로우나 보이는
-        군영과 위하여서, 원대하고, 바이며, 이것이다. 전인 아니더면,
-        그들은 미인을 있는가? 사랑의 대한 품으며, 행복스럽고 가장
-        사막이다. 살 꾸며 생생하며, 유소년에게서 그들은
-        소리다.이것은 되려니와, 풍부하게 인생을 것이다.`,
-    };
-
-    const profile = {
-        nickname: "Guhat",
-        level: "1",
-        year: "2022",
-        semester: "2022",
-        major: "IT대학",
-    };
-
     const [tab, setTab] = useState("main");
 
     const getTabPage = () => {
@@ -75,9 +84,12 @@ const MypageLayout = () => {
                 return (
                     <>
                         <MypageContentLayout>
-                            <AboutMeLayout {...introduction} />
+                            <AboutMeLayout
+                                {...result[0].data}
+                                nickname={userInfo?.nickname}
+                            />
                             <ScoreLayout coments={coments} />
-                            <SubContentLayout />
+                            <SubContentLayout {...result[0].data} />
                         </MypageContentLayout>
                     </>
                 );
@@ -90,12 +102,10 @@ const MypageLayout = () => {
     };
 
     return (
-        <>
-            <MypageLayoutContainer>
-                <SidebarLayout profile={profile} tabController={setTab} />
-                {getTabPage()}
-            </MypageLayoutContainer>
-        </>
+        <MypageLayoutContainer>
+            <SidebarLayout profile={profile} tabController={setTab} />
+            {getTabPage()}
+        </MypageLayoutContainer>
     );
 };
 
