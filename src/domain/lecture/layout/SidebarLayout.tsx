@@ -41,6 +41,7 @@ const LectureWrpper = styled.div`
     position: relative;
     padding: 3rem;
     display: flex;
+    width: 16rem;
     flex-direction: column;
     gap: 1rem;
     color: white;
@@ -50,11 +51,11 @@ const LectureWrpper = styled.div`
 
     p {
         padding-left: 2rem;
-        font-size: 1.4rem;
+        font-size: 1.3rem;
     }
     .lecture-title {
-        font-size: 2rem;
-        font-weight: 600;
+        font-size: 1.8rem;
+        font-weight: 500;
     }
 
     .lecture-bar {
@@ -91,8 +92,18 @@ const SidebarLayout = ({ lecture, tabController }: Props) => {
     return (
         <SidebarLayoutContainer>
             <LectureWrpper>
-                <p className="lecture-title">과목 이름</p>
-                <p>교수님 이름</p>
+                <p className="lecture-title">
+                    {lecture.name.substring(0, lecture.name.indexOf("("))}
+                </p>
+                <p>
+                    {lecture.name.substring(
+                        lecture.name.indexOf("("),
+                        lecture.name.length
+                    )}
+                </p>
+                {lecture.professor.map((p: any) => (
+                    <p>{p}</p>
+                ))}
                 <div className="lecture-bar"></div>
             </LectureWrpper>
             <SidebarLabel>

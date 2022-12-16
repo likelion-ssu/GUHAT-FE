@@ -9,6 +9,7 @@ import InputFiled from "@/components/InputBox/InputFiled";
 import { loadingState } from "@/storage/recoil/loadingState";
 import { modalState } from "@/storage/recoil/modalState";
 
+import { createReview, createReviewFile, postValidation } from "@/apis/review";
 import FileItem from "@/components/FileItem";
 import {
     RecruitContentLayout,
@@ -18,6 +19,9 @@ import {
     RecruitPostTitle,
 } from "@/domain/recruitPost/Layout/RecruitPostLayout.style";
 import { StickRecruitkBtn } from "@/domain/recruitView/RecruitViewLayout.style";
+import { AxiosError } from "axios";
+import { useQuery } from "react-query";
+import { useNavigate, useParams } from "react-router-dom";
 import {
     ReviewFileContainer,
     ReviewFileWrapper,
@@ -28,8 +32,31 @@ import {
 const ReviewPostLayout = () => {
     const [loading, setLoading] = useRecoilState(loadingState);
     const [modalVisible, setModalVisible] = useRecoilState(modalState);
+    const { id } = useParams();
+    const { status, data } = useQuery(
+        ["validation-review", id],
+        () => postValidation(id!!),
+        {
+            onError: (res: AxiosError | any) => {
+                console.log(res.response?.data);
+                if (
+                    res.response.data.message === "시간표 업로드가 필요합니다"
+                ) {
+                    setLoading(false);
+                    setModalVisible(true);
+                } else if (res.response?.status === 400) {
+                    alert("수강 과목이 아닙니다!");
+                    window.history.back();
+                }
+            },
+            onSuccess: () => {
+                setLoading(false);
+            },
+            retry: 0,
+        }
+    );
 
-    const today = new Date();
+    const navigator = useNavigate();
 
     const [postTitle, setPostTitle] = useState("");
     const [subject, setSubject] = useState("");
@@ -45,7 +72,6 @@ const ReviewPostLayout = () => {
     const [sendFile, setSendFile] = useState<FormData>();
 
     useEffect(() => {
-        setLoading(false);
         setModalVisible(false);
     }, []);
 
@@ -68,17 +94,43 @@ const ReviewPostLayout = () => {
         console.log(e.target.files);
         const newFiles = [...fileList];
         const files = [...e.target.files];
-        const form = new FormData();
         files.forEach((element: File) => {
             newFiles.push(element);
-            form.append("file", element);
         });
-        setSendFile(form);
+
         setFileList(newFiles);
     };
 
     const submitClick = () => {
         console.log("submit");
+        setLoading(true);
+        const formData = new FormData();
+        fileList.forEach((element: File) => {
+            formData.append("file", element);
+        });
+        const body = {
+            title: postTitle,
+            peopleNum: member,
+            level: level,
+            topic: subject,
+            period: [start.replace("월", ""), end.replace("월", "")],
+            detail: detail,
+            lecture_id: id!!,
+        };
+
+        createReview(id!!, body)
+            .then((res) => {
+                console.log(res);
+                const reviewId = res.data.reviewId;
+                createReviewFile(id!!, reviewId, formData).then((res) => {
+                    console.log(res);
+                    setLoading(false);
+                    navigator("/review/" + reviewId);
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     };
 
     return (
@@ -96,7 +148,7 @@ const ReviewPostLayout = () => {
                     <RecruitContentProgress isFilled={member.length !== 0} />
                     <RecruitDrowdownWrapper>
                         <p className="label-dropdown">필요 인원</p>
-                        <div style={{ width: "5rem" }}>
+                        <div style={{ width: "6rem" }}>
                             <InputFiled
                                 text={member}
                                 handler={setMember}
@@ -202,7 +254,7 @@ const ReviewPostLayout = () => {
 
                             <ReviewFileWrapper>
                                 {fileList?.map((file) => (
-                                    <FileItem file={file} />
+                                    <FileItem file={file} mode={"view"} />
                                 ))}
                             </ReviewFileWrapper>
                         </ReviewFileContainer>

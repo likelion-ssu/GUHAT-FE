@@ -5,7 +5,7 @@ const RecruitMore = () => {
     return (
         <APILayout>
             <RecruitMoreLayout></RecruitMoreLayout>
-        </APILayout>
+        </APILayout> 
     );
 };
 

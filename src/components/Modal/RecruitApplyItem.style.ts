@@ -1,11 +1,11 @@
+import DefaultIcon from "@/assets/member_default2.svg";
 import styled from "@emotion/styled";
 import themes from "@styles/themes";
-
 export const RecruitApplyItemContainer = styled.button`
     display: flex;
     width: 100%;
     padding: 1rem;
-    background-color: white;
+    background-color: ${themes.colors.white};
     border-radius: 0.5rem;
     align-items: center;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
@@ -18,15 +18,20 @@ export const RecruitApplyItemContainer = styled.button`
     }
 `;
 
-export const RecruitApplyImg = styled.div`
+export const RecruitApplyImg = styled.div<{ image?: string | null }>`
     min-width: 3.5rem;
     min-height: 3.5rem;
     border-radius: 5rem;
-    background-color: ${themes.colors.gray_500};
+    background-color: ${themes.colors.gray_100};
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     margin-right: 2rem;
+
+    ${({ image }) =>
+        image
+            ? `background-image : url(${image});`
+            : `background-image : url( ${DefaultIcon});`}
 `;
 
 export const RecruitApplyItemWrap = styled.div`

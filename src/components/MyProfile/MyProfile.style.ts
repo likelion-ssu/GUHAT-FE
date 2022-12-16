@@ -11,7 +11,7 @@ export const MyProfileWrap = styled.div`
     padding: 5rem 0rem;
     padding-bottom: 0;
     background: #303644;
-    color: ${themes.colors.gray_300};
+    color: ${themes.colors.gray_100};
     box-shadow: 12px 12px 0px #999999;
     border-radius: 1rem;
 `;
@@ -75,7 +75,7 @@ export const MyprofileinfoWrap = styled.div`
     }
     .profile-label {
         font-weight: 200;
-        color: ${themes.colors.gray_900};
+        color: ${themes.colors.gray_100};
         text-align: right;
         max-width: 4rem;
     }

@@ -7,16 +7,18 @@ import SearchResultLayout from "../domain/search/Layout/SearchResultLayout";
 const Search = () => {
     const location = useLocation();
 
-    const [keyword, setKeyword] = useState<string | null>("");
+    const [keyword, setKeyword] = useState<string>("");
     const [option, setOptoin] = useState("");
 
     useEffect(() => {
         const queryData = QueryString.parse(location.search, {
             ignoreQueryPrefix: true,
         });
+
         if (queryData.keyword) setKeyword(queryData.keyword.toString());
 
         if (queryData.option) setOptoin(queryData.option.toString());
+        console.log(keyword);
     }, [keyword, location]);
 
     return (

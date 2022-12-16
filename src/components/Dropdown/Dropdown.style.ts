@@ -28,7 +28,7 @@ export const DropDownMenu = styled.div`
     position: absolute;
     width: 100%;
     top: 3rem;
-    z-index: 80;
+    z-index: 51;
     max-height: 8rem;
     overflow-y: scroll;
     border: 1px solid black;
@@ -37,7 +37,7 @@ export const DropDownMenu = styled.div`
 
 export const DrowdownList = styled.ul`
     /* max-height: 6rem; */
-    z-index: 80;
+    z-index: 50;
     border-top: none;
     width: 100%;
     display: flex;
@@ -50,7 +50,7 @@ export const DrowdownList = styled.ul`
 `;
 
 export const DropdownItem = styled.li`
-    z-index: 90;
+    z-index: 50;
     padding: 0.7rem 1.5rem;
     font-size: 1rem;
     background-color: white;

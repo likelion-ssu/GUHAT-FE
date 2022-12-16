@@ -121,10 +121,10 @@ const SidebarLayout = ({ profile, tabController }: Props) => {
             >
                 <img src={IconList} alt="리뷰아이콘"></img>팀플리뷰
             </button>
-            <SidebarLabel>
+            {/* <SidebarLabel>
                 참여이력
                 <img src={IconMenu} alt="참여이력" />
-            </SidebarLabel>
+            </SidebarLabel> */}
         </SidebarLayoutContainer>
     );
 };

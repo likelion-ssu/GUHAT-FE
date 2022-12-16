@@ -9,7 +9,7 @@ export const InputFiledContainer = styled.input`
     align-items: center;
     gap: 1rem;
     text-align: left;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     border-radius: 1rem;
     padding: 1rem;
     border: 2px solid ${themes.colors.gray_500};
@@ -25,10 +25,12 @@ const InputFiled = ({
     text: string;
     hint?: string;
     type?: string;
+
     handler: (e: string) => void;
 }) => {
     return (
         <InputFiledContainer
+            type={type}
             placeholder={hint}
             value={text}
             onChange={(e) => {

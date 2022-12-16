@@ -21,7 +21,7 @@ const SearchResult = ({
                 list.map((result, idx) => {
                     return (
                         <SearchResultItem
-                            key={result}
+                            key={result + idx}
                             onClick={() => {
                                 clickListener(result);
                             }}

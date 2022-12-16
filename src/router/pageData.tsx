@@ -6,6 +6,7 @@ import SearchDetail from "@pages/SearchDetail";
 import routerType from "@_types/router.types";
 import Lecture from "../pages/Lecture";
 import MyPage from "../pages/MyPage";
+import ProfileView from "../pages/ProfileView";
 import RecruitPost from "../pages/RecruitPost";
 import RecruitView from "../pages/RecruitView";
 import ReviewPost from "../pages/ReviewPost";
@@ -37,7 +38,7 @@ const pagesData: routerType[] = [
     },
     {
         name: "Seach",
-        path: "/search/lecture/",
+        path: "/search/detail/",
         component: <SearchDetail />,
         exact: true,
     },
@@ -65,7 +66,7 @@ const pagesData: routerType[] = [
 
     {
         name: "ReviewPost",
-        path: "/review/post",
+        path: "/review/post/:id",
         component: <ReviewPost />,
         exact: false,
     },
@@ -81,6 +82,12 @@ const pagesData: routerType[] = [
         name: "RecruitsList",
         path: "/recruits",
         component: <RecruitMore />,
+        exact: false,
+    },
+    {
+        name: "Profile",
+        path: "/profile",
+        component: <ProfileView />,
         exact: false,
     },
 
