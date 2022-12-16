@@ -3,7 +3,7 @@ import PDFIcon from "@/assets/pdfIcon.svg";
 import XIcon from "@assets/close.svg";
 import styled from "@emotion/styled";
 
-const FileItemLayout = styled.button`
+const FileItemLayout = styled.div`
     display: flex;
     justify-content: space-between;
     padding: 1rem;
@@ -13,6 +13,9 @@ const FileItemLayout = styled.button`
     background: #f6f6f6;
     border: 2px solid #bcbcbc;
     align-items: center;
+    img {
+        cursor: pointer;
+    }
     .file-content {
         width: 100%;
         display: flex;
@@ -42,7 +45,9 @@ const FileItem = ({
     const onDownload = () => {
         console.log(file);
         if (file.location) window.open(file.location);
+        else if (!file.name && file.includes("https")) window.open(file);
         else {
+            console.log("좀 열어줄래");
             const objectURL = window.URL.createObjectURL(file);
             console.log(objectURL);
             window.open(objectURL);
@@ -51,8 +56,6 @@ const FileItem = ({
 
     const onDelete = () => {
         deleteListener?.(file.location ? file.location : file);
-        // if (file.location) deleteProfile(file.location);
-        // else if (file.include("aws")) deleteProfile(file);
     };
 
     return (
@@ -65,7 +68,9 @@ const FileItem = ({
                             <h1>
                                 {file.originalname
                                     ? file.originalname
-                                    : file.slice(file.indexOf("_"))}
+                                    : file.name
+                                    ? file.name
+                                    : file.slice(file.indexOf("_") + 1)}
                             </h1>
                             <p>{file.size}KB</p>
                         </div>
@@ -84,7 +89,9 @@ const FileItem = ({
                             <h1>
                                 {file.originalname
                                     ? file.originalname
-                                    : file.slice(file.indexOf("_"))}
+                                    : file.name
+                                    ? file.name
+                                    : file.slice(file.indexOf("_") + 1)}
                             </h1>
                             <p>{file.size}KB</p>
                         </div>

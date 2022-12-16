@@ -1,4 +1,7 @@
+import { keywordState } from "@/storage/recoil/keywordState";
+import { errorState, loadingState } from "@/storage/recoil/loadingState";
 import { Route, Routes } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
 
 import routerType from "../types/router.types";
 import pageData from "./pageData";
@@ -25,10 +28,12 @@ export const Router = () => {
 export default Router;
 
 export function PrivateRoute({ Component }: React.ReactNode | any) {
-    // const setErrorState = useSetRecoilState(errorState);
-    // const setLoadingState = useSetRecoilState(loadingState);
-    // setLoadingState(true);
-    // setErrorState(null);
+    const setErrorState = useSetRecoilState(errorState);
+    const setLoadingState = useSetRecoilState(loadingState);
+    const setKeyword = useSetRecoilState(keywordState);
+    setLoadingState(true);
+    setErrorState(null);
+    setKeyword(false);
 
     // const auth = getCookieToken();
 

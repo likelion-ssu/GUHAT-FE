@@ -22,7 +22,7 @@ export const MemberCardContainer = styled.button<{
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: ${({ width }) => (width ? width : "100%")};
+    width: ${({ width }) => (width ? width : "100%")};
     padding: 1rem;
     gap: 1rem;
     cursor: ${({ disabled }) =>
@@ -39,7 +39,26 @@ export const MemberCardContainer = styled.button<{
         display: flex;
     }
 
+    .member-img {
+        width: 4.5rem;
+        height: 4.5rem;
+        background-color: white;
+        border-radius: 5rem;
+    }
+
     :disabled {
         opacity: 1;
     }
+`;
+
+export const MemberCardImg = styled.div<{ img?: string }>`
+    width: 4.5rem;
+    height: 4.5rem;
+    background-color: white;
+    border-radius: 5rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    ${({ img }) => (img ? `background-image: url(${img});` : null)}
 `;

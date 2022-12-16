@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
 
-export const LectureItemWrap = styled.div`
+export const LectureItemWrap = styled.button`
+    position: relative;
     width: 100%;
     max-width: 30%;
-
+    min-height: 23vw;
     padding: 4rem 3rem;
     padding-bottom: 2rem;
     display: flex;
@@ -40,17 +41,32 @@ export const LectureItemWrap = styled.div`
 export const LectureItemTitle = styled.p`
     font-size: 1.5rem;
     font-weight: 700;
+    text-align: left;
 `;
 
 export const LectureItemSubTitle = styled.p`
     font-size: 1.3rem;
-    font-weight: 500;
+    font-weight: 600;
+    margin-bottom: 1rem;
 `;
 export const LectureItemDetail = styled.p`
     color: black;
+    font-size: 1rem;
+    text-align: left;
+    font-weight: 500;
 `;
 
+export const LectureItemSubDetail = styled.p`
+    color: black;
+    font-size: 0.9rem;
+    text-align: left;
+    color: gray;
+`;
 export const LectureMoreButton = styled.button`
+    position: absolute;
+    bottom: 2rem;
+    right: 50%;
+    transform: translate(50%, 0%);
     width: 40%;
     border-radius: 3rem;
     background-color: white !important;

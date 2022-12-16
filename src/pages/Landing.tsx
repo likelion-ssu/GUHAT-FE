@@ -4,7 +4,7 @@ import InputFiled from "@/components/InputBox/InputFiled";
 import APILayout from "@/components/Layout/APILayout";
 import { accessTokenState } from "@/storage/atom/tokenState";
 import { setRefreshToken } from "@/storage/cookie";
-import { loadingState } from "@/storage/recoil/loadingState";
+import { loadingMessage, loadingState } from "@/storage/recoil/loadingState";
 import { modalState } from "@/storage/recoil/modalState";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +14,7 @@ import { refreshTokenType } from "../types/token.type";
 const Landing = () => {
     const navigator = useNavigate();
     const [loading, setLoading] = useRecoilState(loadingState);
+    const [loadingMsg, setLoadingMsg] = useRecoilState(loadingMessage);
     const [modalVisible, setModalVisible] = useRecoilState(modalState);
     const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
     const [id, setId] = useState("");
@@ -24,6 +25,7 @@ const Landing = () => {
     }, []);
 
     const onClickLogin = () => {
+        setLoadingMsg("유세인트 접속 중...");
         if (id && pw && !loading) {
             setLoading(true);
             login(id, pw)

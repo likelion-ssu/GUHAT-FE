@@ -20,11 +20,12 @@ export interface RecruitViewResponse {
     writer: any;
     date: string;
     lecture: object;
-    duration: string;
+    priority: string;
     endDate: string;
-    group: any[];
+    Roles: any[];
     detail: string;
     piriority: string;
+    createdAt: string;
 }
 
 export interface IRecruit {

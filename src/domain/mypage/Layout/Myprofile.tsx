@@ -5,6 +5,7 @@ import { userState } from "@/storage/recoil/userState";
 import themes from "@/styles/themes";
 import styled from "@emotion/styled";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { displayLevel } from "../../../util/displayLevel";
 
 const MyProfileWrapper = styled.div`
     padding: 2rem;
@@ -111,7 +112,9 @@ const Myprofile = ({ ...props }: Props) => {
                                 backgroundSize: "cover",
                             }}
                         ></div>
-                        <p className="level-content">{userInfo!!.level!!}</p>
+                        <p className="level-content">
+                            {displayLevel(userInfo!!.level!!)}
+                        </p>
                     </MyProfileImgWrapper>
                     <p className="nickname-content">
                         {userInfo.nickname}

@@ -40,13 +40,11 @@ const MypageLayout = () => {
         },
     ]);
     useEffect(() => {
-        //setLoading(false);
+        setLoading(result.some((result) => result.isLoading));
+    }, [result]);
+    useEffect(() => {
         setModalVisible(false);
     }, []);
-    setLoading(result.some((result) => result.isLoading));
-    useEffect(() => {
-        console.log("재로딩", loading);
-    }, [loading]);
 
     const UnsmileEmoji = "../../assets/unsmile_emoji.png";
     const coments: any[] = [
@@ -86,6 +84,7 @@ const MypageLayout = () => {
                         <MypageContentLayout>
                             <AboutMeLayout
                                 {...result[0].data}
+                                profileImg={userInfo?.profileImg}
                                 nickname={userInfo?.nickname}
                             />
                             <ScoreLayout coments={coments} />

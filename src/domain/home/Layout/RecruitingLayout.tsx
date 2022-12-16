@@ -23,7 +23,7 @@ const RecruitingLayout = ({ list }: Props) => {
                 </div>
 
                 <RecruitingList
-                    recruitingList={list.length > 4 ? list.slice(0, 3) : list}
+                    recruitingList={list.length > 4 ? list.slice(0, 4) : list}
                 />
                 <div style={{ width: "100%", position: "relative" }}>
                     <button

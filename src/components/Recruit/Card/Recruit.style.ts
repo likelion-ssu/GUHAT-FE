@@ -34,9 +34,9 @@ export const RecruitLectureTitle = styled.p`
     display: flex;
     justify-content: center;
     height: 6rem;
-    width: 90%;
+    width: 80%;
     font-weight: 600;
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     text-align: center;
     align-items: center;
     align-self: center;
@@ -46,8 +46,8 @@ export const RecruitLectureTitle = styled.p`
 export const RecruitSubTitle = styled.p<{ type?: string }>`
     position: relative !important;
     width: 100%;
-    font-weight: 500;
-    font-size: 1.2rem;
+    font-weight: 400;
+    font-size: 1.1rem;
     text-align: center;
     align-items: center;
     color: ${({ type }) => (type === "major" ? `white;` : ` black`)};

@@ -2,6 +2,7 @@ import { removeCookieToken } from "@/storage/cookie";
 import { userState } from "@/storage/recoil/userState";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
+import { displayLevel } from "../../util/displayLevel";
 import LevelProgress from "./LevelProgress";
 import {
     MyProfileBgProgress,
@@ -69,10 +70,16 @@ const MyProfile = ({ nickName, name, semester, univ, major, level }: Props) => {
             <LevelProgress
                 total={total}
                 current={userInfo?.score ? userInfo.score : 0}
-                level={userInfo?.level}
+                level={displayLevel(userInfo?.level!!)}
             />
             <MyProfileBtnWrap>
-                <MyProfileInfoBtn>내정보</MyProfileInfoBtn>
+                <MyProfileInfoBtn
+                    onClick={() => {
+                        navgator("/mypage");
+                    }}
+                >
+                    내정보
+                </MyProfileInfoBtn>
                 <MyProfileLogOutBtn
                     onClick={() => {
                         alert("로그아웃");

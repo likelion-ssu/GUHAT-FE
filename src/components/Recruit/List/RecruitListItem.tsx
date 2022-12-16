@@ -11,12 +11,11 @@ interface Props {
     isOwner?: boolean;
     id: number | string;
     title: string;
-    nickname?: string;
-    level: string | number;
+    writer: any;
     lectureName: string;
     year: string;
-    semester: string;
-    time: string | string[] | null;
+    semester?: string;
+    time?: any[];
     type: string | "major" | "elective";
     professor: string | string[];
     detail: string;
@@ -41,14 +40,16 @@ const RecruitListItem = ({ ...props }: Props) => {
                 </p>
             </div>
             <div className="content-wrapper bold">
-                <p>{props.time}</p>
+                {props.time
+                    ? props.time.map((s: any) => `${s.day} ${s.time}`)
+                    : []}
             </div>
             <div className="text-wrapper">{props.detail}</div>
 
             <div className="content-wrapper">
                 <p className="bold">D-{calculateData(props.endDate)}</p>
-                <p className="bold">{props.nickname}</p>
-                <p className="level">{props.level}</p>
+                <p className="bold">{props.writer.nickname}</p>
+                <p className="level">{props.writer.level}</p>
             </div>
             <p
                 className="day-wrapper"
@@ -58,7 +59,7 @@ const RecruitListItem = ({ ...props }: Props) => {
                         : { color: "gray" }
                 }
             >
-                작성일 : {props.createdAt}
+                작성일 : {props.createdAt.slice(0, 10)}
             </p>
 
             <LectureProgressContainer major={props.type === "major"}>

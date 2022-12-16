@@ -35,7 +35,7 @@ const SearchInput = styled.input`
     background-color: transparent;
     padding: 1rem 2rem;
     width: calc(100% - 3rem);
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 `;
 
 const SearchKeyword = styled.button<{ active?: boolean }>`
@@ -92,13 +92,13 @@ const SearchKeywordOption = styled.ul`
     li {
         z-index: 90;
         text-align: center;
-        background-color: #f18904;
+        background-color: #2496ff;
         color: white;
         padding: 0.7rem 0rem;
         font-size: 1.1rem;
         border-radius: 1rem;
-        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
-            rgba(0, 0, 0, 0.23) 0px 6px 6px;
+        cursor: pointer;
+
         :hover {
             filter: brightness(0.9);
             transform: scale(1.05);

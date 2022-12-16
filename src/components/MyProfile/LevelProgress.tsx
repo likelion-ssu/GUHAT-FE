@@ -8,9 +8,10 @@ import {
 interface Props {
     total?: number;
     current?: number;
+    level?: number | string;
 }
 
-const LevelProgress = ({ total, current }: Props) => {
+const LevelProgress = ({ total, current, level }: Props) => {
     return (
         <ProgressContainer>
             <ProgressWrap>
@@ -23,9 +24,9 @@ const LevelProgress = ({ total, current }: Props) => {
                 ) : null}
             </ProgressWrap>
             <ProgressInfo>
-                <p>Lv.0고딩</p>
+                <p>{level}</p>
                 <div style={{ display: "flex" }}>
-                    <p className="profile-point">235 </p>
+                    <p className="profile-point">{current} </p>
                     <p> Points</p>
                 </div>
             </ProgressInfo>

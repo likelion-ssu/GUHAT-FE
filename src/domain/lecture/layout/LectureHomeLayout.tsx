@@ -1,5 +1,10 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
+import { useQueries } from "react-query";
+import { useParams } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { getLecture, getLectureRecruits } from "../../../apis/lecture/index";
+import { loadingState } from "../../../storage/recoil/loadingState";
 import RecruitListLayout from "./RecruitListLayout";
 import ReviewListLayout from "./ReviewListLayout";
 import SidebarLayout from "./SidebarLayout";
@@ -20,14 +25,33 @@ const Container = styled.div`
 `;
 
 const LectureHomeLayout = () => {
+    const [loading, setLoading] = useRecoilState(loadingState);
     const [tab, setTab] = useState("main");
+    const { id } = useParams();
+    const result = useQueries([
+        {
+            queryKey: ["lecture", id],
+            queryFn: () => getLecture(id!!),
+            onSuccess: (data: any) => {
+                console.log("lecture", data);
+            },
+        },
 
+        {
+            queryKey: ["getLectureRecruits"],
+            queryFn: () => getLectureRecruits(id!!),
+            onSuccess: (data: any) => {
+                console.log("recruits", data);
+            },
+        },
+    ]);
+    setLoading(result.some((result) => result.isLoading));
     const getTabPage = () => {
         switch (tab) {
             case "main":
-                return <RecruitListLayout list={recruits} />;
+                return <RecruitListLayout list={result[1].data!!} />;
             case "recruit":
-                return <RecruitListLayout list={recruits} />;
+                return <RecruitListLayout list={result[1].data!!} />;
             case "review":
                 return (
                     <>
@@ -169,10 +193,17 @@ const LectureHomeLayout = () => {
     return (
         <>
             <Container>
-                <SidebarLayout tabController={setTab} />
-                <LectureHomeLayoutContainer>
-                    {getTabPage()}
-                </LectureHomeLayoutContainer>
+                {!loading ? (
+                    <>
+                        <SidebarLayout
+                            tabController={setTab}
+                            lecture={result[0].data}
+                        />
+                        <LectureHomeLayoutContainer>
+                            {getTabPage()}
+                        </LectureHomeLayoutContainer>
+                    </>
+                ) : null}
             </Container>
         </>
     );

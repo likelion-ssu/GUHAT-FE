@@ -4,6 +4,7 @@ import { modalState } from "@/storage/recoil/modalState";
 import CheckIcon from "@assets/check.svg";
 import CloseIcon from "@assets/close.svg";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import {
     RecruitApplyButton,
@@ -13,11 +14,11 @@ import {
 const RecruitApplyModal = ({ list }: { list: any[] }) => {
     const [modalVisible, setModalVisible] = useRecoilState(modalState);
     const [loading, setLoading] = useRecoilState(loadingState);
-
+    const { id } = useParams();
     const [checkedRoleId, setRoleId] = useState<null | string | number>(null);
 
     const onClickSubmit = () => {
-        if (checkedRoleId) requestApply(checkedRoleId);
+        if (checkedRoleId) requestApply(checkedRoleId, id!!);
         setLoading(true);
         setTimeout(() => {
             alert("지원완료");

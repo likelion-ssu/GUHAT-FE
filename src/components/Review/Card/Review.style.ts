@@ -45,9 +45,10 @@ export const ReviewTitleWrap = styled.div`
 `;
 
 export const ReviewTitle = styled.p`
-    font-weight: 500;
+    font-weight: 600;
     font-size: 1.8rem;
-    align-items: center;
+    text-align: left;
+    width: 100%;
     color: ${themes.colors.black_500};
 `;
 
@@ -61,6 +62,7 @@ export const ReviewContent = styled.p`
 `;
 export const ReviewProfileInfo = styled.div`
     display: flex;
+    width: 100%;
     flex-direction: row;
     align-items: flex-end;
     justify-content: space-between;

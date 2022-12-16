@@ -4,6 +4,7 @@ import {
     ProfileImgBgCircle,
     ProfileImgWrap,
 } from "@/components/Recruit/Card/Profile.style";
+import { displayLevel } from "../../util/displayLevel";
 import { ProfileLayoutContainer } from "./ProfileLayout.style";
 
 interface Props {
@@ -29,7 +30,7 @@ const ProfileLayout = ({ ...props }: Props) => {
             <div style={{ marginLeft: "1rem" }}>
                 <p className="nickname">{props.nickname}</p>
             </div>
-            <p className="level">{props.level}</p>
+            <p className="level">{displayLevel(props.level)}</p>
             {props.endDate ? (
                 <>
                     {" "}

@@ -6,9 +6,9 @@ export const getHomeRecruitList = async () => {
 };
 
 export const getRecentRecruitList = async (page: number) => {
-    return await Api.get(
-        `/posting/lecture/all?sort={latest}&page=${page}`
-    ).then((res) => res.data.data);
+    return await Api.get(`/posting/lectures?sort={latest}&page=${page}`).then(
+        (res) => res.data.data
+    );
 };
 
 export const useRecentRecruit = (page: number) => {
@@ -28,6 +28,7 @@ export const useRecentRecruit = (page: number) => {
                     lectureName: item.lecture.name,
                     type: item.type,
                     professor: item.lecture.professors,
+                    writer: item.writer,
                 };
             }),
     });
