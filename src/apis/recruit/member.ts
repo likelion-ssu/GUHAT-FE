@@ -84,7 +84,8 @@ export const getMembers = (recruitId: string): any[] => {
 };
 
 interface IupdateMember {
-    title: string;
+    roleId: number | string;
+    title?: string;
     member: any[];
 }
 

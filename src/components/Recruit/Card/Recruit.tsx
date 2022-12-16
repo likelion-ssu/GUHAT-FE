@@ -55,6 +55,7 @@ const Recruit = ({ recruit }: { recruit: IRecruitItem }) => {
                 endDate={parseInt(day) < 0 ? "모집마감" : `D-${day}`}
             >
                 <Profile
+                    profileImg={recruit.writer.profileImg}
                     level={recruit.writer.level}
                     nickname={recruit.writer.nickname}
                 />

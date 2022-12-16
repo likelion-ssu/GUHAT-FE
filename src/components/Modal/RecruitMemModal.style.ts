@@ -25,8 +25,22 @@ export const RecruitMemModalContainer = styled.div`
         font-weight: 700;
         font-size: 1.1rem;
     }
+    .reset-btn {
+        font-weight: 700;
+        font-size: 1.1rem;
+
+        :hover,
+        :active {
+            text-decoration: underline;
+        }
+        :active {
+            font-size: 0.9rem;
+        }
+    }
+
     .modal-recuit-content {
         display: flex;
+        min-width: 50%;
         flex-direction: column;
         align-items: center;
         justify-content: center;
@@ -36,7 +50,6 @@ export const RecruitMemModalContainer = styled.div`
     .modal-recuit-group-button {
         width: 35%;
         padding: 0.7rem;
-        background-color: red;
         text-align: center;
         align-items: center;
         border-radius: 3rem;
@@ -56,12 +69,13 @@ export const RecruitMemModalList = styled.ul`
     overflow-y: auto;
     gap: 1rem;
     min-width: 43%;
+
     height: 100%;
     display: flex;
     flex-direction: column;
     border-radius: 1rem;
     padding: 2rem;
-    background-color: #f2f2f2;
+    background-color: ${themes.colors.blue + "30"};
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 
     .recruit-modal-empty-state {
@@ -76,6 +90,7 @@ export const RecruitMemModalList = styled.ul`
 `;
 export const RecruitMemModalGroups = styled.div`
     width: 100%;
+    min-height: 80%;
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
@@ -83,7 +98,7 @@ export const RecruitMemModalGroups = styled.div`
 `;
 export const RecruitMemCardList = styled.div`
     position: relative;
-    height: 80%;
+    height: 90%;
     display: flex;
     padding-top: 2rem;
     padding-left: 1rem;
@@ -109,9 +124,9 @@ export const RecruitMemCardWrapper = styled.div<{
     padding: 0;
     transform: ${({ checked, isNew }) =>
         checked && isNew ? "scale(1.05)" : "default"};
-    ${({ checked }) => (checked ? "opacity : 1" : "opacity : 0.7")};
-    ${({ mem, isNew }) =>
+    ${({ checked }) => (checked ? "opacity : 1" : "filter : brightness(0.8);")};
+    /* ${({ mem, isNew }) =>
         isNew || (!isNew && !mem)
             ? "opacity : 1"
-            : "opacity : 0.7; filter: brightness(0.6);"};
+            : "opacity : 0.7; filter: brightness(0.6);"}; */
 `;

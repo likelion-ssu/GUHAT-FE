@@ -1,12 +1,16 @@
+import { IUserState, userState } from "@/storage/recoil/userState";
 import { useQuery } from "react-query";
+import { useSetRecoilState } from "recoil";
 import Api from "../index";
-export const uploadFile = async (file: FormData) => {
-    try {
-        const { data } = await Api.post("/upload", file);
-        return data;
-    } catch (e) {
-        console.log(e);
-    }
+
+export const getPortfolio = async () => {
+    return await Api.get("/profile").then((res) => res.data.data);
+};
+export const useGetMyPortfolio = (successHandler: (d: any) => void) => {
+    return useQuery(["my-portfolio"], () => getPortfolio(), {
+        select: (data: any[]) => data,
+        onSuccess: (data: any) => successHandler(data),
+    });
 };
 
 export const getMyRecruitPost = async (page: number) => {
@@ -25,13 +29,16 @@ export const useGetMyRecruitPost = (page: number) => {
                 data.map((item: any, idx: number) => {
                     return {
                         id: item.id,
-                        isOwner: item.isMine,
+                        isOwner: item.isMine | item.isOwner,
+                        isApply: item.isApply,
+                        status: item.status,
                         title: item.title,
                         detail: item.detail,
+                        type: item.type,
                         total: item.total,
                         current: item.current,
                         endDate: item.endDate,
-                        createdAt: "들어올거야 나중에",
+                        createdAt: item.createdAt,
                         lectureName: item.lecture.name,
                         professor: item.lecture.professors,
                     };
@@ -40,15 +47,60 @@ export const useGetMyRecruitPost = (page: number) => {
     );
 };
 
-export const uploadFiiles = (profile: FormData) => {
-    return Api.post("profile/file", profile, {
+export const uploadFiiles = async (profile: FormData) => {
+    return await Api.post("profile/file", profile, {
         headers: {
             "Content-Type": "multipart/form-data",
         },
     });
 };
 
-export const deleteProfile = (path: string) => {
-    console.log(path);
-    return Api.post("profile/file/delete", { file: path });
+export const deleteProfile = async (path: string) => {
+    const file = path;
+    return await Api.post("profile/file/delete", { file: file });
+};
+
+export const uploadFile = async (file: FormData) => {
+    try {
+        const { data } = await Api.post("/upload", file);
+        return data;
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+export const updateProfileMode = async (mode: string) => {
+    return await Api.patch("profile/mode?mode=" + mode);
+};
+
+export const updateProfile = async (profile: FormData, nickname: string) => {
+    return await Api.post("user?nickname=" + nickname, profile).then((res) => {
+        return res;
+    });
+};
+
+export const getProfile = async () => {
+    return await Api.get("user/").then((res) => {
+        console.log(res);
+        return res.data.data;
+    });
+};
+
+export const useGetMyProfile = () => {
+    return useQuery(["my-profile"], () => getProfile(), {
+        select: (data: any[]) => data,
+    });
+};
+
+export const useSaveProfile = (data: IUserState) => {
+    const profile = useSetRecoilState(userState);
+    profile(data);
+};
+
+export const updateIntro = (intro: string, detail: string) => {
+    return Api.patch("/profile/intro", { introduction: intro, detail: detail });
+};
+
+export const updateDetail = (skill: string[], personality: number[]) => {
+    return Api.patch("/profile/detail", { skill, personality });
 };

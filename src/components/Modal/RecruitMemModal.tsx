@@ -6,13 +6,13 @@ import {
     RecruitMemModalList,
 } from "./RecruitMemModal.style";
 
+import { updateApply } from "@/apis/recruit/apply";
 import { loadingState } from "@/storage/recoil/loadingState";
 import { modalState } from "@/storage/recoil/modalState";
 import CloseIcon from "@assets/close.svg";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { getApplicants, updateMember } from "../../apis/recruit/member";
 import MemberCard from "../Member/MemberCard";
 import RecruitApplyItem from "./RecruitApplyItem";
 
@@ -24,18 +24,38 @@ interface checkedMem {
     nickname?: string;
     level?: string;
     isNew?: boolean;
+    profileImg?: string | null;
 }
 
 const RecruitMemModal = ({ members }: { members: any[] }) => {
     const { id } = useParams();
-    const data = getApplicants(id ? id : 0); //url validation
 
+    console.log("member", members);
     const [loading, setLoading] = useRecoilState(loadingState);
 
     const [modalVisible, setModalVisible] = useRecoilState(modalState);
     const [checkedMem, setCheckedMem] = useState<checkedMem | null>(null);
-    const [applicantList, setApplicantList] = useState(data); //보여지는 리스트
-    const [selecteMember, setSelectedMember] = useState([...members]);
+    const [applicantList, setApplicantList] = useState<any[]>(members); //보여지는 리스트
+    const [selecteMember, setSelectedMember] = useState<any[]>([]);
+
+    useEffect(() => {
+        const data: any[] = [];
+        const onlyApplierData: any[] = [];
+        members.forEach((applier, index) => {
+            console.log("applier", applier);
+            const onlyApplier: any[] = [];
+            const init = Array.from({ length: applier.max }, () => null);
+            applier.member.forEach((i: any, idx: number) => {
+                init[idx] = i.status === "success" ? i : null;
+                if (i.status === "apply") onlyApplier.push(i);
+            });
+            const item = { ...members[index], member: init };
+            onlyApplierData.push(onlyApplier);
+            data.push(item);
+        });
+        setApplicantList([...onlyApplierData]);
+        setSelectedMember(data);
+    }, []);
 
     useEffect(() => {
         //TODO 지원자 받기
@@ -43,10 +63,12 @@ const RecruitMemModal = ({ members }: { members: any[] }) => {
     }, [applicantList]);
 
     useEffect(() => {
-        console.log(checkedMem);
+        console.log("check", checkedMem);
     }, [checkedMem]);
 
-    useEffect(() => {}, [selecteMember]);
+    useEffect(() => {
+        console.log("selected", selecteMember);
+    }, [selecteMember]);
 
     const onClickSubmit = () => {
         setLoading(true);
@@ -59,35 +81,43 @@ const RecruitMemModal = ({ members }: { members: any[] }) => {
                     return m ? m.id : null;
                 });
                 return {
-                    roldeId: group?.roleId,
-                    title: group?.title.toString(),
+                    roleId: group?.roleId,
+                    postId: id!!,
                     member: member,
                 };
             }
         );
-
-        const res = updateMember(submit);
-        console.log(res);
-
-        setTimeout(() => {
-            setLoading(false);
-            window.location.reload();
-        }, 4000);
+        console.log("submit", submit);
+        updateApply(submit)
+            .then((res) => {
+                console.log(res);
+                setLoading(false);
+                window.location.reload();
+            })
+            .catch((err) => {
+                console.log(err);
+                setLoading(false);
+            });
     };
 
     const addMember = (mem: any) => {
+        console.log("please..add", mem);
         const group = [...selecteMember[mem.titleIndex].member];
         const addIndex = group.indexOf(null);
-        if (addIndex) {
+        if (addIndex !== -1) {
             group[addIndex] = {
                 id: mem.id,
                 nickname: mem.nickname,
                 level: mem.level,
+                profileImg: mem.profileImg,
                 isNew: true,
             };
+        } else {
+            console.log("자리가 없잖아!!!!!");
         }
         const newState = [...selecteMember];
         newState[mem.titleIndex].member = group;
+        console.log("changed..........", newState);
         setCheckedMem({ ...mem });
         setSelectedMember(newState);
     };
@@ -108,6 +138,7 @@ const RecruitMemModal = ({ members }: { members: any[] }) => {
                 id: checkedMem.id,
                 nickname: checkedMem.nickname,
                 level: checkedMem.level,
+                profileImg: checkedMem.profileImg,
             };
 
             const deleteIndex = reGroup[
@@ -126,7 +157,7 @@ const RecruitMemModal = ({ members }: { members: any[] }) => {
 
     const onClickApplyItem = (clickedApplicant: any) => {
         if (
-            applicantList[clickedApplicant.titleIndex].applicant.length > 0 &&
+            applicantList[clickedApplicant.titleIndex].member.length > 0 &&
             checkedMem?.id
         ) {
             //남는 자리가 없음
@@ -138,6 +169,7 @@ const RecruitMemModal = ({ members }: { members: any[] }) => {
             changeInfo.id = clickedApplicant.id;
             changeInfo.nickname = clickedApplicant.nickname;
             changeInfo.level = clickedApplicant.level;
+            changeInfo.profileImg = clickedApplicant.profileImg;
             setCheckedMem(changeInfo);
             setMember(changeInfo);
 
@@ -145,13 +177,13 @@ const RecruitMemModal = ({ members }: { members: any[] }) => {
         }
 
         const curApplyGroup = [
-            ...applicantList[clickedApplicant.titleIndex].applicant,
+            ...applicantList[clickedApplicant.titleIndex].member,
         ];
 
         curApplyGroup.splice(clickedApplicant.index, 1);
 
         const newState = [...applicantList];
-        newState[clickedApplicant.titleIndex].applicant = [...curApplyGroup];
+        newState[clickedApplicant.titleIndex].member = [...curApplyGroup];
         setApplicantList(newState);
         addMember(clickedApplicant);
     };
@@ -162,7 +194,7 @@ const RecruitMemModal = ({ members }: { members: any[] }) => {
         id: string | number
     ): boolean => {
         console.log("checkMem", checkedMem);
-        console.log("ini mem", member);
+
         if (checkedMem === null || checkedMem.title === title) return true;
         if (member?.isNew !== undefined && member?.isNew) return false;
         else {
@@ -183,39 +215,50 @@ const RecruitMemModal = ({ members }: { members: any[] }) => {
                 }}
             ></button>
             <RecruitMemModalList>
-                <h1 className="list-label">지원자 목록</h1>
+                <h1 className="list-label">
+                    {checkedMem?.id
+                        ? selecteMember[checkedMem.titleIndex].title + " "
+                        : ""}
+                    지원자 목록
+                </h1>
 
-                {checkedMem && applicantList ? (
-                    applicantList[checkedMem ? checkedMem.titleIndex : 0]
-                        .applicant.length !== 0 ? (
-                        applicantList[
-                            checkedMem ? checkedMem.titleIndex : 0
-                        ].applicant.map((a: any, idx: number) => {
-                            return (
-                                <RecruitApplyItem
-                                    key={
-                                        "recruit-modal-apply-item" +
-                                        a.title +
-                                        idx
-                                    }
-                                    nickname={a.nickname}
-                                    id={a.id}
-                                    level={a.level}
-                                    clickListener={() => {
-                                        onClickApplyItem({
-                                            titleIndex: checkedMem.titleIndex,
-                                            index: idx,
-                                            id: a.id,
-                                            ...a,
-                                        });
-                                    }}
-                                />
-                            );
-                        })
+                {checkedMem && checkedMem.titleIndex && applicantList ? (
+                    applicantList[checkedMem.titleIndex].length > 0 &&
+                    applicantList[checkedMem.titleIndex].member.length !== 0 ? (
+                        applicantList[checkedMem.titleIndex].member.map(
+                            (a: any, idx: number) => {
+                                return (
+                                    <RecruitApplyItem
+                                        key={
+                                            "recruit-modal-apply-item" +
+                                            a.title +
+                                            idx
+                                        }
+                                        profileImg={a.user.profileImg}
+                                        nickname={a.user.nickname}
+                                        id={a.user.id}
+                                        level={a.user.level}
+                                        clickListener={() => {
+                                            onClickApplyItem({
+                                                titleIndex:
+                                                    checkedMem.titleIndex,
+                                                index: idx,
+                                                id: a.user.id,
+                                                nickname: a.user.nickname,
+                                                profileImg: a.user.profileImg,
+                                                level: a.user.level,
+
+                                                ...a,
+                                            });
+                                        }}
+                                    />
+                                );
+                            }
+                        )
                     ) : (
                         <div className="recruit-modal-empty-state">
                             <h2 className="recruit-modal-empty-state">
-                                아직 지원자가 없습니다
+                                지원자가 없습니다
                             </h2>
                         </div>
                     )
@@ -249,7 +292,7 @@ const RecruitMemModal = ({ members }: { members: any[] }) => {
                                                       checked={checkValidation(
                                                           m,
                                                           mem.title,
-                                                          mem.id
+                                                          mem.roleId
                                                       )}
                                                       mem={m}
                                                       isNew={
@@ -257,6 +300,11 @@ const RecruitMemModal = ({ members }: { members: any[] }) => {
                                                       }
                                                   >
                                                       <MemberCard
+                                                          profileImg={
+                                                              m
+                                                                  ? m.profileImg
+                                                                  : null
+                                                          }
                                                           member={
                                                               m
                                                                   ? m.nickname
@@ -269,6 +317,7 @@ const RecruitMemModal = ({ members }: { members: any[] }) => {
                                                           }
                                                           clickListener={() => {
                                                               console.log(m);
+                                                              console.log(mem);
                                                               m === null
                                                                   ? setCheckedMem(
                                                                         {
@@ -287,6 +336,8 @@ const RecruitMemModal = ({ members }: { members: any[] }) => {
                                                                             nickname:
                                                                                 m.nickname,
                                                                             id: m.id,
+                                                                            profileImg:
+                                                                                m.profileImg,
                                                                             level: m.level,
                                                                         }
                                                                     );

@@ -11,6 +11,7 @@ interface Props {
 }
 
 const ProgressBar = ({ total, current }: Props) => {
+    console.log("current", current);
     return (
         <ProgressContainer>
             <ProgressWrap>
