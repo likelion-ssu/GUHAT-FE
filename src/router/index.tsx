@@ -1,6 +1,7 @@
+import { getCookieToken } from "@/storage/cookie";
 import { keywordState } from "@/storage/recoil/keywordState";
 import { errorState, loadingState } from "@/storage/recoil/loadingState";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 
 import routerType from "../types/router.types";
@@ -35,12 +36,12 @@ export function PrivateRoute({ Component }: React.ReactNode | any) {
     setErrorState(null);
     setKeyword(false);
 
-    // const auth = getCookieToken();
+    const auth = getCookieToken();
 
-    // console.log("isAuthentic", auth);
-    // if (!auth) {
-    //     alert("로그인이 필요합니다");
-    // }
-    return Component;
-    //return auth ? Component : <Navigate to="/login" />;
+    console.log("isAuthentic", auth);
+    if (!auth) {
+        alert("로그인이 필요합니다");
+    }
+
+    return auth ? Component : <Navigate to="/login" />;
 }
