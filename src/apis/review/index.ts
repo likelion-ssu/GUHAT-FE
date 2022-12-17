@@ -26,3 +26,7 @@ export const createReviewFile = async (
 export const getRecentReviews = async () => {
     return await Api.get("/home/review");
 };
+
+export const closeRecruit = async (postId: number | string) => {
+    return await Api.post(`/project/create?postId=${postId}`);
+};
