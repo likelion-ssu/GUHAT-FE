@@ -1,17 +1,23 @@
-import axios from "axios";
 import { useQuery } from "react-query";
+import Api from "../../index";
 
-const getResultByKeyword = async (keyword: string) => {
-    const data = await axios
-        .get("https://jsonplaceholder.typicode.com/posts")
+const getResultByKeyword = async (keyword: string, option: string) => {
+    let op;
+    if (option === "수업명") op = "lecture";
+    else if (option === "교수님") op = "professor";
+    else op = "stack";
+    console.log("request uri", keyword);
+
+    const data = await Api.get(
+        `/search?keyword=${encodeURIComponent(keyword)}&&option=${op}`
+    )
         .then((res) => {
-            const result: any = [];
-            res.data.map((context: any, idx: number) => {
-                if (context.body.slice(0, 20).includes(keyword))
-                    result.push(context.body.slice(0, 20));
+            let result: any = [];
+            result = res.data.data.map((context: any, idx: number) => {
+                return context;
             });
 
-            return result;
+            return result.slice(0, 20);
         })
         .catch((error) => {
             console.log("error", error);
@@ -20,9 +26,13 @@ const getResultByKeyword = async (keyword: string) => {
     return data;
 };
 
-export const useKeywordResults = (keyword: string) => {
-    return useQuery(["keyword", keyword], () => getResultByKeyword(keyword), {
-        enabled: !!keyword,
-        select: (data) => data.slice(0, 10),
-    });
+export const useKeywordResults = (keyword: string, option: string) => {
+    return useQuery(
+        ["keyword", keyword, option],
+        () => getResultByKeyword(keyword, option),
+        {
+            enabled: !!keyword && keyword !== "",
+            select: (data) => data.slice(0, 10),
+        }
+    );
 };

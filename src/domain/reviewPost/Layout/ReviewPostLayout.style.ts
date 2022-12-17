@@ -6,6 +6,7 @@ export const ReviewLevelButton = styled.button<{ checked?: boolean }>`
     color: white;
     background-color: white;
     border-radius: 1rem;
+    font-size: 1.1rem;
     font-weight: 500;
     ${({ checked }) =>
         checked

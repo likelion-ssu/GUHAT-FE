@@ -5,6 +5,7 @@ import {
     LectureProgressContainer,
     Progress,
     ProgressWrapper,
+    StatusChip,
 } from "./LectureHistory.style";
 
 interface Props {
@@ -22,17 +23,31 @@ interface Props {
     createdAt: string;
     total: number;
     current: number;
+    status?: string;
 
     clickListener?: () => void;
 }
 
 const LectureHistory = ({ ...props }: Props) => {
     console.log(props);
+    const statusMapper = (status: string) => {
+        if (props.total === props.current) return "모집마감";
+        if (status === "success") return "매칭완료";
+        else if (status === "apply") return "지원완료";
+        return "";
+    };
     return (
         <LectureHistoryContainer onClick={props.clickListener}>
             <div className="recruit-title">
                 <p> {props.title}</p>
-                <img className="edit-img" src={Edit} alt="편집 아이콘" />
+                {props.isOwner ? (
+                    <img className="edit-img" src={Edit} alt="편집 아이콘" />
+                ) : null}
+                {props.status && !props.isOwner ? (
+                    <>
+                        <StatusChip>{statusMapper(props.status)}</StatusChip>
+                    </>
+                ) : null}
             </div>
             <div className="recruit-sub-title">
                 <h1>
@@ -64,9 +79,3 @@ const LectureHistory = ({ ...props }: Props) => {
 };
 
 export default LectureHistory;
-function useGetProfileRecentRecruit(focusPage: number): {
-    status: any;
-    data: any;
-} {
-    throw new Error("Function not implemented.");
-}

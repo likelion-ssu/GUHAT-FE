@@ -1,4 +1,5 @@
 import ProfileLayout from "@/domain/recruitView/ProfileLayout";
+import { displayLevel } from "@/util/displayLevel";
 import {
     ReviewViewinfoWrapper,
     ReviewViewLayoutContainer,
@@ -25,14 +26,6 @@ interface Props {
     detail: string;
 }
 
-// {
-//     isLike: false,
-//     year: "2022",
-//     semester: "1학기",
-//     createdAt: "2022-01-01 12:40:00",
-//     comment: "내용내요요요애뇽",
-// },
-
 const ReviewViewLayout = ({ ...props }: Props) => {
     return (
         <ReviewViewLayoutContainer>
@@ -44,7 +37,7 @@ const ReviewViewLayout = ({ ...props }: Props) => {
                 <ProfileLayout
                     nickname={props.nickname}
                     id={props.writerId}
-                    level={props.writerLevel}
+                    level={displayLevel(props.writerLevel)}
                     endDate={props.createdAt}
                     isOwner={props.isOwner ? true : false}
                 ></ProfileLayout>

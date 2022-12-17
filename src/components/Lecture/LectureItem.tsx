@@ -1,5 +1,6 @@
 import {
     LectureItemDetail,
+    LectureItemSubDetail,
     LectureItemSubTitle,
     LectureItemTitle,
     LectureItemWrap,
@@ -12,23 +13,12 @@ interface Props {
     professor?: string[] | string;
     year: string;
     semester: string;
-    time: string[] | string;
+    time: any;
     place: string;
 
     clickListener: () => void;
 }
 
-const faker = [
-    {
-        id: 1, // 과목id
-        title: "수업이름",
-        professor: ["교수명"],
-        year: "2022",
-        semester: "2학기",
-        time: "월 수 10:30",
-        place: "진리관",
-    },
-];
 const LectureItem = ({ ...props }: Props) => {
     return (
         <LectureItemWrap>
@@ -37,8 +27,11 @@ const LectureItem = ({ ...props }: Props) => {
             <LectureItemDetail>
                 {props.year}년도 {props.semester}
             </LectureItemDetail>
+            <LectureItemSubDetail>
+                {props.time ? props.time.map((t: any) => <p>{t}</p>) : null}
+            </LectureItemSubDetail>
             <LectureItemDetail>
-                {props.time} [ {props.place} ]
+                {props.place.replace("(", "").replace(")", "")}
             </LectureItemDetail>
             <LectureMoreButton onClick={props.clickListener}>
                 더보기

@@ -27,8 +27,8 @@ border: 2px solid #999999;`
         width: 100%;
         margin-left: 10rem;
         left: 10rem;
-        font-size: 3rem;
-        font-family: 500;
+        font-size: 2rem;
+        font-weight: 600;
     }
     .aboutme-comment {
         margin-left: 10rem;
@@ -99,6 +99,7 @@ const EditWrapper = styled.div`
 
 interface Props {
     nickname: string;
+    profileImg?: string | null;
     introduction: string;
     detail: string;
 }
@@ -113,10 +114,6 @@ const AboutMeLayout = ({ ...props }: Props) => {
     const [about, setAbout] = useState(props.detail);
     const [intro, setIntro] = useState(props.introduction);
 
-    // useEffect(() => {
-    //     console.log(mode);
-    // }, [mode]);
-    console.log("proifle", props);
     const onClickSubmit = () => {
         setLoading(true);
         updateIntro(intro, about).then((res) => {
@@ -138,7 +135,15 @@ const AboutMeLayout = ({ ...props }: Props) => {
             </EditWrapper>
             <MyProfileImgWrapper>
                 <div className="circle sub-circle"></div>
-                <div className="circle main-circle"></div>
+                <div
+                    className="circle main-circle"
+                    style={{
+                        backgroundImage: `url(${props.profileImg})`,
+                        backgroundSize: "contain",
+                    }}
+                >
+                    {" "}
+                </div>
             </MyProfileImgWrapper>
             <div className="aboutme-nickname"> {props.nickname}</div>
 

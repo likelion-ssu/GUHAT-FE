@@ -1,7 +1,7 @@
 import Edit from "@/assets/edit.svg";
 import ReviewListItem from "@/components/Review/List/ReviewListItem";
 import styled from "@emotion/styled";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 const RecruitContainer = styled.div`
     position: relative;
     width: 100%;
@@ -34,8 +34,9 @@ const ReviewPostButton = styled.button`
 
 const ReviewListLayout = ({ list }: { list: any[] }) => {
     const navigator = useNavigate();
+    const { id } = useParams();
     const onClickPost = () => {
-        navigator("/review/post");
+        navigator("/review/post/" + id);
     };
 
     return (

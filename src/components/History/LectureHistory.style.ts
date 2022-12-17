@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import themes from "@styles/themes";
 export const LectureHistoryContainer = styled.div`
     position: relative;
     width: 100%;
@@ -45,6 +46,15 @@ export const LectureHistoryContainer = styled.div`
         font-size: 1rem;
         font-weight: 600;
     }
+`;
+
+export const StatusChip = styled.div`
+    border-radius: 0.7rem;
+    background-color: ${themes.colors.blue};
+    color: white;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.5rem;
+    text-align: center;
 `;
 
 export const LectureProgressContainer = styled.div<{ major?: boolean }>`
@@ -122,4 +132,6 @@ export const Progress = styled.div<{ percent: number }>`
     /* bottom: 3rem;
     right: 3rem; */
     background-color: white;
+
+    ${({ percent }) => (percent === 0 ? "background: darkgray; " : "")};
 `;

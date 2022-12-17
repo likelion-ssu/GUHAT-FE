@@ -1,5 +1,6 @@
 import Profile from "@/components/MyPost/Card/Profile";
 import { IReview } from "../../../types/review.types";
+import { displayLevel } from "../../../util/displayLevel";
 import {
     ReviewContainer,
     ReviewContent,
@@ -38,17 +39,11 @@ const Review = ({
             <ReviewContent>{review.detail}</ReviewContent>
             <ReviewProfileInfo>
                 <p className="lecture-info">
-                    {`${review.lecture.year?.substring(2, 4)} 년도 ${
-                        review.lecture.semester
-                    } `}
+                    {`${review.lecture.year}년도 ${review.lecture.semester} `}
                     수강자
                 </p>
                 <Profile
-                    level={
-                        review.writer.level?.toString()
-                            ? review.writer.level?.toString()
-                            : "0"
-                    }
+                    level={displayLevel(review.writer.level!!)}
                     nickname={review.writer.nickname}
                 />
             </ReviewProfileInfo>

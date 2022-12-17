@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 export const LoadingContainer = styled.div`
     z-index: 100;
     position: fixed;
-    top: 0;
+    top: 0rem;
     background-color: black;
     width: 100%;
     height: 100%;

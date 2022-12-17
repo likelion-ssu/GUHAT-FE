@@ -14,6 +14,8 @@ import SearchResult from "./SearchResult";
 
 import { debounce } from "@/util/debounce";
 import SearchIcon from "@assets/Search.svg";
+import { useRecoilState } from "recoil";
+import { keywordState } from "../../storage/recoil/keywordState";
 
 const SearchBar = () => {
     const navigator = useNavigate();
@@ -21,7 +23,7 @@ const SearchBar = () => {
 
     const options = ["수업명", "교수님", "스택"];
 
-    const [active, setActive] = useState(false);
+    const [active, setActive] = useRecoilState(keywordState);
     const [option, setOption] = useState(options[0]);
 
     const [search, setSearch] = useState<string>("");
@@ -36,7 +38,7 @@ const SearchBar = () => {
         "9w09r0e",
     ]);
 
-    const { status, data } = useKeywordResults(apiQuery);
+    const { status, data } = useKeywordResults(apiQuery, option);
 
     useEffect(() => {
         document.addEventListener("mousedown", clickInputOutside);
@@ -103,10 +105,29 @@ const SearchBar = () => {
     };
 
     const moveToResultPage = (searchKeyword: string) => {
+        console.log("move page", searchKeyword);
         setSearch(searchKeyword);
+
+        if (searchKeyword !== "") {
+            if (searchKeyword.includes("/"))
+                navigator(
+                    `/search?keyword=${encodeURIComponent(
+                        searchKeyword.substring(
+                            0,
+                            searchKeyword.indexOf("/") - 1
+                        )
+                    )}&option=${option}`
+                );
+            else {
+                navigator(
+                    `/search?keyword=${encodeURIComponent(
+                        searchKeyword
+                    )}&option=${option}`
+                );
+            }
+        }
+
         setSubmitted(true);
-        if (searchKeyword !== "")
-            navigator(`/search?keyword=${searchKeyword}&&option=${option}`);
     };
 
     const getDataByStatus = () => {
@@ -120,7 +141,15 @@ const SearchBar = () => {
                     <>
                         {search.length !== 0 && !submitted ? (
                             <SearchResult
-                                list={data}
+                                list={data.map(
+                                    (d: any) =>
+                                        `${
+                                            d.name.length > 30
+                                                ? d.name.substring(0, 32) +
+                                                  "..."
+                                                : d.name
+                                        } /  ${d.professor}`
+                                )}
                                 keyword={search}
                                 clickListener={moveToResultPage}
                                 closeListener={() => {
