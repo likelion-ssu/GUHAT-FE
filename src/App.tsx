@@ -3,11 +3,11 @@ import { ThemeProvider } from "@emotion/react";
 import GlobalStyle from "@styles/GlobalStyle";
 import themes from "@styles/themes";
 
-import { BrowserRouter } from "react-router-dom";
-import Router from "./router";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
+import Test from "./pages/Test";
 
 const queryClient = new QueryClient();
 
@@ -19,7 +19,11 @@ function App() {
                     <GlobalStyle />
                     <BrowserRouter>
                         <Header title={"GUHAT"} />
-                        <Router />
+                        <Routes>
+                            <Route path="/" element={<Test />} />
+                        </Routes>
+
+                        {/* <Router /> */}
                     </BrowserRouter>
                 </ThemeProvider>
             </QueryClientProvider>
