@@ -139,7 +139,9 @@ const SearchBar = () => {
             default: {
                 return (
                     <>
-                        {search.length !== 0 && !submitted ? (
+                        {option !== "스택" &&
+                        search.length !== 0 &&
+                        !submitted ? (
                             <SearchResult
                                 list={data.map(
                                     (d: any) =>

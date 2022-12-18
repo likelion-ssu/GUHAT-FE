@@ -27,6 +27,7 @@ interface Props {
 }
 
 const ReviewViewLayout = ({ ...props }: Props) => {
+    console.log(props);
     return (
         <ReviewViewLayoutContainer>
             <h1 className="title">{props.title}</h1>
@@ -35,10 +36,11 @@ const ReviewViewLayout = ({ ...props }: Props) => {
             </p>
             <div className="content">
                 <ProfileLayout
+                    profileImg={props.profileImg}
                     nickname={props.nickname}
                     id={props.writerId}
                     level={displayLevel(props.writerLevel)}
-                    endDate={props.createdAt}
+                    endDate={props.createdAt.slice(0, 10)}
                     isOwner={props.isOwner ? true : false}
                 ></ProfileLayout>
             </div>

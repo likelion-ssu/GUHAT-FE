@@ -11,6 +11,7 @@ export interface IUserState {
     level?: number;
     score?: number;
     profileImg: string | null;
+    currentProject?: number | string;
 }
 
 export const userState = atom<IUserState | null>({

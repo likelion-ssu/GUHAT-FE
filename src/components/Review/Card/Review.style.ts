@@ -50,6 +50,7 @@ export const ReviewTitle = styled.p`
     text-align: left;
     width: 100%;
     color: ${themes.colors.black_500};
+    text-align: left;
 `;
 
 export const ReviewContent = styled.p`
@@ -73,8 +74,11 @@ export const ReviewProfileInfo = styled.div`
 
 export const ReviewLecturenWrap = styled.div`
     display: flex;
+    width: 100%;
+    flex-direction: column;
     justify-content: left;
-    align-items: center;
+    align-items: left;
+    text-align: left;
     gap: 0.3rem;
     margin: 1rem 0;
     font-size: 1.2rem;

@@ -27,7 +27,7 @@ const Review = ({
             <ReviewTitleWrap>
                 <ReviewTitle>{review.title}</ReviewTitle>
                 <ReviewLecturenWrap>
-                    <p>{review.lecture.name} / </p>
+                    <p>{review.lecture.name} </p>
                     <p>
                         {review.lecture.professors?.map((p, i) => {
                             if (i === 0) return p;
@@ -43,6 +43,7 @@ const Review = ({
                     수강자
                 </p>
                 <Profile
+                    profileImg={review.writer.profileImg}
                     level={displayLevel(review.writer.level!!)}
                     nickname={review.writer.nickname}
                 />

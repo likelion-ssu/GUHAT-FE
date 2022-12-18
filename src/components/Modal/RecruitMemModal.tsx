@@ -358,6 +358,9 @@ const RecruitMemModal = ({ members }: { members: any[] }) => {
                 >
                     모집현황 저장
                 </button>
+                <button className="modal-recuit-group-button">
+                    모집 마감하기
+                </button>
             </div>
         </RecruitMemModalContainer>
     );

@@ -19,7 +19,9 @@ const ReviewList = ({ reviewList }: Props) => {
                                   review={review}
                                   key={"review " + idx}
                                   clickListener={() => {
-                                      navigator("/review/" + review.id);
+                                      navigator(
+                                          `/review/${review.id}/${review.lecture.lectureId}`
+                                      );
                                   }}
                               />
                           );

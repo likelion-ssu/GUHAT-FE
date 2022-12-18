@@ -11,16 +11,17 @@ interface Props {
     year: string;
     semester: string;
     createdAt: string;
-    isLike: boolean;
+    status: string;
     comment: string;
 }
 const LikeComment = ({ ...props }: Props) => {
+    console.log(props);
     return (
         <CommentContainer>
             <EmojiContainer>
                 <img
                     className="like-img"
-                    src={props.isLike ? LikeIcon : DislikeIcon}
+                    src={props.status === "like" ? LikeIcon : DislikeIcon}
                     alt="이모지"
                 ></img>
             </EmojiContainer>

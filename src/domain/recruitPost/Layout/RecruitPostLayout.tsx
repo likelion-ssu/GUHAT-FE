@@ -135,12 +135,12 @@ const RecruitPostLayout = () => {
             });
     };
 
-    const onChangeDetail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChangeDetail = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         e.preventDefault();
         if (detail.length < 499) setDetail(e.target.value);
     };
 
-    const onChangePrioirty = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChangePrioirty = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         e.preventDefault();
         if (priority.length < 99) setPrioirty(e.target.value);
     };
@@ -305,19 +305,21 @@ const RecruitPostLayout = () => {
                 <RecruitContentLayout isFilled={detail.length !== 0}>
                     <RecruitContentProgress isFilled={detail.length !== 0} />
                     <div className="content-label">상세설명</div>
-                    <input
+
+                    <textarea
                         className="content-inputbox"
                         onChange={onChangeDetail}
-                    />
+                    ></textarea>
                     <p className="content-input-count">{detail.length}/500</p>
                 </RecruitContentLayout>
                 <RecruitContentLayout>
                     <RecruitContentProgress isFilled={priority.length !== 0} />
                     <div className="content-label">우대사항</div>
-                    <input
+                    <textarea
                         className="content-inputbox"
                         onChange={onChangePrioirty}
-                    />
+                    ></textarea>
+
                     <p className="content-input-count">{priority.length}/100</p>
                 </RecruitContentLayout>
                 <RecruitContentLayout>

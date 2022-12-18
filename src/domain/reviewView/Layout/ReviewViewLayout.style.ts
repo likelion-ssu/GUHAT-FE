@@ -3,12 +3,14 @@ import styled from "@emotion/styled";
 
 export const ReviewViewLayoutContainer = styled.div`
     width: 100%;
+    margin-top: 3rem;
     padding: 3rem 0rem;
     background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
-
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     .title {
         font-weight: 700;
         font-size: 2.3rem;

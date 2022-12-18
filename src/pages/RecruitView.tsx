@@ -1,3 +1,4 @@
+import { closeRecruit } from "@/apis/recruit/post";
 import { useGetRecruitPost } from "@/apis/recruit/view";
 import BackArrowBtn from "@/components/Button/BackArrow";
 import APILayout from "@/components/Layout/APILayout";
@@ -21,7 +22,6 @@ const RecruitView = () => {
     const { status, data } = useGetRecruitPost(id ? id : 0);
 
     useEffect(() => {
-        setLoading(false);
         setModalVisible(false);
     }, []);
 
@@ -31,8 +31,9 @@ const RecruitView = () => {
 
     useEffect(() => {
         if (status === "success") {
+            setLoading(false);
             setApplyState(data.isOwner ? false : data.isApply);
-        }
+        } else setLoading(true);
     }, [status]);
 
     const onClickBack = () => {
@@ -40,7 +41,19 @@ const RecruitView = () => {
     };
 
     const onClickApply = () => {
-        setModalVisible(true);
+        if (data?.isOwner) {
+            setApplyState(false);
+            closeRecruit(id!!)
+                .catch((err) => {
+                    alert(err.response.data.message);
+                })
+                .then((res) => {
+                    console.log(res);
+                    if (res?.data.status < 400) {
+                        alert("모집을 마감했습니다!");
+                    }
+                });
+        } else setModalVisible(true);
     };
 
     return (
@@ -74,13 +87,13 @@ const RecruitView = () => {
                     </APILayout>
                     <StickRecruitkBtn
                         onClick={onClickApply}
-                        disabled={applyState}
+                        disabled={data.status === "close" || applyState}
                     >
                         {!data.isOwner
                             ? applyState
                                 ? "지원완료"
                                 : "지원하기"
-                            : "지원받기"}
+                            : "모집마감"}
                     </StickRecruitkBtn>{" "}
                 </>
             ) : null}

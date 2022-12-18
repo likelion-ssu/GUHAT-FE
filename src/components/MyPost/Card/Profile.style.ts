@@ -1,6 +1,6 @@
 import themes from "@/styles/themes";
+import DefaultIcon from "@assets/member_default.svg";
 import styled from "@emotion/styled";
-
 export const ProfileWrap = styled.div`
     width: 100%;
     display: flex;
@@ -36,8 +36,7 @@ export const ProfileImgBgCircle = styled.div`
     border-radius: 3.5rem;
 `;
 
-export const ProfileImg = styled.div<{ img: string | undefined }>`
-    /* background-image: ${(img) => `url(${img})`}; */
+export const ProfileImg = styled.div<{ img?: string | null }>`
     position: absolute;
     background-color: ${themes.colors.gray_100};
     width: 3.5rem;
@@ -45,4 +44,11 @@ export const ProfileImg = styled.div<{ img: string | undefined }>`
     left: 0;
     top: 0;
     border-radius: 3.5rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    ${({ img }) =>
+        img
+            ? `background-image : url(${img});`
+            : `background-image : url( ${DefaultIcon});`}
 `;

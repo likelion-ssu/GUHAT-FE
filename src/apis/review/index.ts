@@ -27,6 +27,21 @@ export const getRecentReviews = async () => {
     return await Api.get("/home/review");
 };
 
-export const closeRecruit = async (postId: number | string) => {
-    return await Api.post(`/project/create?postId=${postId}`);
+export const getReview = async (id: string, lectureId: string) => {
+    return await Api.get(`/lecture/${lectureId}/review/${id}`);
+};
+
+export const createReviewComment = async (
+    id: string,
+    lectureId: string,
+    comment: any
+) => {
+    return await Api.post(
+        `/lecture/${lectureId}/review/${id}/comment`,
+        comment
+    );
+};
+
+export const getReviewComment = async (id: string, lectureId: string) => {
+    return await Api.get(`/lecture/${lectureId}/review/${id}/comment`);
 };

@@ -140,6 +140,8 @@ const AboutMeLayout = ({ ...props }: Props) => {
                     style={{
                         backgroundImage: `url(${props.profileImg})`,
                         backgroundSize: "contain",
+                        backgroundRepeat: "no-repeat",
+                        backgroundPosition: "center",
                     }}
                 >
                     {" "}

@@ -80,7 +80,7 @@ export const updateProfile = async (profile: FormData, nickname: string) => {
 };
 
 export const getProfile = async () => {
-    return await Api.get("user/").then((res) => {
+    return await Api.get("home/user/").then((res) => {
         console.log(res);
         return res.data.data;
     });
@@ -98,7 +98,10 @@ export const useSaveProfile = (data: IUserState) => {
 };
 
 export const updateIntro = (intro: string, detail: string) => {
-    return Api.patch("/profile/intro", { introduction: intro, detail: detail });
+    return Api.patch("/profile/intro", {
+        introduction: intro ? intro : "",
+        detail: detail ? detail : "",
+    });
 };
 
 export const updateDetail = (skill: string[], personality: number[]) => {

@@ -41,7 +41,13 @@ const ProfileLayout = ({ ...props }: Props) => {
 
             <div style={{ marginLeft: "1rem" }}>
                 {props.isOwner ? (
-                    <EditButton clickListener={onClickEdit} />
+                    <>
+                        {/* <MainButton clickListener={onClickEdit}>
+                            모집 마감하기
+                        </MainButton> */}
+
+                        <EditButton clickListener={onClickEdit} />
+                    </>
                 ) : null}
             </div>
         </ProfileLayoutContainer>

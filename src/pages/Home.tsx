@@ -4,7 +4,6 @@ import APILayout from "@/components/Layout/APILayout";
 import { loadingState } from "@/storage/recoil/loadingState";
 import { modalState } from "@/storage/recoil/modalState";
 import { userState } from "@/storage/recoil/userState";
-import { IReview } from "@/types/review.types";
 import Banner from "@domain/home/Banner/Banner";
 import MyInfoLayout from "@domain/home/Layout/MyInfoLayout";
 import { useEffect } from "react";
@@ -40,76 +39,11 @@ const Home = () => {
 
     useEffect(() => {
         setModalVisible(false);
+        console.log(process.env.REACT_APP_BASE_URL);
     }, []);
 
     setLoading(result.some((result) => result.isLoading));
 
-    const reviews: IReview[] = [
-        {
-            id: 1,
-            lecture: {
-                lectureId: 18,
-                name: "수업이름",
-                professors: ["교수님1", "2"],
-                year: "2022",
-                semester: "1학기",
-                schedule: ["월 10:30"],
-            },
-
-            writer: {
-                studentId: 7,
-                name: "실명",
-                nickname: "닉네임",
-                level: 1,
-                profileImg: null,
-            },
-            title: "리뷰 제목입니다",
-            detail: "상세글은 여기",
-            likeCount: 10,
-        },
-        {
-            id: 1,
-            lecture: {
-                lectureId: 18,
-                name: "수업이름",
-                professors: ["교수님1", "2"],
-                year: "2022",
-                semester: "1학기",
-                schedule: ["월 10:30"],
-            },
-
-            writer: {
-                studentId: 7,
-                name: "실명",
-                nickname: "닉네임",
-                level: 1,
-            },
-            title: "리뷰 제목입니다",
-            detail: "상세글은 여기",
-            likeCount: 10,
-        },
-        {
-            id: 1,
-            lecture: {
-                lectureId: 18,
-                name: "수업이름",
-                professors: ["교수님1", "2"],
-                year: "2022",
-                semester: "1학기",
-                schedule: ["월 10:30"],
-            },
-
-            writer: {
-                studentId: 7,
-                name: "실명",
-                nickname: "닉네임",
-                level: 1,
-            },
-            title: "리뷰 제목입니다",
-            detail: "상세글은 여기",
-            likeCount: 10,
-        },
-    ];
     return (
         <>
             <APILayout>

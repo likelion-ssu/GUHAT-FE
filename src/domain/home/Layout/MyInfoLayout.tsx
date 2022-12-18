@@ -17,6 +17,7 @@ const MyInfoLayout = () => {
                         semester={`${userInfo.grade}학년 ${userInfo.semester}학기 수강자`}
                         major={`${userInfo.major}`}
                         univ={`${userInfo.univ}`}
+                        {...userInfo}
                     />
                     <MyPostingList postList={list} />
                 </MyInfoWrapper>

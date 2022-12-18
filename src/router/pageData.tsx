@@ -73,7 +73,7 @@ const pagesData: routerType[] = [
 
     {
         name: "ReviewView",
-        path: "/review/:id",
+        path: "/review/:id/:lectureId",
         component: <ReviewView />,
         exact: false,
     },

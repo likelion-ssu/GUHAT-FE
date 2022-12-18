@@ -6,7 +6,7 @@ const getAccessToekn = async () => {
     const refreshToken = getCookieToken();
 
     let token = "";
-
+    let alertCheck = true;
     if (refreshToken) {
         const body = {
             refreshToken: refreshToken,
@@ -18,7 +18,7 @@ const getAccessToekn = async () => {
                     "Access-Control-Allow-Origin": "*",
                 },
                 withCredentials: true,
-                baseURL: "http://localhost:8003",
+                baseURL: process.env.REACT_APP_AUTH_BASE_URL,
             })
             .then((res) => {
                 console.log(res.data.data);

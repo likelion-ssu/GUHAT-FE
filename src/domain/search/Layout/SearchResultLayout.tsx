@@ -20,6 +20,7 @@ interface Props {
 
 const SearchResultLayout = ({ keyword, option }: Props) => {
     const navigator = useNavigate();
+    console.log(option);
     const [loading, setLoading] = useRecoilState(loadingState);
     const [error, setError] = useRecoilState(errorState);
 
@@ -49,6 +50,7 @@ const SearchResultLayout = ({ keyword, option }: Props) => {
 
     useEffect(() => {
         getFetchData();
+        console.log(data);
     }, []);
 
     const getFetchData = () => {
@@ -73,7 +75,7 @@ const SearchResultLayout = ({ keyword, option }: Props) => {
                     />
 
                     <ResultItemListWrapper>
-                        {data
+                        {option !== "스택" && data
                             ? data
                                   .map((item: any, index: number) => {
                                       return (
@@ -99,6 +101,11 @@ const SearchResultLayout = ({ keyword, option }: Props) => {
                         </ResultMoreButton>
                     </ResultItemListWrapper>
                     <SearchResultTab title={"프로필"} count={2} />
+                    {option === "스택"
+                        ? data.map((p: any) => {
+                              return <h1>{p.id}</h1>;
+                          })
+                        : null}
                 </ResultContainer>
             );
         }

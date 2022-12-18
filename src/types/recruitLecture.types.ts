@@ -26,6 +26,7 @@ export interface RecruitViewResponse {
     detail: string;
     piriority: string;
     createdAt: string;
+    status: string;
 }
 
 export interface IRecruit {
