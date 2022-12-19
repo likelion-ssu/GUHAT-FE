@@ -4,10 +4,10 @@ import GlobalStyle from "@styles/GlobalStyle";
 import themes from "@styles/themes";
 
 import { BrowserRouter } from "react-router-dom";
-import Router from "./router";
 
 import { QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
+import Router from "./router";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +19,7 @@ function App() {
                     <GlobalStyle />
                     <BrowserRouter>
                         <Header title={"GUHAT"} />
+
                         <Router />
                     </BrowserRouter>
                 </ThemeProvider>

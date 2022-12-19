@@ -1,5 +1,5 @@
+import themes from "@/styles/themes";
 import styled from "@emotion/styled";
-
 export const RecruitViewContainer = styled.div`
     width: 100%;
     padding: 3rem 0rem;
@@ -7,11 +7,17 @@ export const RecruitViewContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-
+    .title-wrapper {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+    }
     .title {
         font-weight: 700;
         font-size: 2.3rem;
         padding: 0 5rem;
+        padding-right: 1rem;
     }
 
     .content {
@@ -22,6 +28,7 @@ export const RecruitViewContainer = styled.div`
         font-weight: 600;
         font-size: 2rem;
         padding: 3rem 6rem;
+        padding-right: 2rem;
     }
 
     .text-content {
@@ -61,9 +68,9 @@ export const StickRecruitkBtn = styled.button`
     background: #303644;
 
     :hover {
-        background-color: #c6e7fa;
-        color: #303644;
-        transform: scale(1.1);
+        background-color: ${themes.colors.blue};
+        color: white;
+        transform: scale(1.05);
         :disabled {
             background: #303644;
             color: white;
@@ -77,5 +84,16 @@ export const StickRecruitkBtn = styled.button`
 
     :disabled {
         opacity: 0.5;
+    }
+`;
+
+export const CloseRecruitBtn = styled.button`
+    border-radius: 1rem;
+    background-color: ${themes.colors.black_500};
+    color: white;
+    padding: 0.7rem 1.5rem;
+    :active,
+    :hover {
+        background-color: ${themes.colors.blue};
     }
 `;

@@ -51,9 +51,7 @@ const PortFolioLayout = ({ mode, files }: Props) => {
     };
 
     useEffect(() => {}, [pathFile]);
-    useEffect(() => {
-        console.log("바뀌잖아", loading);
-    }, [loading]);
+    useEffect(() => {}, [loading]);
     const fileHandleChange = (e: any) => {
         const files = [...e.target.files];
         const profile = new FormData();

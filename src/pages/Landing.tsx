@@ -3,12 +3,18 @@ import MainButton from "@/components/Button";
 import InputFiled from "@/components/InputBox/InputFiled";
 import APILayout from "@/components/Layout/APILayout";
 import { accessTokenState } from "@/storage/atom/tokenState";
-import { setRefreshToken } from "@/storage/cookie";
+import { removeCookieToken, setRefreshToken } from "@/storage/cookie";
 import { loadingMessage, loadingState } from "@/storage/recoil/loadingState";
 import { modalState } from "@/storage/recoil/modalState";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
+import {
+    LandingBgLayout,
+    LandingLayout,
+    LoginFormLayout,
+    LoginImgLayout,
+} from "../domain/landing/landing.style";
 import { refreshTokenType } from "../types/token.type";
 
 const Landing = () => {
@@ -25,6 +31,7 @@ const Landing = () => {
     }, []);
 
     const onClickLogin = () => {
+        removeCookieToken();
         setLoadingMsg("유세인트 접속 중...");
         if (id && pw && !loading) {
             setLoading(true);
@@ -58,40 +65,58 @@ const Landing = () => {
 
     return (
         <APILayout modal={null}>
-            <form
-                onSubmit={(e) => {
-                    e.preventDefault();
-                    onClickLogin();
-                }}
-            >
-                <div
-                    style={{
-                        display: "flex",
-                        height: "80vh",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        width: "30rem",
-                        gap: "1rem",
-                        margin: "0 auto",
-                    }}
-                >
-                    <InputFiled text={id} handler={setId} hint="Usaint ID" />
-                    <InputFiled
-                        text={pw}
-                        handler={setPw}
-                        hint="Usaint Password"
-                        type="password"
-                    />
-
-                    <MainButton
-                        width="100%"
-                        clickListener={onClickLogin}
-                        disabled={!id && !pw}
+            <LandingLayout>
+                <LandingBgLayout>
+                    <h1 className="logo-title">GUHAT</h1>
+                    <div className="logo-subtitle">
+                        <h1>숭실대생을 위한</h1>
+                        <h1>팀플 서포트 서비스 플랫폼</h1>
+                    </div>
+                    <button className="logo-button">GUHAT을 소개합니다</button>
+                </LandingBgLayout>
+                <LoginFormLayout>
+                    <h1>U-saint 계정으로 시작하기</h1>
+                    <form
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            onClickLogin();
+                        }}
                     >
-                        로그인
-                    </MainButton>
-                </div>
-            </form>
+                        <div
+                            style={{
+                                display: "flex",
+
+                                flexDirection: "column",
+                                justifyContent: "center",
+                                width: "30rem",
+                                gap: "1rem",
+                                margin: "0 auto",
+                            }}
+                        >
+                            <InputFiled
+                                text={id}
+                                handler={setId}
+                                hint="Usaint ID"
+                            />
+                            <InputFiled
+                                text={pw}
+                                handler={setPw}
+                                hint="Usaint Password"
+                                type="password"
+                            />
+
+                            <MainButton
+                                width="100%"
+                                clickListener={onClickLogin}
+                                disabled={!id && !pw}
+                            >
+                                로그인
+                            </MainButton>
+                        </div>
+                    </form>
+                    <LoginImgLayout />
+                </LoginFormLayout>
+            </LandingLayout>
         </APILayout>
     );
 };

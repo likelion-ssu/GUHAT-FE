@@ -1,3 +1,4 @@
+import FileItem from "@/components/FileItem";
 import ProfileLayout from "@/domain/recruitView/ProfileLayout";
 import { displayLevel } from "@/util/displayLevel";
 import {
@@ -24,9 +25,11 @@ interface Props {
 
     subject: string;
     detail: string;
+    files?: any[];
 }
 
 const ReviewViewLayout = ({ ...props }: Props) => {
+    console.log(props);
     return (
         <ReviewViewLayoutContainer>
             <h1 className="title">{props.title}</h1>
@@ -35,10 +38,11 @@ const ReviewViewLayout = ({ ...props }: Props) => {
             </p>
             <div className="content">
                 <ProfileLayout
+                    profileImg={props.profileImg}
                     nickname={props.nickname}
                     id={props.writerId}
                     level={displayLevel(props.writerLevel)}
-                    endDate={props.createdAt}
+                    endDate={props.createdAt.slice(0, 10)}
                     isOwner={props.isOwner ? true : false}
                 ></ProfileLayout>
             </div>
@@ -88,6 +92,16 @@ const ReviewViewLayout = ({ ...props }: Props) => {
             <hr />
             <h2 className="subtitle">상세 설명</h2>
             <div className="text-content">{props.detail}</div>
+            <hr />
+            <h2 className="subtitle">팀플 자료</h2>
+            <div className="file-content-wrapper">
+                {" "}
+                {props.files &&
+                    props.files.length > 0 &&
+                    props.files?.map((file) => (
+                        <FileItem file={file} mode={"view"} />
+                    ))}
+            </div>
         </ReviewViewLayoutContainer>
     );
 };

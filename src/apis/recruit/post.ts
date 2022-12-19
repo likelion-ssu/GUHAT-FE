@@ -19,3 +19,7 @@ export const submitPosting = async (body: requestPosting) => {
         }
     );
 };
+
+export const closeRecruit = async (postId: number | string) => {
+    return await Api.post(`/project/create?postId=${postId}`);
+};

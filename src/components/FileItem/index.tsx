@@ -22,6 +22,7 @@ const FileItemLayout = styled.div`
         flex-direction: column;
         text-align: left;
         margin-left: 1rem;
+        overflow: hidden;
 
         h1 {
             font-weight: 700;
@@ -47,7 +48,6 @@ const FileItem = ({
         if (file.location) window.open(file.location);
         else if (!file.name && file.includes("https")) window.open(file);
         else {
-            console.log("좀 열어줄래");
             const objectURL = window.URL.createObjectURL(file);
             console.log(objectURL);
             window.open(objectURL);
@@ -93,7 +93,7 @@ const FileItem = ({
                                     ? file.name
                                     : file.slice(file.indexOf("_") + 1)}
                             </h1>
-                            <p>{file.size}KB</p>
+                            <p>{file.size ? `${file.size}KB` : ""}</p>
                         </div>
                         <img
                             src={DownloadIcon}

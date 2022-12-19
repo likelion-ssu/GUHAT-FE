@@ -27,7 +27,7 @@ const RecruitViewInfo = ({ res }: Props) => {
                             : data.group.slice(0, data.group.length)
                         : ""
                 }`,
-            professor: data.professor.join(),
+            professor: data.professor?.join(),
             year: data.year,
             semester: data.semester,
             time: data.schedule

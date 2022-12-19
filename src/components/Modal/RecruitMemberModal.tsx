@@ -112,14 +112,13 @@ const RecruitMemberModal = ({ members }: { members: IGroup[] }) => {
         if (addIndex !== -1) {
             group[addIndex] = mem;
         } else {
-            console.log("자리가 없잖아!!!!!");
         }
         const newState = [...selecteMember];
         const index = newState.findIndex(
             (member) => member.id === mem.group_id
         );
         newState[index].RoleAppliers = group;
-        console.log("changed..........", newState);
+
         setCheckedMem({ ...mem });
         setSelectedMember(newState);
     };

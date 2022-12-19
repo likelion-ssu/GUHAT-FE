@@ -3,7 +3,6 @@ import ScoreProgress from "@/components/ScoreProgress";
 import StarScoreProgres from "@/components/StarScoreProgress";
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
-import { IComment } from "../../../types/comment.types";
 
 const ScoreLayoutContainer = styled.div`
     display: flex;
@@ -63,24 +62,24 @@ const CommentLayout = styled.div`
     }
 `;
 
-const ScoreLayout = ({ coments }: { coments: IComment[] | [] }) => {
+const ScoreLayout = ({ comments }: { comments: any[] | [] }) => {
     const [mylevel, setMylevel] = useState<any[]>([]);
     const [max, setMax] = useState(-1);
     let [avg, setAvg] = useState(-1);
     useEffect(() => {
-        if (coments.length > 0) {
+        if (comments.length > 0) {
             const init = [-1, 0, 0, 0, 0, 0];
-            coments.forEach((com) => {
+            comments.forEach((com) => {
                 init[com.score] += 1;
             });
 
             const avg =
-                coments
+                comments
                     .map((c) => c.score)
                     .reduce(
                         (sum: number, currValue: number) => (sum += currValue),
                         0
-                    ) / coments.length;
+                    ) / comments.length;
             setAvg(avg);
             setMax(Math.max(...init));
             setMylevel(init);
@@ -89,7 +88,7 @@ const ScoreLayout = ({ coments }: { coments: IComment[] | [] }) => {
 
     return (
         <ScoreLayoutContainer>
-            {coments.length !== 0 ? (
+            {comments.length !== 0 ? (
                 <>
                     <ScoreWrapper>
                         <h1>팀원들의 평점</h1>
@@ -102,28 +101,28 @@ const ScoreLayout = ({ coments }: { coments: IComment[] | [] }) => {
                     >
                         <ScoreProgress
                             label="1점"
-                            percent={(mylevel[1] / coments.length) * 100}
+                            percent={(mylevel[1] / comments.length) * 100}
                             active={mylevel[1] === max}
                         />
 
                         <ScoreProgress
                             label="2점"
-                            percent={(mylevel[2] / coments.length) * 100}
+                            percent={(mylevel[2] / comments.length) * 100}
                             active={mylevel[2] === max}
                         />
                         <ScoreProgress
                             label="3점"
-                            percent={(mylevel[3] / coments.length) * 100}
+                            percent={(mylevel[3] / comments.length) * 100}
                             active={mylevel[3] === max}
                         />
                         <ScoreProgress
                             label="4점"
-                            percent={(mylevel[4] / coments.length) * 100}
+                            percent={(mylevel[4] / comments.length) * 100}
                             active={mylevel[4] === max}
                         />
                         <ScoreProgress
                             label="5점"
-                            percent={(mylevel[5] / coments.length) * 100}
+                            percent={(mylevel[5] / comments.length) * 100}
                             active={mylevel[5] === max}
                         />
                     </div>
@@ -131,7 +130,7 @@ const ScoreLayout = ({ coments }: { coments: IComment[] | [] }) => {
                     <CommentLayout>
                         <h1 className="title">Comment</h1>
                         <div className="content">
-                            {coments.map((comment, i) => {
+                            {comments.map((comment, i) => {
                                 return <Comment {...comment} />;
                             })}
                         </div>

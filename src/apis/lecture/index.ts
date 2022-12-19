@@ -31,3 +31,21 @@ export const getLectureRecruits = async (
         });
     });
 };
+
+export const getLectureReviews = async (
+    lectureId: number | string,
+    page?: number
+) => {
+    return await Api.get(
+        `lecture/${lectureId}/review/all?page=${page ? page : 1}`
+    ).then((res) => {
+        console.log("get response", res);
+        const result = res.data.reviewList;
+        return result.map((i: any) => {
+            return {
+                lecture: res.data.lecture,
+                ...i,
+            };
+        });
+    });
+};

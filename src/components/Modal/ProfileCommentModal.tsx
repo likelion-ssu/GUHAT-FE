@@ -7,6 +7,7 @@ import styled from "@emotion/styled";
 import MainButton from "../Button";
 import InputTextArea from "../InputBox/InputTextArea";
 
+import { writeMemberComment } from "@/apis/profile";
 import AngryIcon from "@/assets/Angry.png";
 import CloseIcon from "@/assets/close.svg";
 import MessageIcon from "@/assets/comment_review.png";
@@ -14,6 +15,7 @@ import CryingIcon from "@/assets/Crying.png";
 import HappyIcon from "@/assets/Happy.png";
 import LoveIcon from "@/assets/Love.png";
 import SmileIcon from "@/assets/Smiling.png";
+import { useParams } from "react-router-dom";
 import { Rating } from "react-simple-star-rating";
 
 const CommentLayoutcontainer = styled.div`
@@ -102,12 +104,25 @@ const ProfileCommentModal = ({
     const [canWrite, setCanWrite] = useState(true);
     const [rating, setRating] = useState(-1);
     const [modalVisible, setModalVisible] = useRecoilState(modalState);
+
+    const { id } = useParams();
     useEffect(() => {
         console.log(likeCheck);
     }, [likeCheck]);
     const onClickSubmit = () => {
         console.log(comment);
-        setModalVisible(false);
+        const body = {
+            emojiType: likeCheck ? parseInt(likeCheck) : 1,
+            score: rating,
+            comment: input,
+        };
+        writeMemberComment(body, id!!).then((res) => {
+            console.log(res);
+            setModalVisible(false);
+            alert("작성 성공");
+            window.location.reload();
+        });
+
         alert(input);
     };
     const handleRating = (rate: number) => {

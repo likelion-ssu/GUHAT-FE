@@ -10,9 +10,7 @@ const APILayout = ({
     children: ReactNode;
     modal?: any;
 }) => {
-    useEffect(() => {
-        console.log("api state triger");
-    }, []);
+    useEffect(() => {}, []);
 
     return (
         <>

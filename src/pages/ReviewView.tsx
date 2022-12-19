@@ -1,9 +1,16 @@
 import BackArrowBtn from "@/components/Button/BackArrow";
-import MainLayout from "@/components/Layout/MainLayout";
+import APILayout from "@/components/Layout/APILayout";
+
 import { StickBackBtn } from "@/domain/recruitView/RecruitViewLayout.style";
 import CommentLayout from "@/domain/reviewView/Layout/CommentLayout";
+import { loadingState } from "@/storage/recoil/loadingState";
+import { modalState } from "@/storage/recoil/modalState";
 import styled from "@emotion/styled";
+import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { getReview, getReviewComment } from "../apis/review/index";
 import ReviewViewLayout from "../domain/reviewView/Layout/ReviewViewLayout";
 
 const ReviewViewContainer = styled.div`
@@ -16,75 +23,61 @@ const ReviewViewContainer = styled.div`
 `;
 
 const ReviewView = () => {
-    const { id } = useParams();
-    const review = {
-        isOwner: true,
-        title: "알고리즘 팀플",
-        year: "2020",
-        semester: "1학기",
-        createdAt: "2022-12-12", //작성일
+    const [loading, setLoading] = useRecoilState(loadingState);
+    const [modalVisible, setModalVisible] = useRecoilState(modalState);
+    const { id, lectureId } = useParams();
+    const [review_id, setReviewId] = useState<string | null>(null);
+    const [lecture_id, setLectureId] = useState<string | null>(null);
 
-        writerId: "29292",
-        nickname: "익명111",
-        writerLevel: 2,
-        memberNum: 4, //필요인원
-        startDate: "1월",
-        endDate: "2월",
-        reviewLevel: "하",
+    const { status, data } = useQuery(
+        ["reviewPost", id],
 
-        subject: "주제입니다",
-        detail: "사아아ㅏ리멀덜먀ㅓ대ㅓㄹ매ㅓ댜ㅓㅐㅓㅐㅑㅓ",
-        files: [],
-    };
+        () => getReview(id!!, lectureId!!),
+        {
+            onSuccess: (data: any) => {
+                console.log("review response", data);
+            },
+        }
+    );
 
-    const comment = {
-        canWrite: true, //해당 팀플 팀원일때만 & 작성자가 아닐때
+    const resultComment = useQuery(
+        ["reviewCommentList", id],
+        () => getReviewComment(id!!, lectureId!!),
+        {
+            onSuccess: (data: any) => {},
+            onError: (err: any) => {
+                console.log("comment error", err);
+            },
+        }
+    );
 
-        comments: [
-            {
-                isLike: true,
-                year: "2022",
-                semester: "1학기",
-                createdAt: "2022-02-01 08:12:40", //yyyy-mm-dd hh:mm:ss 형식
-                comment: "내용내요요요애뇽",
-            },
-            {
-                isLike: false,
-                year: "2022",
-                semester: "1학기",
-                createdAt: "2022-01-01 12:40:00",
-                comment: "내용내요요요애뇽",
-            },
-            {
-                isLike: true,
-                year: "2022",
-                semester: "1학기",
-                createdAt: "2022-12-11 12:40:00",
-                comment: "내용내요요요애뇽",
-            },
-            {
-                isLike: false,
-                year: "2022",
-                semester: "1학기",
-                createdAt: "2022-12-01 12:40:00",
-                comment: "내용내요요요애뇽",
-            },
-        ],
-    };
+    useEffect(() => {
+        setModalVisible(false);
+        if (id) setReviewId(id);
+        if (lectureId) setLectureId(lectureId);
+    }, []);
+    setLoading(status !== "success");
+
     const onClickBack = () => {
         window.history.back();
     };
+    console.log("response", data);
     return (
         <>
             <StickBackBtn>
                 <BackArrowBtn clickListener={onClickBack} />
             </StickBackBtn>
-            <MainLayout>
-                <ReviewViewContainer>
-                    <ReviewViewLayout {...review} />
-                    <CommentLayout {...comment} reviewId={id ? id : 0} />
-                </ReviewViewContainer>
-            </MainLayout>
+            <APILayout modal={null}>
+                {data?.data ? (
+                    <ReviewViewContainer>
+                        <ReviewViewLayout {...data.data.data} />
+                        <CommentLayout
+                            {...resultComment.data}
+                            {...data.data.data}
+                        />
+                    </ReviewViewContainer>
+                ) : null}
+            </APILayout>
         </>
     );
 };

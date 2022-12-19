@@ -12,7 +12,7 @@ export const MyProfileWrap = styled.div`
     padding-bottom: 0;
     background: #303644;
     color: ${themes.colors.gray_100};
-    box-shadow: 12px 12px 0px #999999;
+    box-shadow: 8px 8px 0px #999999;
     border-radius: 1rem;
 `;
 
@@ -49,7 +49,7 @@ export const MyProfileImg = styled.div<{ img?: any | null }>`
             ? `background-image : url(${img});`
             : `background-image : url( ${DefaultIcon});`}
     /* background-image: ${(img) => (img ? `url(${img})` : null)}; */
-    background-size: contain;
+    background-size: cover;
     background-position: center;
 `;
 export const MyProfileInfoContainer = styled.div`

@@ -3,7 +3,6 @@ import ScoreProgress from "@/components/ScoreProgress";
 import StarScoreProgres from "@/components/StarScoreProgress";
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
-import { IComment } from "../../../types/comment.types";
 
 const ScoreLayoutContainer = styled.div`
     display: flex;
@@ -62,7 +61,7 @@ const CommentLayout = styled.div`
     }
 `;
 
-const ScoreLayout = ({ coments }: { coments: IComment[] | [] }) => {
+const ScoreLayout = ({ coments }: { coments: any[] | [] }) => {
     const [mylevel, setMylevel] = useState<any[]>([]);
     const [max, setMax] = useState(-1);
     let [avg, setAvg] = useState(-1);

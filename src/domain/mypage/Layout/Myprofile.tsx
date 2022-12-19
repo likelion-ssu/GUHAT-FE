@@ -109,7 +109,9 @@ const Myprofile = ({ ...props }: Props) => {
                                         ? `url(${userInfo.profileImg})`
                                         : DefaultIcon
                                 }`,
-                                backgroundSize: "cover",
+                                backgroundSize: "contain",
+                                backgroundRepeat: "no-repeat",
+                                backgroundPosition: "center",
                             }}
                         ></div>
                         <p className="level-content">

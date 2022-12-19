@@ -75,7 +75,7 @@ const ReviewPostLayout = () => {
         setModalVisible(false);
     }, []);
 
-    const onChangeDetail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChangeDetail = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         e.preventDefault();
         if (detail.length < 499) setDetail(e.target.value);
     };
@@ -86,7 +86,6 @@ const ReviewPostLayout = () => {
     };
 
     const onClickUplod = () => {
-        alert("파일업로드");
         if (fileRef) fileRef.current!!.click();
     };
 
@@ -124,8 +123,9 @@ const ReviewPostLayout = () => {
                 const reviewId = res.data.reviewId;
                 createReviewFile(id!!, reviewId, formData).then((res) => {
                     console.log(res);
+                    alert("리뷰 작성 완료!");
                     setLoading(false);
-                    navigator("/review/" + reviewId);
+                    navigator(`/review/${reviewId}/${id}`);
                 });
             })
             .catch((err) => {
@@ -218,7 +218,7 @@ const ReviewPostLayout = () => {
                 <RecruitContentLayout isFilled={detail.length !== 0}>
                     <RecruitContentProgress isFilled={detail.length !== 0} />
                     <div className="content-label">상세설명</div>
-                    <input
+                    <textarea
                         className="content-inputbox"
                         onChange={onChangeDetail}
                     />

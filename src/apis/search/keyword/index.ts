@@ -32,7 +32,7 @@ export const useKeywordResults = (keyword: string, option: string) => {
         () => getResultByKeyword(keyword, option),
         {
             enabled: !!keyword && keyword !== "",
-            select: (data) => data.slice(0, 10),
+            select: (data) => data,
         }
     );
 };

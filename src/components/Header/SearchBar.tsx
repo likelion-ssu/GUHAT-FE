@@ -31,11 +31,19 @@ const SearchBar = () => {
     const [searchResult, setSeachResult] = useState<string[] | null>([]);
     const [submitted, setSubmitted] = useState<boolean>(true);
     const [keywordList, setKeywordList] = useState<string[]>([
-        "refaef",
-        "efafefaf",
-        "2qrwq",
-        "909re0",
-        "9w09r0e",
+        "리액트",
+        "Django",
+        "Springboot",
+        "Figma",
+        "영어회화",
+    ]);
+
+    const [LecturekeywordList, setLectureKeywordList] = useState<string[]>([
+        "캡스톤디자인",
+        "독서와토론",
+        "사용자인터페이스",
+        "창의적공학설계",
+        "기업가의정신",
     ]);
 
     const { status, data } = useKeywordResults(apiQuery, option);
@@ -67,7 +75,6 @@ const SearchBar = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("submit", search);
         setTimeout(() => {
             moveToResultPage(search);
         }, 200);
@@ -82,7 +89,7 @@ const SearchBar = () => {
     const optionHandler = (op: string) => {
         moveToResultPage(search);
         setSubmitted(true);
-        setSearch("");
+        // setSearch("");
     };
 
     const onDebouncedChangeListener = debounce(
@@ -90,7 +97,7 @@ const SearchBar = () => {
             console.log("action", e.target.value);
             if (e.target.value !== "") setApiQuery(e.target.value);
         },
-        500
+        300
     );
 
     const callApi = useCallback(onDebouncedChangeListener, []);
@@ -139,13 +146,15 @@ const SearchBar = () => {
             default: {
                 return (
                     <>
-                        {search.length !== 0 && !submitted ? (
+                        {option !== "스택" &&
+                        search.length !== 0 &&
+                        !submitted ? (
                             <SearchResult
                                 list={data.map(
                                     (d: any) =>
                                         `${
-                                            d.name.length > 30
-                                                ? d.name.substring(0, 32) +
+                                            d.name.length > 20
+                                                ? d.name.substring(0, 19) +
                                                   "..."
                                                 : d.name
                                         } /  ${d.professor}`
@@ -194,7 +203,9 @@ const SearchBar = () => {
             <SearchWrap isFocused={!submitted} ref={inputRef}>
                 {!submitted && search.length === 0 ? (
                     <RecomandKeywords
-                        keywords={keywordList}
+                        keywords={
+                            option === "스택" ? keywordList : LecturekeywordList
+                        }
                         clickListener={(keyword) => {
                             moveToResultPage(keyword);
                         }}
