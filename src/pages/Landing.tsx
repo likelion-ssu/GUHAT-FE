@@ -75,7 +75,7 @@ const Landing = () => {
                     <button className="logo-button">GUHAT을 소개합니다</button>
                 </LandingBgLayout>
                 <LoginFormLayout>
-                    <h1>U-saint로 접속하기!</h1>
+                    <h1>U-saint 계정으로 시작하기</h1>
                     <form
                         onSubmit={(e) => {
                             e.preventDefault();
