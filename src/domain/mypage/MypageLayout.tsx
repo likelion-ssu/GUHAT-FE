@@ -52,7 +52,7 @@ const MypageLayout = () => {
             day: "8일",
             score: 5,
             content: "최고에요",
-            emoji: UnsmileEmoji,
+            emojiType: 1,
         },
         {
             day: "8일",
@@ -87,7 +87,7 @@ const MypageLayout = () => {
                                 profileImg={userInfo?.profileImg}
                                 nickname={userInfo?.nickname}
                             />
-                            <ScoreLayout coments={coments} />
+                            <ScoreLayout comments={result[0].data.comments} />
                             <SubContentLayout {...result[0].data} />
                         </MypageContentLayout>
                     </>

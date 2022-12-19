@@ -58,8 +58,7 @@ border: 2px solid #999999;`
 
         textarea {
             height: 10rem !important;
-            padding: 2rem 2import { updateIntro } from '../../../apis/profile/index';
-rem;
+            padding: 2rem 2rem;
             line-height: 2rem;
             font-size: 1.1rem;
         }
@@ -140,6 +139,8 @@ const AboutMeLayout = ({ ...props }: Props) => {
                     style={{
                         backgroundImage: `url(${props.profileImg})`,
                         backgroundSize: "contain",
+                        backgroundRepeat: "no-repeat",
+                        backgroundPosition: "center",
                     }}
                 >
                     {" "}

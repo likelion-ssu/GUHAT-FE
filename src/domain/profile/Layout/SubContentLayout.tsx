@@ -1,5 +1,4 @@
 import { updateDetail } from "@/apis/profile";
-import EditButton from "@/components/Button/EditButton";
 import { loadingState } from "@/storage/recoil/loadingState";
 import styled from "@emotion/styled";
 import { useState } from "react";
@@ -54,37 +53,6 @@ const EditWrapper = styled.div`
 `;
 
 const SubContentLayout = ({ ...props }) => {
-    const teamhistory = [
-        {
-            id: 1,
-            endDate: "2022-08-09",
-            title: "사용자 인터페이스 사람구함",
-        },
-
-        {
-            id: 2,
-            endDate: "2022-02-11",
-            title: "창공 사람구함",
-        },
-
-        {
-            id: 1,
-            endDate: "2022-07-09",
-            title: "사용자이터페이스 사람구함",
-        },
-
-        {
-            id: 1,
-            endDate: "2022-07-09",
-            title: "사용자이터페이스 사람구함",
-        },
-
-        {
-            id: 1,
-            endDate: "2022-07-09",
-            title: "사용자이터페이스 사람구함",
-        },
-    ];
     const [loading, setLoading] = useRecoilState(loadingState);
     const [personality, setPersonality] = useState(props.personality);
     const [skill, setSkill] = useState(props.skill);
@@ -107,17 +75,6 @@ const SubContentLayout = ({ ...props }) => {
 
     return (
         <SubContentLayoutContainer mode={mode}>
-            <EditWrapper>
-                <EditButton
-                    saveMode={true}
-                    clickListener={() => {
-                        if (mode === MODE_VIEW)
-                            setMode((prev) => (prev ? MODE_VIEW : MODE_EDIT));
-                        else onClickSubmit();
-                    }}
-                />
-            </EditWrapper>
-
             <div className="content-wrapper">
                 <h1 className="content-label">PORTFOLIO</h1>
                 <PortFolioLayout mode={mode} files={props.files} />
@@ -134,7 +91,7 @@ const SubContentLayout = ({ ...props }) => {
             </div>
             <div className="content-wrapper">
                 <h1 className="content-label">TEAM HISTORY</h1>
-                <TeamHistoryList list={teamhistory} />
+                <TeamHistoryList list={props.history} />
             </div>
             <div className="content-wrapper ">
                 <h1 className="content-label">PERSONALITY</h1>

@@ -56,8 +56,7 @@ border: 2px solid #999999;`
 
         textarea {
             height: 10rem !important;
-            padding: 2rem ;
-rem;
+            padding: 2rem 2rem;
             line-height: 2rem;
             font-size: 1.1rem;
         }
@@ -96,12 +95,12 @@ const EditWrapper = styled.div`
 `;
 
 interface Props {
-    nickname: string;
-    introduction: string;
-    detail: string;
+    nickname?: string;
+    introduction?: string;
+    detail?: string;
 }
 
-const AboutMeLayout = ({ ...props }: Props) => {
+const AboutMeLayout = ({ ...props }) => {
     const MODE_VIEW = 0;
     const MODE_EDIT = 1;
     const [mode, setMode] = useState(MODE_VIEW);
@@ -127,7 +126,15 @@ const AboutMeLayout = ({ ...props }: Props) => {
         <AboutmeContainer mode={mode}>
             <MyProfileImgWrapper>
                 <div className="circle sub-circle"></div>
-                <div className="circle main-circle"></div>
+                <div
+                    className="circle main-circle"
+                    style={{
+                        backgroundImage: `url(${props.profileImg})`,
+                        backgroundSize: "contain",
+                        backgroundRepeat: "no-repeat",
+                        backgroundPosition: "center",
+                    }}
+                ></div>
             </MyProfileImgWrapper>
             <div className="aboutme-nickname"> {props.nickname}</div>
 

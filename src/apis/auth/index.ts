@@ -2,11 +2,11 @@ import { getCookieToken, setRefreshToken } from "@/storage/cookie";
 import axios from "axios";
 
 // @ts-ignore
-const getAccessToekn = async () => {
+const getAccessToken = async () => {
     const refreshToken = getCookieToken();
 
     let token = "";
-
+    let alertCheck = true;
     if (refreshToken) {
         const body = {
             refreshToken: refreshToken,
@@ -18,10 +18,11 @@ const getAccessToekn = async () => {
                     "Access-Control-Allow-Origin": "*",
                 },
                 withCredentials: true,
-                baseURL: "http://localhost:8003",
+                baseURL: process.env.REACT_APP_AUTH_BASE_URL,
             })
             .then((res) => {
                 console.log(res.data.data);
+
                 let res_refreshToken = res.data.data.refreshToken;
 
                 if (res_refreshToken && refreshToken !== res_refreshToken)
@@ -29,10 +30,13 @@ const getAccessToekn = async () => {
                 return res.data.data.accessToken;
             })
             .catch((error) => {
+                if (error.response.data.message === "회원정보 없음") {
+                    //removeCookieToken();
+                }
                 console.log(error);
             });
         return token;
     } else return token;
 };
 
-export { getAccessToekn };
+export { getAccessToken };

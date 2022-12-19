@@ -6,9 +6,11 @@ import SearchDetail from "@pages/SearchDetail";
 import routerType from "@_types/router.types";
 import Lecture from "../pages/Lecture";
 import MyPage from "../pages/MyPage";
+import NotFound from "../pages/NotFound";
 import ProfileView from "../pages/ProfileView";
 import RecruitPost from "../pages/RecruitPost";
 import RecruitView from "../pages/RecruitView";
+import ReviewMore from "../pages/ReviewMore";
 import ReviewPost from "../pages/ReviewPost";
 import ReviewView from "../pages/ReviewView";
 const pagesData: routerType[] = [
@@ -73,7 +75,7 @@ const pagesData: routerType[] = [
 
     {
         name: "ReviewView",
-        path: "/review/:id",
+        path: "/review/:id/:lectureId",
         component: <ReviewView />,
         exact: false,
     },
@@ -84,9 +86,16 @@ const pagesData: routerType[] = [
         component: <RecruitMore />,
         exact: false,
     },
+
+    {
+        name: "ReviewsList",
+        path: "/reviews",
+        component: <ReviewMore />,
+        exact: false,
+    },
     {
         name: "Profile",
-        path: "/profile",
+        path: "/profile/:id",
         component: <ProfileView />,
         exact: false,
     },
@@ -94,7 +103,7 @@ const pagesData: routerType[] = [
     {
         name: "Notfound",
         path: "*",
-        component: <h1>Notfound</h1>,
+        component: <NotFound />,
     },
 ];
 

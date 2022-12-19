@@ -25,7 +25,7 @@ interface Props {
     level?: string;
 }
 
-const MyProfile = ({ nickName, name, semester, univ, major, level }: Props) => {
+const MyProfile = ({ ...props }) => {
     const total = 100;
 
     const userInfo = useRecoilValue(userState);
@@ -44,7 +44,7 @@ const MyProfile = ({ nickName, name, semester, univ, major, level }: Props) => {
                     img={userInfo?.profileImg ? userInfo?.profileImg : null}
                 />
                 <MyprofileinfoWrap>
-                    <p className="profile-number">3</p>
+                    <p className="profile-number">{userInfo?.currentProject}</p>
                     <p className="profile-label">진행중인 팀플</p>
                 </MyprofileinfoWrap>
                 <MyprofileinfoWrap>

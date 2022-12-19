@@ -1,7 +1,7 @@
 import themes from "@/styles/themes";
 import ReviewThumb from "@assets/review_thumb.svg";
 import styled from "@emotion/styled";
-export const ReviewHistoryContainer = styled.div`
+export const ReviewHistoryContainer = styled.button`
     position: relative;
     width: 100%;
     display: flex;
@@ -49,6 +49,7 @@ export const ReviewHistoryContainer = styled.div`
         max-height: 4.5rem;
         overflow: hidden;
         line-height: 1.5rem;
+        text-align: left;
     }
 `;
 export const ReviewTagThumb = styled.div`

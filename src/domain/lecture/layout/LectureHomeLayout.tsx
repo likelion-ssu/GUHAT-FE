@@ -3,7 +3,11 @@ import { useState } from "react";
 import { useQueries } from "react-query";
 import { useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { getLecture, getLectureRecruits } from "../../../apis/lecture/index";
+import {
+    getLecture,
+    getLectureRecruits,
+    getLectureReviews,
+} from "../../../apis/lecture/index";
 import { loadingState } from "../../../storage/recoil/loadingState";
 import RecruitListLayout from "./RecruitListLayout";
 import ReviewListLayout from "./ReviewListLayout";
@@ -28,6 +32,7 @@ const LectureHomeLayout = () => {
     const [loading, setLoading] = useRecoilState(loadingState);
     const [tab, setTab] = useState("main");
     const { id } = useParams();
+
     const result = useQueries([
         {
             queryKey: ["lecture", id],
@@ -38,10 +43,18 @@ const LectureHomeLayout = () => {
         },
 
         {
-            queryKey: ["getLectureRecruits"],
+            queryKey: ["getLectureRecruits", id],
             queryFn: () => getLectureRecruits(id!!),
             onSuccess: (data: any) => {
                 console.log("recruits", data);
+            },
+        },
+
+        {
+            queryKey: ["getLectureReviews", id],
+            queryFn: () => getLectureReviews(id!!),
+            onSuccess: (data: any) => {
+                console.log("review", data);
             },
         },
     ]);
@@ -55,7 +68,7 @@ const LectureHomeLayout = () => {
             case "review":
                 return (
                     <>
-                        <ReviewListLayout list={reviews} />
+                        <ReviewListLayout list={result[2].data!!} />
                     </>
                 );
         }

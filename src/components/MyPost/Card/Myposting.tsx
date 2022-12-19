@@ -1,3 +1,5 @@
+import { displayLevel } from "@/util/displayLevel";
+import { useNavigate } from "react-router-dom";
 import commentIcon from "../../../assets/comment.svg";
 import thumbIcon from "../../../assets/thumbUp.svg";
 import {
@@ -10,37 +12,60 @@ import {
 } from "./Myposting.style";
 import Profile from "./Profile";
 
-interface Props {
-    title: string;
-    type?: string;
-    likeCount?: number | null;
-    commentCount?: number | null;
-}
-const Myposting = ({ title, type, likeCount, commentCount }: Props) => {
+const Myposting = ({ ...props }) => {
+    console.log(props);
+    const navigator = useNavigate();
+    const onClickItem = (type: string) => {
+        if (type === "lectureReview") {
+            const lectureId = props.data.lecture.lectureId;
+            const id = props.data.id;
+            navigator(`/review/${id}/${lectureId}/`);
+        } else {
+            const id = props.data.id;
+            navigator(`/recruit/${id}`);
+        }
+    };
     return (
-        <MyPostWrap>
-            <MyPosTitle>{title}</MyPosTitle>
-            <MyPostLecturenWrap>
-                <p>사용자 인터페이스 및 실습 / </p>
-                <p>최지웅</p>
-            </MyPostLecturenWrap>
-            <MyPostContent>
-                {"안녕하세요. 저는 나랏말싸미 듕귁에 달아 물자와로 서로 사맛디 아니할쎄 내 이를 어녀삐녀겨 새로 스물 여덟 글..." +
-                    "안녕하세요. 저는 나랏말싸미 듕귁에 달아 물자와로 서로 사맛디 아니할쎄 내 이를 어녀삐녀겨 새로 스물 여덟 글..."}
-            </MyPostContent>
-            <MyPostIconContainer>
+        <>
+            <MyPostWrap onClick={() => onClickItem(props.type)}>
+                <MyPosTitle>{props.data.title}</MyPosTitle>
                 <MyPostLecturenWrap>
-                    <img src={thumbIcon} alt="좋아요" />
-                    <p>{likeCount ? likeCount : 0}</p>
+                    <p>{props.data.lecture?.name}/ </p>
+                    <p className="professor">
+                        {" "}
+                        {props.data.lecture?.professors?.join()}
+                    </p>
                 </MyPostLecturenWrap>
-                <MyPostLecturenWrap>
-                    <img src={commentIcon} alt="댓글" />
-                    <p>{commentCount ? commentCount : 0}</p>
-                </MyPostLecturenWrap>
-            </MyPostIconContainer>
-            <Profile level="LV2" nickname="닉네임" />
-            <MyPostingBgImg type={type} />
-        </MyPostWrap>
+                <MyPostContent>{props.data.detail}</MyPostContent>
+                {props.type === "lectureReview" ? (
+                    <MyPostIconContainer>
+                        <MyPostLecturenWrap>
+                            <img src={thumbIcon} alt="좋아요" />
+                            <p>
+                                {props.data.likeCount
+                                    ? props.data.likeCount
+                                    : 0}
+                            </p>
+                        </MyPostLecturenWrap>
+                        <MyPostLecturenWrap>
+                            <img src={commentIcon} alt="댓글" />
+                            <p>
+                                {props.data?.commentCount
+                                    ? props.data.commentCount
+                                    : 0}
+                            </p>
+                        </MyPostLecturenWrap>
+                    </MyPostIconContainer>
+                ) : null}
+
+                <Profile
+                    profileImg={props.data?.writer?.profileImg}
+                    level={displayLevel(props.data?.writer?.level)}
+                    nickname={props.data?.writer?.nickname}
+                />
+                <MyPostingBgImg type={props.type} />
+            </MyPostWrap>
+        </>
     );
 };
 

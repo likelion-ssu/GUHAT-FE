@@ -101,7 +101,6 @@ const RecruitMemModal = ({ members }: { members: any[] }) => {
     };
 
     const addMember = (mem: any) => {
-        console.log("please..add", mem);
         const group = [...selecteMember[mem.titleIndex].member];
         const addIndex = group.indexOf(null);
         if (addIndex !== -1) {
@@ -113,11 +112,10 @@ const RecruitMemModal = ({ members }: { members: any[] }) => {
                 isNew: true,
             };
         } else {
-            console.log("자리가 없잖아!!!!!");
         }
         const newState = [...selecteMember];
         newState[mem.titleIndex].member = group;
-        console.log("changed..........", newState);
+
         setCheckedMem({ ...mem });
         setSelectedMember(newState);
     };
@@ -357,6 +355,9 @@ const RecruitMemModal = ({ members }: { members: any[] }) => {
                     onClick={onClickSubmit}
                 >
                     모집현황 저장
+                </button>
+                <button className="modal-recuit-group-button">
+                    모집 마감하기
                 </button>
             </div>
         </RecruitMemModalContainer>

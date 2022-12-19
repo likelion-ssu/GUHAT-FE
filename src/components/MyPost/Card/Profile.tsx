@@ -20,7 +20,7 @@ const Profile = ({ profileImg, level, nickname }: Props) => {
             </ProfileWrap>
             <ProfileImgWrap>
                 <ProfileImgBgCircle />
-                <ProfileImg img={undefined} />
+                <ProfileImg img={profileImg ? profileImg : null} />
             </ProfileImgWrap>
         </div>
     );

@@ -1,4 +1,3 @@
-import ReviewHistory from "@/components/History/ReviewHistory";
 import styled from "@emotion/styled";
 const ReviewContainer = styled.div`
     position: absolute;
@@ -12,11 +11,7 @@ const ReviewContainer = styled.div`
 `;
 
 const ReviewHistoryLayout = () => {
-    return (
-        <ReviewContainer>
-            <ReviewHistory />;
-        </ReviewContainer>
-    );
+    return <ReviewContainer></ReviewContainer>;
 };
 
 export default ReviewHistoryLayout;

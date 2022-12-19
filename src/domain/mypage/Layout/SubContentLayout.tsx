@@ -58,37 +58,6 @@ const EditWrapper = styled.div`
 `;
 
 const SubContentLayout = ({ ...props }) => {
-    const teamhistory = [
-        {
-            id: 1,
-            endDate: "2022-08-09",
-            title: "사용자 인터페이스 사람구함",
-        },
-
-        {
-            id: 2,
-            endDate: "2022-02-11",
-            title: "창공 사람구함",
-        },
-
-        {
-            id: 1,
-            endDate: "2022-07-09",
-            title: "사용자이터페이스 사람구함",
-        },
-
-        {
-            id: 1,
-            endDate: "2022-07-09",
-            title: "사용자이터페이스 사람구함",
-        },
-
-        {
-            id: 1,
-            endDate: "2022-07-09",
-            title: "사용자이터페이스 사람구함",
-        },
-    ];
     const [loading, setLoading] = useRecoilState(loadingState);
     const [personality, setPersonality] = useState(props.personality);
     const [skill, setSkill] = useState(props.skill);
@@ -138,7 +107,7 @@ const SubContentLayout = ({ ...props }) => {
             </div>
             <div className="content-wrapper">
                 <h1 className="content-label">TEAM HISTORY</h1>
-                <TeamHistoryList list={teamhistory} />
+                <TeamHistoryList list={props.history} />
             </div>
             <div className="content-wrapper ">
                 <h1 className="content-label">Personality</h1>

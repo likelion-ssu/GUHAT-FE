@@ -14,7 +14,7 @@ export const RecruitApplyItemContainer = styled.button`
     :hover {
         //border: 2px solid #374765;
         //color: white !important;
-        transform: scale(1.1);
+        transform: scale(1.05);
     }
 `;
 

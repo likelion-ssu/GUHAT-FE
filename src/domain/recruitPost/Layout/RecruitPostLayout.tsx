@@ -55,11 +55,8 @@ const RecruitPostLayout = () => {
             setLoading(false);
             console.log(res.data.data);
             const data = res.data.data;
-            if (data.length === 0) {
-                alert("휴학 중인 경우 모집글 작성이 불가능 합니다!");
-                window.history.back();
-            }
-            scheduleParseer(data);
+
+            if (data.length > 0) scheduleParseer(data);
         });
 
         setModalVisible(false);
@@ -92,9 +89,13 @@ const RecruitPostLayout = () => {
 
         requestSchedule()
             .then((res) => {
+                const data = res.data.data;
+                if (data.length === 0) {
+                    alert("휴학 중인 경우 모집글 작성이 불가능 합니다!");
+                    window.history.back();
+                }
                 setLecture({ index: -1, item: "--선택해주세요--" });
                 console.log(res.data.data);
-                const data = res.data.data;
                 scheduleParseer(data);
                 setLoading(false);
             })
@@ -135,12 +136,12 @@ const RecruitPostLayout = () => {
             });
     };
 
-    const onChangeDetail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChangeDetail = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         e.preventDefault();
         if (detail.length < 499) setDetail(e.target.value);
     };
 
-    const onChangePrioirty = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChangePrioirty = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         e.preventDefault();
         if (priority.length < 99) setPrioirty(e.target.value);
     };
@@ -305,19 +306,21 @@ const RecruitPostLayout = () => {
                 <RecruitContentLayout isFilled={detail.length !== 0}>
                     <RecruitContentProgress isFilled={detail.length !== 0} />
                     <div className="content-label">상세설명</div>
-                    <input
+
+                    <textarea
                         className="content-inputbox"
                         onChange={onChangeDetail}
-                    />
+                    ></textarea>
                     <p className="content-input-count">{detail.length}/500</p>
                 </RecruitContentLayout>
                 <RecruitContentLayout>
                     <RecruitContentProgress isFilled={priority.length !== 0} />
                     <div className="content-label">우대사항</div>
-                    <input
+                    <textarea
                         className="content-inputbox"
                         onChange={onChangePrioirty}
-                    />
+                    ></textarea>
+
                     <p className="content-input-count">{priority.length}/100</p>
                 </RecruitContentLayout>
                 <RecruitContentLayout>
@@ -338,9 +341,7 @@ const RecruitPostLayout = () => {
                         lecture.item !== "수강 중인 강의가 없습니다" &&
                         lecture.index !== -1 &&
                         title !== "" &&
-                        detail.length !== 0 &&
-                        priority.length !== 0 &&
-                        link.length !== 0
+                        detail.length !== 0
                     )
                 }
             >

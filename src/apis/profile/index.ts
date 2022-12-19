@@ -47,6 +47,29 @@ export const useGetMyRecruitPost = (page: number) => {
     );
 };
 
+export const getMyReviewPost = async (page: number) => {
+    return await Api.get(`/profile/review/my?page=${page}`)
+        .then((res) => res.data.data)
+        .catch((e) => console.log(e));
+};
+
+export const useGetMyReviewPost = (page: number) => {
+    return useQuery(
+        ["profile-recentReview", page],
+        () => getMyReviewPost(page),
+        {
+            enabled: !!page,
+            select: (data: any[]) =>
+                data.map((item: any, idx: number) => {
+                    return {
+                        lecture: item.lecture,
+                        ...item.review,
+                    };
+                }),
+        }
+    );
+};
+
 export const uploadFiiles = async (profile: FormData) => {
     return await Api.post("profile/file", profile, {
         headers: {
@@ -80,7 +103,7 @@ export const updateProfile = async (profile: FormData, nickname: string) => {
 };
 
 export const getProfile = async () => {
-    return await Api.get("user/").then((res) => {
+    return await Api.get("home/user/").then((res) => {
         console.log(res);
         return res.data.data;
     });
@@ -98,9 +121,24 @@ export const useSaveProfile = (data: IUserState) => {
 };
 
 export const updateIntro = (intro: string, detail: string) => {
-    return Api.patch("/profile/intro", { introduction: intro, detail: detail });
+    return Api.patch("/profile/intro", {
+        introduction: intro ? intro : "",
+        detail: detail ? detail : "",
+    });
 };
 
 export const updateDetail = (skill: string[], personality: number[]) => {
     return Api.patch("/profile/detail", { skill, personality });
+};
+
+export const getMemberProfile = async (id: number | string) => {
+    return await Api.get(`/project/profile/${id}`).then((res) => res.data.data);
+};
+
+export const writeMemberComment = async (
+    body: any,
+
+    profileId: any
+) => {
+    return await Api.post(`/project/profile/${profileId}/review/new`, body);
 };

@@ -1,8 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import { IReview } from "../../../types/review.types";
 import ReviewList from "../List/ReviewList";
 import { RecruitingListLayoutWrapper } from "./RecruitingLayout.style";
 
 const ReviewLayout = ({ list }: { list: IReview[] }) => {
+    const navigator = useNavigate();
     return (
         <>
             <RecruitingListLayoutWrapper>
@@ -23,7 +25,14 @@ const ReviewLayout = ({ list }: { list: IReview[] }) => {
                     reviewList={list.length > 3 ? list.slice(0, 3) : list}
                 />
                 <div style={{ width: "100%", position: "relative" }}>
-                    <button className="recruiting-more">더보기</button>
+                    <button
+                        className="recruiting-more"
+                        onClick={() => {
+                            navigator("/reviews");
+                        }}
+                    >
+                        더보기
+                    </button>
                 </div>
             </RecruitingListLayoutWrapper>
         </>

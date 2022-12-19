@@ -35,12 +35,15 @@ export const ProfileImgBgCircle = styled.div`
     border-radius: 3.5rem;
 `;
 
-export const ProfileImg = styled.div<{ img?: string | null }>`
+export const ProfileImg = styled.button<{ img?: string | null }>`
     position: absolute;
+    left: 0;
     background-color: ${themes.colors.gray_100};
     width: 3.5rem;
     height: 3.5rem;
     border-radius: 3.5rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     ${({ img }) =>
         img
             ? `background-image : url(${img});`

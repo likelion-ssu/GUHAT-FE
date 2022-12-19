@@ -40,6 +40,8 @@ export const RecruitContentDetail = styled.p`
     margin-top: 1rem;
     margin-bottom: 2rem;
     max-lines: 2;
+    height: 2.5rem;
+    overflow: hidden;
     color: ${themes.colors.gray_700};
 `;
 

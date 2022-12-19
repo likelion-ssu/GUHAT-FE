@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const MyPostingContainer = styled.div`
-    width: calc(100% - 20vw);
+    width: calc(100% - 20vw - 2rem);
     margin-top: 1rem;
     margin-left: 2rem;
     display: flex;
