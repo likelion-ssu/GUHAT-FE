@@ -9,10 +9,14 @@ export const MyPostWrap = styled.div`
     flex-direction: column;
     justify-content: center;
     min-width: 25vw;
+    max-width: 25vw;
     border-radius: 1rem;
     background-color: white;
     padding: 2.54rem;
-    box-shadow: 12px 12px 0px #999999;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+        rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+        rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
     :active {
         filter: brightness(0.8);
     }
@@ -20,17 +24,21 @@ export const MyPostWrap = styled.div`
 
 export const MyPosTitle = styled.p`
     font-weight: 700;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     align-items: center;
 `;
 
 export const MyPostContent = styled.p`
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.1rem;
+
     align-items: center;
-    height: 5rem;
+    height: 6rem;
     overflow: hidden;
     color: #9a9a9a;
+    .professor {
+        font-weight: 500;
+    }
 `;
 
 export const MyPostIconContainer = styled.div`
@@ -65,7 +73,7 @@ export const MyPostingBgImg = styled.div<{ type?: string }>`
     min-width: 13rem;
     height: 10rem;
     background-image: ${({ type }) =>
-        type === "major" ? `url(${ReviewBg})` : `url(${RecruitBg})`};
+        type === "lectureReview" ? `url(${ReviewBg})` : `url(${RecruitBg})`};
     background-size: cover;
     background-repeat: no-repeat;
 `;

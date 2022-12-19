@@ -4,13 +4,14 @@ import InputFiled from "@/components/InputBox/InputFiled";
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 
-import { createReviewComment, getReviewComment } from "@/apis/review";
+import { createReviewComment } from "@/apis/review";
 import MessageIcon from "@/assets/comment_review.png";
 import DisLikeIcon from "@/assets/round_dislike.svg";
 import LikeIcon from "@/assets/round_like.svg";
 import MainButton from "@/components/Button";
-import { useQuery } from "react-query";
+import { loadingState } from "@/storage/recoil/loadingState";
 import { useParams } from "react-router-dom";
+import { useRecoilState } from "recoil";
 
 const CommentLayoutcontainer = styled.div`
     width: 100%;
@@ -104,48 +105,31 @@ const EmojiContainer = styled.div`
     }
 `;
 
-interface Props {
-    reviewId: number | string;
-    canWrite: boolean;
-    comments: any[];
-}
-
-const CommentLayout = ({ ...props }: Props) => {
+const CommentLayout = ({ ...data }) => {
+    console.log("in comment props", data);
     const { id, lectureId } = useParams();
+    const [loading, setLoading] = useRecoilState(loadingState);
 
     const [input, setInput] = useState("");
     const [likeCheck, setLikeCheck] = useState<null | string>(null);
-    const [comments, setComment] = useState([]);
-    const [percent, setPercent] = useState(0);
-    const [canWrite, setCanWrite] = useState(false);
-    const { status, data } = useQuery(
-        ["reviewComment", id, canWrite],
-        () => getReviewComment(id!!, lectureId!!),
-        {
-            onSuccess: (data: any) => {
-                console.log(data.data.data.comments);
-                setCanWrite(data.data.data.canWrite);
-                setComment(data.data.data.comments);
-                setPercent(
-                    data.data.data.comments
-                        ? (data.data.data.comments.filter(
-                              (i: any) => i.status === "like"
-                          ).length /
-                              data.data.data.comments.length) *
-                              100
-                        : 0
-                );
-            },
-        }
-    );
-
+    const [comments, setComment] = useState(data.comments);
+    const [percent, setPercent] = useState(data.percent);
+    const [canWrite, setCanWrite] = useState(data.canWrite);
+    // setLoading(status !== "success");
     useEffect(() => {}, [likeCheck]);
+
     const onClickSubmit = () => {
+        setLoading(true);
         const comment = {
             like: likeCheck,
             comment: input,
         };
-        if (id && lectureId) createReviewComment(id!!, lectureId!!, comment);
+        if (id && lectureId)
+            createReviewComment(id!!, lectureId!!, comment).then((res) => {
+                console.log(res);
+                setLoading(false);
+                window.location.reload();
+            });
         setCanWrite(false);
     };
 
@@ -158,7 +142,16 @@ const CommentLayout = ({ ...props }: Props) => {
                         <ProgressContainer>
                             <CommentProgessWrapper>
                                 <CommentProgress
-                                    percent={percent}
+                                    percent={
+                                        comments && comments.length > 0
+                                            ? (comments.filter(
+                                                  (i: any) =>
+                                                      i.status === "like"
+                                              ).length /
+                                                  comments.length) *
+                                              100
+                                            : 0
+                                    }
                                     likeCount={
                                         comments && comments.length > 0
                                             ? comments.filter(
@@ -177,7 +170,7 @@ const CommentLayout = ({ ...props }: Props) => {
                                         {comments.map((com: any) => (
                                             <>
                                                 <LikeComment
-                                                    {...data.data.data.lecture}
+                                                    {...data.lecture}
                                                     {...com}
                                                 />
                                             </>
@@ -195,7 +188,7 @@ const CommentLayout = ({ ...props }: Props) => {
                                 )}
                             </CommnetListContainer>
                         </ProgressContainer>
-                        {canWrite ? (
+                        {canWrite && !data.isOwner ? (
                             <div className="comment-input">
                                 <InputFiled
                                     text={input}

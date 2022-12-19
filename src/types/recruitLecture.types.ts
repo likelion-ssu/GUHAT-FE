@@ -15,7 +15,7 @@ export interface recuritLecture {
 
 export interface RecruitViewResponse {
     isOwner: boolean;
-    isApply: boolean;
+    isApply: string;
     title: string;
     writer: any;
     date: string;

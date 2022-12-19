@@ -47,6 +47,17 @@ export const ReviewViewLayoutContainer = styled.div`
         padding-bottom: 3rem;
     }
 
+    .file-content-wrapper {
+        display: flex;
+        margin-left: 6rem;
+        margin-right: 50%;
+        flex-direction: column;
+        align-content: center;
+
+        gap: 1rem;
+        font-size: 1.3rem;
+    }
+
     .header-gap {
         height: 3rem;
         background-color: ${themes.colors.bgColor};

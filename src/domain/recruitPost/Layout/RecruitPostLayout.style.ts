@@ -42,7 +42,8 @@ export const RecruitContentLayout = styled.div<{ isFilled?: boolean }>`
     textArea {
         border-radius: 0.5rem;
         border: 1px solid black;
-
+        height: 10rem;
+        resize: none;
         :focus {
             border: 1px solid black;
             outline: none;

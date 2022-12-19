@@ -3,7 +3,7 @@ import {
     removeCookieToken,
     setRefreshToken,
 } from "@/storage/cookie";
-import { getAccessToekn } from "@apis/auth";
+import { getAccessToken } from "@apis/auth";
 import axios, { AxiosRequestConfig } from "axios";
 import moment from "moment";
 
@@ -12,7 +12,7 @@ const refresh = async (
 ): Promise<AxiosRequestConfig> => {
     const refreshToken = getCookieToken();
     const expireAt = localStorage.getItem("expiresAt");
-    let token = await getAccessToekn();
+    let token = await getAccessToken();
 
     // 토큰이 만료되었고, refreshToken 이 저장되어 있을 때
     console.log(

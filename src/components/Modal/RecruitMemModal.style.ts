@@ -75,7 +75,7 @@ export const RecruitMemModalList = styled.ul`
     flex-direction: column;
     border-radius: 1rem;
     padding: 2rem;
-    background-color: ${"#f5e8aa" + "30"};
+    background-color: ${themes.colors.gray_300};
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 
     .recruit-modal-empty-state {

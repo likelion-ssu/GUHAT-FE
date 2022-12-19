@@ -12,8 +12,6 @@ const AuthApi = axios.create({
     withCredentials: true,
 });
 
-console.log(process.env.REACT_APP_AUTH_BASE_URL);
-
 AuthApi.interceptors.request.use(refresh, refreshErrorHandle);
 
 export default AuthApi;

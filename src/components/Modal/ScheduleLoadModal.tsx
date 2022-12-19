@@ -35,6 +35,13 @@ const Container = styled.div`
         text-align: center;
         font-weight: 600;
     }
+
+    h2 {
+        font-weight: 400;
+        color: gray;
+        font-size: 1rem;
+        padding: 1rem;
+    }
     .modal-close-btn {
         position: absolute;
         width: 1rem;
@@ -77,8 +84,10 @@ const ScheduleLoadModal = () => {
                     navigator("/lecture/" + id);
                 }}
             ></button>
+
             <h1>최초 시간표 업로드시 </h1>
             <h1>요청 시간이 길어질 수 있습니다</h1>
+            <h2>휴학중인 경우 리뷰 등록이 불가능합니다</h2>
             <button
                 className="load-schedule"
                 onClick={onClickUpload}

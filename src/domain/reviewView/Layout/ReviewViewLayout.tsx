@@ -1,3 +1,4 @@
+import FileItem from "@/components/FileItem";
 import ProfileLayout from "@/domain/recruitView/ProfileLayout";
 import { displayLevel } from "@/util/displayLevel";
 import {
@@ -24,6 +25,7 @@ interface Props {
 
     subject: string;
     detail: string;
+    files?: any[];
 }
 
 const ReviewViewLayout = ({ ...props }: Props) => {
@@ -90,6 +92,16 @@ const ReviewViewLayout = ({ ...props }: Props) => {
             <hr />
             <h2 className="subtitle">상세 설명</h2>
             <div className="text-content">{props.detail}</div>
+            <hr />
+            <h2 className="subtitle">팀플 자료</h2>
+            <div className="file-content-wrapper">
+                {" "}
+                {props.files &&
+                    props.files.length > 0 &&
+                    props.files?.map((file) => (
+                        <FileItem file={file} mode={"view"} />
+                    ))}
+            </div>
         </ReviewViewLayoutContainer>
     );
 };

@@ -55,11 +55,8 @@ const RecruitPostLayout = () => {
             setLoading(false);
             console.log(res.data.data);
             const data = res.data.data;
-            if (data.length === 0) {
-                alert("휴학 중인 경우 모집글 작성이 불가능 합니다!");
-                window.history.back();
-            }
-            scheduleParseer(data);
+
+            if (data.length > 0) scheduleParseer(data);
         });
 
         setModalVisible(false);
@@ -92,9 +89,13 @@ const RecruitPostLayout = () => {
 
         requestSchedule()
             .then((res) => {
+                const data = res.data.data;
+                if (data.length === 0) {
+                    alert("휴학 중인 경우 모집글 작성이 불가능 합니다!");
+                    window.history.back();
+                }
                 setLecture({ index: -1, item: "--선택해주세요--" });
                 console.log(res.data.data);
-                const data = res.data.data;
                 scheduleParseer(data);
                 setLoading(false);
             })
@@ -340,9 +341,7 @@ const RecruitPostLayout = () => {
                         lecture.item !== "수강 중인 강의가 없습니다" &&
                         lecture.index !== -1 &&
                         title !== "" &&
-                        detail.length !== 0 &&
-                        priority.length !== 0 &&
-                        link.length !== 0
+                        detail.length !== 0
                     )
                 }
             >

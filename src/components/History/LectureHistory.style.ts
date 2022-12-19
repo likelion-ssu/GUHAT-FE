@@ -37,7 +37,7 @@ export const LectureHistoryContainer = styled.div`
 
     .recruit-content {
         width: 70%;
-        max-height: 4.5rem;
+        height: 4.5rem;
         overflow: hidden;
         line-height: 1.5rem;
     }
@@ -65,11 +65,11 @@ export const LectureProgressContainer = styled.div<{ major?: boolean }>`
     top: 0;
     right: 0;
     height: 100%;
-    width: 20rem;
+    width: 21rem;
     display: flex;
     border-radius: 0;
 
-    transform: skew(-20deg) translate(30px, 0px);
+    transform: skew(-20deg) translate(40px, 0px);
     ${({ major }) =>
         major
             ? "background: #303644; color:white; "

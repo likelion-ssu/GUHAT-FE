@@ -1,5 +1,5 @@
 import { getHomeRecruitList } from "@/apis/recruit/list";
-import { getRecentReviews } from "@/apis/review";
+import { getRecentReviews as getHomeReviewList } from "@/apis/review";
 import APILayout from "@/components/Layout/APILayout";
 import { loadingState } from "@/storage/recoil/loadingState";
 import { modalState } from "@/storage/recoil/modalState";
@@ -9,6 +9,7 @@ import MyInfoLayout from "@domain/home/Layout/MyInfoLayout";
 import { useEffect } from "react";
 import { useQueries } from "react-query";
 import { useRecoilState } from "recoil";
+import { getMyAllPost } from "../apis/home/index";
 import { getProfile } from "../apis/profile/index";
 import RecruitingLayout from "../domain/home/Layout/RecruitingLayout";
 import ReviewLayout from "../domain/home/Layout/ReviewLayout";
@@ -19,20 +20,27 @@ const Home = () => {
     const [userInfo, setUserInfo] = useRecoilState(userState);
     const result = useQueries([
         {
-            queryKey: ["getRecruits"],
+            queryKey: ["getRecruits", userInfo?.id],
             queryFn: () => getHomeRecruitList(),
         },
 
         {
-            queryKey: ["getUserinfo"],
+            queryKey: ["getUserinfo", userInfo?.id],
             queryFn: () => getProfile(),
             onSuccess: (data: any) => {
                 setUserInfo(data);
             },
         },
         {
-            queryKey: ["getReviews"],
-            queryFn: () => getRecentReviews(),
+            queryKey: ["getReviews", userInfo?.id],
+            queryFn: () => getHomeReviewList(),
+        },
+        {
+            queryKey: ["getMyAllPost", userInfo?.id],
+            queryFn: () => getMyAllPost(),
+            onSuccess: (data: any) => {
+                console.log("all", data);
+            },
         },
     ]);
     console.log(result[0].data);
@@ -51,7 +59,7 @@ const Home = () => {
                 {!loading ? (
                     <>
                         {" "}
-                        <MyInfoLayout />
+                        <MyInfoLayout list={[...result[3].data?.data.data]} />
                         <div style={{ width: "100%", height: "7vh" }}></div>
                         {result[0].data ? (
                             <RecruitingLayout

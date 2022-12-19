@@ -26,32 +26,43 @@ function Header({ title }: HeaderProps) {
     }, []);
 
     return (
-        <HeaderWrap>
-            {!isSSR && (
-                <>
-                    {title && (
+        <>
+            {" "}
+            {!location.pathname.includes("login") ? (
+                <HeaderWrap>
+                    {!isSSR && (
                         <>
-                            <Title onClick={onClickTitle}>{title}</Title>
-                            {!location.pathname.includes("login") ? (
+                            {title && (
                                 <>
-                                    {" "}
-                                    <SearchBar />
-                                    <IconWrapper>
-                                        <HeaderIcon
-                                            img={ProfileIcon}
-                                            onClick={() => navigator("/mypage")}
-                                        />
-                                        <HeaderIcon img={ScheduleIcon} />
+                                    <Title onClick={onClickTitle}>
+                                        {title}
+                                    </Title>
+                                    {!location.pathname.includes("login") ? (
+                                        <>
+                                            {" "}
+                                            <SearchBar />
+                                            <IconWrapper>
+                                                <HeaderIcon
+                                                    img={ProfileIcon}
+                                                    onClick={() =>
+                                                        navigator("/mypage")
+                                                    }
+                                                />
+                                                <HeaderIcon
+                                                    img={ScheduleIcon}
+                                                />
 
-                                        <PostButton />
-                                    </IconWrapper>
+                                                <PostButton />
+                                            </IconWrapper>
+                                        </>
+                                    ) : null}
                                 </>
-                            ) : null}
+                            )}
                         </>
                     )}
-                </>
-            )}
-        </HeaderWrap>
+                </HeaderWrap>
+            ) : null}
+        </>
     );
 }
 

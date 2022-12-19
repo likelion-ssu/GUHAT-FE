@@ -1,3 +1,4 @@
+import { useQuery } from "react-query";
 import Api from "../index";
 
 export const postValidation = async (lectureId: string) => {
@@ -27,8 +28,41 @@ export const getRecentReviews = async () => {
     return await Api.get("/home/review");
 };
 
-export const getReview = async (id: string, lectureId: string) => {
-    return await Api.get(`/lecture/${lectureId}/review/${id}`);
+export const getRecentReviewList = async (page: number) => {
+    return await Api.get(`/posting/lectures?sort={latest}&page=${page}`).then(
+        (res) => res.data.data
+    );
+};
+
+export const useRecentReview = (page: number) => {
+    return useQuery(["recentReview", page], () => getRecentReviewList(page), {
+        enabled: !!page,
+        select: (data: any[]) =>
+            data.map((item: any, idx: number) => {
+                return {
+                    id: item.id,
+                    isOwner: item.isMine,
+                    title: item.title,
+                    detail: item.detail,
+                    total: item.total,
+                    current: item.current,
+                    endDate: item.endDate,
+                    createdAt: item.createdAt,
+                    lectureName: item.lecture.name,
+                    type: item.type,
+                    professor: item.lecture.professors,
+                    writer: item.writer,
+                };
+            }),
+    });
+};
+
+export const getReview = async (
+    id: string | null,
+    lectureId: string | null
+) => {
+    if (id && lectureId)
+        return await Api.get(`/lecture/${lectureId}/review/${id}`);
 };
 
 export const createReviewComment = async (
@@ -43,5 +77,7 @@ export const createReviewComment = async (
 };
 
 export const getReviewComment = async (id: string, lectureId: string) => {
-    return await Api.get(`/lecture/${lectureId}/review/${id}/comment`);
+    return await Api.get(`/lecture/${lectureId}/review/${id}/comment`).then(
+        (res) => res.data.data
+    );
 };

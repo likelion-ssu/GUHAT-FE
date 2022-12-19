@@ -3,8 +3,9 @@ import styled from "@emotion/styled";
 
 export const RecruitWrap = styled.button<{ lectureType?: string }>`
     position: relative;
-    display: flex block;
+    display: flex;
     flex-direction: column;
+
     width: calc(100% / 3);
     height: 40rem;
     border-radius: 1rem;

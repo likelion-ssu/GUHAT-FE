@@ -46,7 +46,7 @@ export const ProfileImg = styled.div<{ img?: string | null }>`
     border-radius: 3.5rem;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     ${({ img }) =>
         img
             ? `background-image : url(${img});`

@@ -58,7 +58,7 @@ export const MemberCardImg = styled.div<{ img?: string }>`
     border-radius: 5rem;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
 
     ${({ img }) => (img ? `background-image: url(${img});` : null)}
 `;

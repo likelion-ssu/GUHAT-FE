@@ -2,7 +2,7 @@ import { atom } from "recoil";
 
 export interface IUserState {
     id: string;
-    nickname: string;
+    nickname?: string;
     name?: string;
     grade?: string;
     univ?: string;

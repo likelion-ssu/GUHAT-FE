@@ -19,9 +19,6 @@ export const LectureItemWrap = styled.button`
     :hover {
         background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
 
-        /* background-color: #8bc6ec;
-        background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%); */
-
         p {
             color: white;
         }

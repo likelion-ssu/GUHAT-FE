@@ -23,16 +23,17 @@ const RecruitView = () => {
 
     useEffect(() => {
         setModalVisible(false);
+        setLoading(true);
     }, []);
 
     const [applyState, setApplyState] = useState(
-        data ? (data.isOwner ? false : data.isApply) : true
+        data ? (data.isOwner ? false : data.isApply !== "none") : true
     );
 
     useEffect(() => {
         if (status === "success") {
             setLoading(false);
-            setApplyState(data.isOwner ? false : data.isApply);
+            setApplyState(data.isOwner ? false : data.isApply !== "none");
         } else setLoading(true);
     }, [status]);
 

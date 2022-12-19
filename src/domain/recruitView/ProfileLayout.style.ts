@@ -34,10 +34,3 @@ export const ProfileImg = styled.div`
     border-radius: 2rem;
     background-color: ${themes.colors.gray_500};
 `;
-
-export const CloseRecruitBtn = styled.button`
-    border-radius: 1rem;
-    background-color: ${themes.colors.blue};
-    color: white;
-    padding: 1rem 1.5rem;
-`;

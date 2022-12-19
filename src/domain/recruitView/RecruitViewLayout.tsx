@@ -60,6 +60,7 @@ const RecruitViewLayout = ({ recruit }: Props) => {
                         ? res.Roles.map((g, i) => {
                               return (
                                   <MemberList
+                                      canAccess={res.isApply === "success"}
                                       list={g.RoleAppliers}
                                       name={g.name}
                                       max={g.max}

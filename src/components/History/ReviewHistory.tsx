@@ -1,50 +1,63 @@
 import Edit from "@assets/edit.svg";
+import { useNavigate } from "react-router-dom";
+import displayedAt from "../../util/displayAt";
 import {
     ReviewHistoryContainer,
     ReviewLikeCount,
     ReviewLikeTagWrap,
     ReviewTagThumb,
 } from "./ReviewHistory.style";
-const ReviewHistory = () => {
+
+export interface IReviewHistory {
+    lecture?: any;
+    id: number;
+    title: string;
+    reviewLevel: string;
+    year: string;
+    semester: string;
+    memberNum: number | string;
+    fileCnt: number | string;
+    detail: string;
+    nickname: string;
+    writerLevel: number | string;
+    viewCount: number;
+    likeCount?: number | string;
+    createdAt?: string;
+    isOwner: boolean;
+    likeCnt?: number;
+
+    clickListener?: () => void;
+}
+const ReviewHistory = ({ ...props }: IReviewHistory) => {
+    console.log(props);
+    const navigator = useNavigate();
     return (
-        <ReviewHistoryContainer>
+        <ReviewHistoryContainer
+            onClick={() => {
+                navigator(`/review/${props.id}/${props.lecture.id}`);
+            }}
+        >
             <div className="recruit-title">
-                <p> 팀플 글 제목</p>
-                <img className="edit-img" src={Edit} alt="편집 아이콘" />
+                <p>{props.title}</p>
+                {props.isOwner ? (
+                    <img className="edit-img" src={Edit} alt="편집 아이콘" />
+                ) : null}
             </div>
             <div className="recruit-sub-title">
-                <p>과목명/교수님</p>
+                <p>
+                    {props.lecture.name}/
+                    {props.lecture.professor
+                        ? props.lecture.professor.join()
+                        : null}
+                </p>
             </div>
-            <p className="recruit-day">작성일 : 2022-09-09</p>
-            <div className="recruit-content">
-                앞이 우는 길지 거선의 트고, 그리하였는가? 두손을 스며들어 이성은
-                몸이 속에서 놀이 철환하였는가? 날카로우나 보이는 군영과
-                위하여서, 원대하고, 바이며, 이것이다. 전인 아니더면 ... 앞이
-                우는 길지 거선의 트고, 그리하였는가? 두손을 스며들어 이성은 몸이
-                속에서 놀이 철환하였는가? 날카로우나 보이는 군영과 위하여서,
-                원대하고, 바이며, 이것이다. 전인 아니더면 ... 앞이 우는 길지
-                거선의 트고, 그리하였는가? 두손을 스며들어 이성은 몸이 속에서
-                놀이 철환하였는가? 날카로우나 보이는 군영과 위하여서, 원대하고,
-                바이며, 이것이다. 전인 아니더면 ... 앞이 우는 길지 거선의 트고,
-                그리하였는가? 두손을 스며들어 이성은 몸이 속에서 놀이
-                철환하였는가? 날카로우나 보이는 군영과 위하여서, 원대하고,
-                바이며, 이것이다. 전인 아니더면 ... 앞이 우는 길지 거선의 트고,
-                그리하였는가? 두손을 스며들어 이성은 몸이 속에서 놀이
-                철환하였는가? 날카로우나 보이는 군영과 위하여서, 원대하고,
-                바이며, 이것이다. 전인 아니더면 ... 앞이 우는 길지 거선의 트고,
-                그리하였는가? 두손을 스며들어 이성은 몸이 속에서 놀이
-                철환하였는가? 날카로우나 보이는 군영과 위하여서, 원대하고,
-                바이며, 이것이다. 전인 아니더면 ... 앞이 우는 길지 거선의 트고,
-                그리하였는가? 두손을 스며들어 이성은 몸이 속에서 놀이
-                철환하였는가? 날카로우나 보이는 군영과 위하여서, 원대하고,
-                바이며, 이것이다. 전인 아니더면 ... 앞이 우는 길지 거선의 트고,
-                그리하였는가? 두손을 스며들어 이성은 몸이 속에서 놀이
-                철환하였는가? 날카로우나 보이는 군영과 위하여서, 원대하고,
-                바이며, 이것이다. 전인 아니더면 ...
-            </div>
+            <p className="recruit-day">
+                작성일 : {displayedAt(props.createdAt!!)}
+            </p>
+            <div className="recruit-content">{props.detail}</div>
             <ReviewLikeTagWrap></ReviewLikeTagWrap>
             <ReviewTagThumb />
-            <ReviewLikeCount>+100</ReviewLikeCount>
+            <ReviewLikeCount>+{props.likeCnt}</ReviewLikeCount>
         </ReviewHistoryContainer>
     );
 };

@@ -33,10 +33,6 @@ const Dropdown = ({ width, selectValue, list, handler }: Props) => {
                             <DropdownItem
                                 key={item}
                                 onClick={(e) => {
-                                    console.log("clci", {
-                                        index: index,
-                                        item: item,
-                                    });
                                     handler({ index: index, item: item });
                                     setActive(false);
                                 }}

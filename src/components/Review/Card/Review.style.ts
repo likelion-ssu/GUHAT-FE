@@ -9,7 +9,7 @@ export const ReviewContainer = styled.button`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 100%;
+    width: calc(100% / 3);
     border-radius: 1rem;
     background-color: white;
     padding: 2.54rem;
@@ -46,20 +46,23 @@ export const ReviewTitleWrap = styled.div`
 
 export const ReviewTitle = styled.p`
     font-weight: 600;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     text-align: left;
-    width: 100%;
+    width: 90%;
     color: ${themes.colors.black_500};
     text-align: left;
 `;
 
 export const ReviewContent = styled.p`
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     align-items: center;
-    min-height: 10rem;
+    height: 10rem;
+    overflow: hidden;
+    line-height: 1.8rem;
     padding-bottom: 4rem;
     color: #9a9a9a;
+    text-align: left;
 `;
 export const ReviewProfileInfo = styled.div`
     display: flex;

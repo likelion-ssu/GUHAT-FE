@@ -18,8 +18,6 @@ const Search = () => {
         if (queryData.keyword) setKeyword(queryData.keyword.toString());
 
         if (queryData.option) setOptoin(queryData.option.toString());
-        console.log(keyword);
-        console.log(option);
     }, [keyword, location]);
 
     return (
