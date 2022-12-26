@@ -2,6 +2,22 @@
 > 숭실대생을 위한 팀플 서포트 서비스 플랫폼
 #### www.guhat.netlify.app
 
+## Skills
+
+<p>
+
+<img src="https://img.shields.io/badge/React.js-81def7?style=flat-square&logo=React&logoColor=white"/>
+<img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=TypeScript&logoColor=white"/>
+<img src="https://img.shields.io/badge/Emotion-EFD1EA?style=flat-square&logo=css3&logoColor=white"/>
+<img src="https://img.shields.io/badge/ReactQuery-FF4154?style=flat-square&logo=ReactQuery&logoColor=white"/>
+<img src="https://img.shields.io/badge/Recoil-3578E5?style=flat-square&logo=react&logoColor=white"/>
+
+
+</p>
+
+<br />
+<br />
+
 
 ![1](https://user-images.githubusercontent.com/78139690/209513950-6c2bd5b8-979e-4676-9e1f-bf37f853ffd3.png)
 ![2](https://user-images.githubusercontent.com/78139690/209513957-7503d912-c28d-4386-b0a6-69857e9d52e5.png)
